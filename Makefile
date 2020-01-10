@@ -6,7 +6,7 @@
 #    By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 17:15:47 by dmukaliy          #+#    #+#              #
-#    Updated: 2020/01/08 18:04:14 by dmukaliy         ###   ########.fr        #
+#    Updated: 2020/01/09 11:06:43 by dmukaliy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all clean
+re: fclean all
 
 .PHONY: all clean fclean re
