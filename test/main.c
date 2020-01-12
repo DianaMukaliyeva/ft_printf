@@ -3,6 +3,7 @@
 
 int	main(int argc, char **argv)
 {
+	int	num = 0;
 	if (argc == 2)
 		ft_printf(argv[1]);
 	if (argc == 3)
@@ -26,11 +27,20 @@ int	main(int argc, char **argv)
 		// printf("%2$d %2$d;\n","16",17);
 		// printf("%2$d %1$s; %1$d %1$s\n","16",17);
 
-		printf("rfsprintf %s\t \n", "hello", 7654321, 9);
-		ft_printf("ft_printf %s\t \n", "hello", 7654321, 9);
+		// num = printf("dd_printf %s, '%-3.d'\n", "hello", 3, 9);
+		// num = printf("dd_printf %s, '%5bd'\n", "hello", 9, 7654321);
+		num = printf("dd_printf %s, '%-+d'\n", "hello", 9, 7654321);
+		// printf("num = %d\n", num);
+		ft_printf("ft_printf %s, '%-+d'\n", "hello", 9, 7654321);
 
+		// int d1=123, d2=42, d3=1543;
+   		// printf ("'%d'\n'%6d'\n'%6d'\n",d1,d2,d3);
+		// printf ("\n2.3 Вывод чисел c выравниванием по левому краю:\n");
+		// printf ("'%-d'\n'%-6d'\n'%-6d'\n",d1,d2,d3);
 		// printf("%.d %s\n", 5, "lol");
 		// ft_printf("%5.9d %s\n", 5, "lol");
+		// printf("flagi '%5-d'\n", 45);
+
 	}
 	printf("\nEND\n");
 	return (0);

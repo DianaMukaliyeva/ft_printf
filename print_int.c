@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 17:15:16 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 21:43:06 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/12 19:43:24 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/12 19:43:52 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	print_int(t_identifier *identifiers, va_list list)
 {
-	va_list	list;
-	int	i;
-	int	len;
-	int		res;
+	int	res;
+	int	num;
 
-	i = 0;
 	res = 0;
-	len = ft_strlen(format);
-	va_start(list, format);
-	while (i < len)
+	num = va_arg(list, int);
+	if (identifiers->width.is_width)
 	{
-		if (format[i] == '%')
-			res += parse_specifiers(list, format, &i);
-		else
-			res += printf_putchar(format[i]);
-		i++;
+
+	} else
+	{
+		if (identifiers->flags.sign && num > 0)
+			res += printf_putchar('+');
 	}
-	va_end(list);
+	res += printf_putnbr(num);
 	return (res);
 }
