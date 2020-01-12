@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 19:49:37 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 21:46:12 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/12 22:57:11 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,17 @@ int		ft_strlen(const char *str)
 	return (i);
 }
 
-int	print_arg(char modifier, t_identifier *identifiers, va_list list)
+int	print_arg(char modifier, t_tag *tags, va_list list)
 {
 	int	res;
 
 	res = 0;
 	if (modifier == 's')
 	{
-		if (identifiers->width.asterisk == 0)
+		if (tags->width.asterisk == 0)
 			ft_putstr(va_arg(list, char*));
 	}
 	if (modifier == 'd')
-		res += print_int(identifiers, list);
+		res += print_int(tags, list);
 	return (res);
 }

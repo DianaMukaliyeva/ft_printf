@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format_specifier.c                           :+:      :+:    :+:   */
+/*   parse_specifier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 21:44:15 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/12 22:55:04 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,47 +21,47 @@ static int			is_type(char c)
 	return (0);
 }
 
-static t_identifier	*create_identifier(void)
+static t_tag	*create_tag(void)
 {
-	t_identifier	*identifiers;
+	t_tag	*tags;
 
-	identifiers = malloc(sizeof(t_identifier));
-	identifiers->flags.hash = 0;
-	identifiers->flags.left_align = 0;
-	identifiers->flags.sign = 0;
-	identifiers->flags.space = 0;
-	identifiers->flags.zero = 0;
-	identifiers->modifier.h = 0;
-	identifiers->modifier.hh = 0;
-	identifiers->modifier.l = 0;
-	identifiers->modifier.ll = 0;
-	identifiers->modifier.big_l = 0;
-	identifiers->precision.is_precision = 0;
-	identifiers->precision.asterisk = 0;
-	identifiers->precision.num = 0;
-	identifiers->width.is_width = 0;
-	identifiers->width.asterisk = 0;
-	identifiers->width.width = 0;
-	return (identifiers);
+	tags = malloc(sizeof(t_tag));
+	tags->flags.hash = 0;
+	tags->flags.left_align = 0;
+	tags->flags.sign = 0;
+	tags->flags.space = 0;
+	tags->flags.zero = 0;
+	tags->modifier.h = 0;
+	tags->modifier.hh = 0;
+	tags->modifier.l = 0;
+	tags->modifier.ll = 0;
+	tags->modifier.big_l = 0;
+	tags->precision.is_exist = 0;
+	tags->precision.asterisk = 0;
+	tags->precision.num = 0;
+	tags->width.is_exist = 0;
+	tags->width.asterisk = 0;
+	tags->width.num = 0;
+	return (tags);
 }
 
 int					parse_specifiers(va_list list, const char *format, int *i)
 {
-	t_identifier	*identifiers;
+	t_tag	*tags;
 	int				res;
 
 	res = 0;
-	identifiers = create_identifier();
+	tags = create_tag();
 	while (format[++(*i)])
 	{
 		if (is_type(format[*i]))
-			res += print_arg(format[*i], identifiers, list);
-		else if (fill_identifiers(identifiers, format[*i], list))
+			res += print_arg(format[*i], tags, list);
+		else if (fill_tags(tags, format[*i], list))
 			continue ;
 		else
 			res += printf_putchar(format[*i]);
 		break ;
 	}
-	free(identifiers);
+	free(tags);
 	return (res);
 }
