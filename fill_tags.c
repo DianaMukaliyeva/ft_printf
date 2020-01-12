@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_tags.c                                 :+:      :+:    :+:   */
+/*   fill_tags.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 21:45:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 22:50:56 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/12 22:58:35 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/12 22:59:14 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ static void		fill_modifiers(t_tag *tags, char symbol)
 		tags->modifier.big_l = 1;
 }
 
-static void		fill_amount_of_char(t_amount_char *amount, char symbol, va_list list)
+static void		fill_amount(t_amount_char *amount, char symbol, va_list list)
 {
 	amount->is_exist = 1;
 	if (symbol == '*')
 	{
 		amount->asterisk = 1;
 		amount->num = va_arg(list, int);
-	} else
+	}
+	else
 		amount->num = amount->num * 10 + symbol - 48;
 }
 
@@ -74,11 +75,11 @@ int				fill_tags(t_tag *tags, char symbol, va_list list)
 
 	if (ft_strchr(numbers, symbol))
 		if (tags->precision.is_exist == 1)
-			fill_amount_of_char(&tags->precision, symbol, list);
+			fill_amount(&tags->precision, symbol, list);
 		else if (tags->width.is_exist == 0 && symbol == '0')
 			fill_flags(tags, symbol);
 		else
-			fill_amount_of_char(&tags->width, symbol, list);
+			fill_amount(&tags->width, symbol, list);
 	else if (ft_strchr(flags, symbol))
 		fill_flags(tags, symbol);
 	else if (ft_strchr(modifiers, symbol))

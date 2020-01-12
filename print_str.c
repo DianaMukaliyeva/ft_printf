@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putchar.c                                   :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 18:28:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 23:00:08 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/12 23:07:59 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_putchar(char c)
+int		print_str(t_tag *tags, va_list list)
 {
-	write(1, &c, 1);
-	return (1);
+	if (tags->width.asterisk == 0)
+			printf_putstr(va_arg(list, char*));
+	return (0);
 }

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putchar.c                                   :+:      :+:    :+:   */
+/*   printf_putstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 18:28:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 23:00:08 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/12 23:05:42 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/12 23:08:17 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_putchar(char c)
+int	printf_putstr(char const *str)
 {
-	write(1, &c, 1);
-	return (1);
+	int	res;
+
+	res = 0;
+	while (str && *str)
+	{
+		res += printf_putchar(*str);
+		str++;
+	}
+	return (res);
 }

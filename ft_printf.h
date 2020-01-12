@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 22:53:43 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/12 23:10:14 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ typedef struct		s_tag
 int		ft_printf(const char *format, ...);
 void	start(va_list list, const char *format);
 int		ft_strlen(const char *str);
-void	ft_putstr(char const *str);
 int	printf_putnbr(int n);
 int	printf_putchar(char c);
-void	ft_putchar(char c);
 int	print_arg(char modifier, t_tag *tags, va_list list);
 int	fill_tags(t_tag *tags, char symbol, va_list list);
 int	parse_specifiers(va_list list, const char *format, int *i);
 int	print_int(t_tag *tags, va_list list);
 char	*ft_strchr(const char *str, int ch);
+int	printf_putstr(char const *str);
+int		print_str(t_tag *tags, va_list list);
 
 #endif
