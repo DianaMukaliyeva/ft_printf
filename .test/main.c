@@ -29,9 +29,9 @@ int	main(int argc, char **argv)
 
 		// num = printf("dd_printf %s, '%-3.d'\n", "hello", 3, 9);
 		// num = printf("dd_printf %s, '%5bd'\n", "hello", 9, 7654321);
-		num = printf("dd_printf %s, '%-+4d'\n", "hello", 9, 7654321);
+		num = printf("dd_printf '%s', '%0-7d' %d  '%c'\n", NULL, 9, 7654321, 'C');
 		// printf("num = %d\n", num);
-		ft_printf("ft_printf %s, '%0+d'\n", "hello", 9, 7654321);
+		ft_printf("ft_printf '%06.3s', '%0+d' %d '%c'\n", NULL, 9, 7654321, 'C');
 
 		// int d1=123, d2=42, d3=1543;
    		// printf ("'%d'\n'%6d'\n'%6d'\n",d1,d2,d3);

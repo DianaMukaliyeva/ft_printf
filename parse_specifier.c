@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 09:52:14 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/13 12:52:23 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		is_type(char c)
 {
-	const char	*flags = "cspdiouxXf";
+	const char	*flags = "cspdiouxXf%%";
 
 	if (ft_strchr(flags, c) != NULL)
 		return (1);

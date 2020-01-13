@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 10:15:08 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/13 12:53:41 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,25 @@ typedef struct		s_tag
 }					t_tag;
 
 int					ft_printf(const char *format, ...);
-int					ft_strlen(const char *str);
-int					printf_putnbr(int n);
-int					printf_putchar(char c);
-int					print_arg(char modifier, t_tag *tags, va_list list);
-int					refill_tags(t_tag *tags, char symbol, va_list list);
-int					parse_specifiers(va_list list, const char *format, int *i);
-int					print_int(t_tag *tags, va_list list);
 char				*ft_strchr(const char *str, int ch);
-int					printf_putstr(char const *str);
-int					print_str(t_tag *tags, va_list list);
-int					print_unsigned_octal(t_tag *tags, va_list list);
-int					print_double(t_tag *tags, va_list list);
+int					ft_strlen(const char *str);
+int					parse_specifiers(va_list list, const char *format, int *i);
+int					print_arg(char modifier, t_tag *tags, va_list list);
 int					print_char(t_tag *tags, va_list list);
+int					print_double_with_big_e(t_tag *tags, va_list list);
+int					print_double_with_e(t_tag *tags, va_list list);
+int					print_double(t_tag *tags, va_list list);
+int					print_int(t_tag *tags, va_list list);
 int					print_memory(t_tag *tags, va_list list);
+int					print_percent(t_tag *tags, va_list list);
+int					print_str(t_tag *tags, va_list list);
 int					print_unsigned_int(t_tag *tags, va_list list);
 int					print_unsigned_low_hex(t_tag *tags, va_list list);
+int					print_unsigned_octal(t_tag *tags, va_list list);
 int					print_unsigned_upper_hex(t_tag *tags, va_list list);
-int					print_double_with_e(t_tag *tags, va_list list);
-int					print_double_with_big_e(t_tag *tags, va_list list);
-
+int					printf_putchar(char c);
+int					printf_putnbr(int n);
+int					printf_putstr(char const *str);
+int					refill_tags(t_tag *tags, char symbol, va_list list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 10:16:32 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/13 12:53:47 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	print_arg3(char modifier, t_tag *tags, va_list list)
 		res += print_double_with_big_e(tags, list);
 	else if (modifier == 'g')
 		res += print_double(tags, list);
+	else if (modifier == '%')
+		res += print_percent(tags, list);
 	return (res);
 }
 
@@ -70,7 +72,7 @@ int			print_arg(char modifier, t_tag *tags, va_list list)
 		res += print_arg1(modifier, tags, list);
 	else if (ft_strchr("diouxX", modifier))
 		res += print_arg2(modifier, tags, list);
-	else if (ft_strchr("feEg", modifier))
+	else if (ft_strchr("feEg%%", modifier))
 		res += print_arg3(modifier, tags, list);
 	return (res);
 }
