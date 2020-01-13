@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/08 17:15:16 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 09:50:04 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/13 09:29:28 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/13 09:29:43 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int		ft_strlen(const char *str)
 {
-	va_list	list;
-	int		i;
-	int		len;
-	int		res;
+	int	i;
 
 	i = 0;
-	res = 0;
-	len = ft_strlen(format);
-	va_start(list, format);
-	while (i < len)
-	{
-		if (format[i] == '%')
-			res += parse_specifiers(list, format, &i);
-		else
-			res += printf_putchar(format[i]);
+	while (str[i] != '\0')
 		i++;
-	}
-	va_end(list);
-	return (res);
+	return (i);
 }

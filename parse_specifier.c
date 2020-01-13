@@ -6,13 +6,13 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 22:55:04 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/13 09:52:14 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			is_type(char c)
+static int		is_type(char c)
 {
 	const char	*flags = "cspdiouxXf";
 
@@ -45,10 +45,10 @@ static t_tag	*create_tag(void)
 	return (tags);
 }
 
-int					parse_specifiers(va_list list, const char *format, int *i)
+int				parse_specifiers(va_list list, const char *format, int *i)
 {
 	t_tag	*tags;
-	int				res;
+	int		res;
 
 	res = 0;
 	tags = create_tag();
@@ -56,7 +56,7 @@ int					parse_specifiers(va_list list, const char *format, int *i)
 	{
 		if (is_type(format[*i]))
 			res += print_arg(format[*i], tags, list);
-		else if (fill_tags(tags, format[*i], list))
+		else if (refill_tags(tags, format[*i], list))
 			continue ;
 		else
 			res += printf_putchar(format[*i]);

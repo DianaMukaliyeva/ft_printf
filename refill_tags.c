@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_tags.c                                        :+:      :+:    :+:   */
+/*   refill_tags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 22:58:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 22:59:14 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/13 09:32:49 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/13 09:51:25 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static void		fill_flags(t_tag *tags, char symbol)
 {
@@ -67,7 +66,7 @@ static void		fill_amount(t_amount_char *amount, char symbol, va_list list)
 		amount->num = amount->num * 10 + symbol - 48;
 }
 
-int				fill_tags(t_tag *tags, char symbol, va_list list)
+int				refill_tags(t_tag *tags, char symbol, va_list list)
 {
 	const char	*flags = "+- 0#";
 	const char	*numbers = "1234567890*";
