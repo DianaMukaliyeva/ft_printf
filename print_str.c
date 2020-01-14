@@ -6,23 +6,22 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 17:14:20 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/14 11:18:30 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-static int	print_str_of_len(int len, char *str)
+static int	print_str_of_len(int len, char *str, int amount_of_spaces)
 {
 	int	res;
 
 	res = 0;
 	while (len-- > 0 && *str)
-	{
-		res += printf_putchar(*str);
-		str++;
-	}
+		res += printf_putchar(*str++);
+	if (amount_of_spaces > 0)
+		while (amount_of_spaces-- > 0)
+			res += printf_putchar(' ');
 	return (res);
 }
 
@@ -39,7 +38,7 @@ static int	print_without_align(char *str, t_tag *tags, int len, char c)
 	{
 		while (width-- > precision)
 			res += printf_putchar(c);
-		print_str_of_len(width + 1, str);
+		res += print_str_of_len(width + 1, str, 0);
 	}
 	else
 	{
@@ -52,20 +51,18 @@ static int	print_without_align(char *str, t_tag *tags, int len, char c)
 
 static int	calculate_and_print(t_tag *tags, char *str, int len)
 {
+	int res;
 	int	width;
 	int	precision;
-	int res;
 
 	res = 0;
 	width = tags->width.num;
 	precision = tags->precision.num;
 	if (tags->flags.left_align)
-	{
-		print_str_of_len(precision, str);
-		width -= precision;
-		while (width-- > 0)
-			res += printf_putchar(' ');
-	}
+		if (precision <= len)
+			res += print_str_of_len(precision, str, width - precision);
+		else
+			res += print_str_of_len(precision, str, width - len);
 	else if (tags->flags.zero)
 		res += print_without_align(str, tags, len, '0');
 	else
@@ -76,24 +73,25 @@ static int	calculate_and_print(t_tag *tags, char *str, int len)
 static int	print_without_precision(t_tag *tags, char *str)
 {
 	int	res;
-	int	len;
 	int	width;
 
 	res = 0;
-	len = ft_strlen(str);
 	width = tags->width.num;
 	if (tags->flags.left_align)
-		while (width-- > len)
+	{
+		res += printf_putstr(str);
+		while (width-- > ft_strlen(str))
 			res += printf_putchar(' ');
+	}
 	else if (tags->flags.zero)
 	{
-		while (width-- > len)
+		while (width-- > ft_strlen(str))
 			res += printf_putchar('0');
 		res += printf_putstr(str);
 	}
 	else
 	{
-		while (width-- > len)
+		while (width-- > ft_strlen(str))
 			res += printf_putchar(' ');
 		res += printf_putstr(str);
 	}
@@ -118,7 +116,7 @@ int			print_str(t_tag *tags, va_list list)
 	if (width == 0 && precision == 0)
 		res += printf_putstr(str);
 	else if (width == 0 || width < len)
-		res += print_str_of_len(precision, str);
+		res += print_str_of_len(precision, str, 0);
 	else if (precision == 0)
 		res += print_without_precision(tags, str);
 	else
