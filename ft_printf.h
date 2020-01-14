@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 12:53:41 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/14 11:28:57 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int					print_double_with_e(t_tag *tags, va_list list);
 int					print_double(t_tag *tags, va_list list);
 int					print_int(t_tag *tags, va_list list);
 int					print_memory(t_tag *tags, va_list list);
-int					print_percent(t_tag *tags, va_list list);
+int					print_percent(t_tag *tags);
 int					print_str(t_tag *tags, va_list list);
 int					print_unsigned_int(t_tag *tags, va_list list);
 int					print_unsigned_low_hex(t_tag *tags, va_list list);
