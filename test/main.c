@@ -1,27 +1,105 @@
 #include "../ft_printf.h"
 #include <stdio.h>
 
+void	check_s()
+{
+	// printf("printf %s,1- %d, 2- %hd, 3- %hhd\n", "Hello", "a", "a", "a");
+	// ft_printf("printf %s,1- %d, 2- %hd, 3- %hhd\n", "Hello", "a", 5, 5);
+	
+	// printf("\n\n");
+	// printf("printf %s \t'\n", "hello");
+	// ft_printf("printf %s \t'\n", "hello");
+}
+
+void	check_c()
+{
+	
+}
+
+void	check_d()
+{
+
+	// printf("'%50.2d'\n", -1234);
+	// ft_printf("'%50.2d'\n", -1234);
+	
+	printf("'%3.2d'\n", -123);
+	ft_printf("'%3.2d'\n", -123);
+}
+void	check_percent()
+{
+
+}
+void	check_o()
+{
+
+}
+void	check_p()
+{
+
+}
+void	check_u()
+{
+
+}
+void	check_x()
+{
+
+}
+void	check_big_x()
+{
+
+}
+void	check_f()
+{
+
+}
+
 int	main(int argc, char **argv)
 {
 	int	num = 0;
+	int	i = 0;
+	char	c;
 	if (argc == 2)
-		ft_printf(argv[1]);
-	if (argc == 3)
-		ft_printf(argv[1], argv[2]);
-	if (argc == 4)
-		ft_printf(argv[1], argv[2], argv[3]);
-	if (argc == 5)
-		ft_printf(argv[1], argv[2], argv[3], argv[4]);
-	if (argc == 6)
-		ft_printf(argv[1], argv[2], argv[3], argv[4], argv[5]);
-	if (argc == 1)
 	{
-		// printf("printf %s,1- %d, 2- %hd, 3- %hhd\n", "Hello", "a", "a", "a");
-		// ft_printf("printf %s,1- %d, 2- %hd, 3- %hhd\n", "Hello", "a", 5, 5);
+		while (argv[1][i])
+		{
+			c = argv[1][i];
+			if (c == 's')
+				check_s();
+			else if (c == 'c')
+				check_c();
+			else if (c == 'p')
+				check_p();
+			else if (c == 'd')
+				check_d();
+			else if (c == 'o')
+				check_o();
+			else if (c == 'u')
+				check_u();
+			else if (c == 'x')
+				check_x();
+			else if (c == 'X')
+				check_big_x();
+			else if (c == 'f')
+				check_f;
+			else if (c == '%')
+				check_percent();
+			i++;
+		}
+	}
+	else
+	{
+		check_s();
+		check_c();
+		check_p();
+		check_d();
+		check_percent();
+		check_o();
+		check_u();
+		check_x();
+		check_big_x();
+		check_f();
 		
-		// printf("\n\n");
-		// printf("printf %s \t'\n", "hello");
-		// ft_printf("printf %s \t'\n", "hello");
 		
 		// printf("Kogda zakanch\n\n");
 		// printf("%2$d %2$d;\n","16",17);
@@ -31,12 +109,6 @@ int	main(int argc, char **argv)
 		// num = printf("dd_printf %s, '%5bd'\n", "hello", 9, 7654321);
 		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
 		// ft_printf("ft_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
-
-		// printf("'%50.2d'\n", -1234);
-		// ft_printf("'%50.2d'\n", -1234);
-		
-		printf("'%3.2d'\n", -123);
-		ft_printf("'%3.2d'\n", -123);
 
 		// printf("'%50.4lld'\n", -9223372036854775808);
 		// ft_printf("'%lld'\n", -9223372036854775808);
