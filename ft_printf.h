@@ -68,7 +68,7 @@ int					print_unsigned_low_hex(t_tag *tags, va_list list);
 int					print_unsigned_octal(t_tag *tags, va_list list);
 int					print_unsigned_upper_hex(t_tag *tags, va_list list);
 int					printf_putchar(char c);
-int					printf_putnbr(int n);
+int					printf_putnbr(long long n);
 int					printf_putstr(char const *str);
 int					refill_tags(t_tag *tags, char symbol, va_list list);
 

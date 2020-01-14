@@ -29,8 +29,19 @@ int	main(int argc, char **argv)
 
 		// num = printf("dd_printf %s, '%-3.d'\n", "hello", 3, 9);
 		// num = printf("dd_printf %s, '%5bd'\n", "hello", 9, 7654321);
-		num = printf("dd_printf  '% 07d' |||| '% 8d' '%7.3s', '%+.10d' ppp\n", 6, -57897, "Hello", 42);
-		ft_printf("ft_printf  '% 07d' |||| '% 8d' '%7.3s', '%+.10d' ppp\n", 6, -57897, "Hello", 42);
+		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
+		// ft_printf("ft_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
+
+		// printf("'%50.2d'\n", -1234);
+		// ft_printf("'%50.2d'\n", -1234);
+		
+		printf("'%3.2d'\n", -123);
+		ft_printf("'%3.2d'\n", -123);
+
+		// printf("'%50.4lld'\n", -9223372036854775808);
+		// ft_printf("'%lld'\n", -9223372036854775808);
+
+		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%-+3.0d' ppp\n", -42, -57897, "Hello", 0);
 		// printf("num = %d\n", num);
 		// ft_printf("ft_printf '%7.6ls', '%0+d' %d '%c'\n", "Hello", 9, 7654321, 'P');
 		// printf("dd_printf '%s'\n");

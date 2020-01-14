@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	printf_putnbr(int n)
+int	printf_putnbr(long long n)
 {
 	int	res;
 

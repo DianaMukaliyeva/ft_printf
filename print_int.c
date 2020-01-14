@@ -39,44 +39,9 @@ static int	print_digit(long long num, int res, t_tag *tags, int len)
 	{
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
-		res += print_digit(num, res, tags, len);
 	}
-	else
-	{
-		if (num < 0)
-		{
-			res += printf_putchar('-');
-			tags->precision.num--;
-			if (num == -2147483648 && tags->precision.num > 0)
-			{
-				res += printf_putchar('2');
-				tags->precision.num--;
-				num = -147483648;
-			}
-			num *= -1;
-		}
-		else
-		{
-			if (tags->flags.sign)
-			{
-				res += printf_putchar('+');
-				tags->precision.num--;
-			}
-			else if (tags->flags.space)
-			{
-				res += printf_putchar(' ');
-				tags->precision.num--;
-			}
-		}
-		if (num / 10 > 0)
-			res += print_digit(num / 10, res, tags, len);
-		if (tags->precision.num > 0)
-		{
-			res += printf_putchar((num % 10) + '0');
-			tags->precision.num--;
-		}
-	}
-	
+	if (tags->precision.num != 0 || num != 0)
+		res += printf_putnbr(num);
 	return (res);
 }
 
@@ -115,11 +80,113 @@ static int print_int_with_width(t_tag *tags, long long num)
 		len++;
 	if (tags->precision.is_exist)
 	{
-		res += printf_putnbr(num);
+		if (tags->flags.left_align)//-*.*
+		{
+			if (tags->flags.sign)//-+*.*
+			{
+				width--;
+				if (num >= 0)
+					res += printf_putchar('+');
+				else
+				{
+					res += printf_putchar('-');
+					num *= -1;
+				}
+				len = get_len(num);
+				res = print_digit(num, res, tags, len);
+				width -= res;
+				while (width-- >= 0)
+					res += printf_putchar(' ');
+			}
+			else if(tags->flags.space)//- *.*
+			{
+				if (num >= 0)
+					res += printf_putchar(' ');
+				else
+				{
+					res += printf_putchar('-');
+					num *= -1;
+				}
+				len = get_len(num);
+				res = print_digit(num, res, tags, len);
+				width -= res;
+				while (width-- > 0)
+					res += printf_putchar(' ');
+			}
+			else//-*.*
+			{
+				res = print_digit(num, res, tags, len);
+				while (width-- > tags->precision.num)
+					res += printf_putchar(' ');
+			}
+		}
+		else
+		{
+			if (tags->flags.sign)//+*.*
+			{
+				width--;
+				while (width-- > len)
+					res += printf_putchar(' ');
+				if (num >= 0)
+					res += printf_putchar('+');
+				else
+				{
+					res += printf_putchar('-');
+					num *= -1;
+				}
+				res = print_digit(num, res, tags, len - 1);
+				if (tags->precision.num == 0 && num == 0)
+					res += printf_putchar(' ');
+			}
+			else if (tags->flags.space)// *.*
+			{
+				width--;
+				while (width-- > len)
+					res += printf_putchar(' ');
+				if (num >= 0)
+					res += printf_putchar(' ');
+				else
+				{
+					res += printf_putchar('-');
+					num *= -1;
+				}
+				res = print_digit(num, res, tags, len - 1);
+				if (tags->precision.num == 0 && num == 0)
+					res += printf_putchar(' ');
+			}
+			else//*.*
+			{
+				if (num >=0)
+				{
+					if (len > tags->precision.num)
+						while (width-- > len)
+							res += printf_putchar(' ');
+					else
+						while (width-- > tags->precision.num)
+							res += printf_putchar(' ');
+					res = print_digit(num, res, tags, len);
+					if (tags->precision.num == 0 && num == 0)
+						res += printf_putchar(' ');
+				}
+				else
+				{
+					width--;
+					if (len > tags->precision.num)
+						while (width-- > len)
+							res += printf_putchar(' ');
+					else
+						while (width-- > tags->precision.num)
+							res += printf_putchar(' ');
+					res += printf_putchar('-');
+					num *= -1;
+					res = print_digit(num, res, tags, len - 1);
+				}
+			}
+		}
 	}
-	else
+	else//точности нету
 	{
-		if (tags->flags.left_align)
+		if (tags->flags.left_align)//-
 		{
 			if (tags->flags.sign)
 				res += print_int_with_sign(num);
@@ -131,11 +198,11 @@ static int print_int_with_width(t_tag *tags, long long num)
 			while (width-- > 0)
 				res += printf_putchar(' ');
 		}
-		else
+		else//точности нету, просто ширина
 		{
-			if (tags->flags.zero)
+			if (tags->flags.zero)//0*
 			{
-				if (tags->flags.sign)
+				if (tags->flags.sign)//0+*
 				{
 					if (num >= 0)
 					{
@@ -146,7 +213,6 @@ static int print_int_with_width(t_tag *tags, long long num)
 					{
 						res += printf_putchar('-');
 						width--;
-						//proverit', esli eto long long samaya bolshaya
 						num *= -1;
 					}
 					len = get_len(num);
@@ -154,7 +220,7 @@ static int print_int_with_width(t_tag *tags, long long num)
 						res += printf_putchar('0');
 					res += printf_putnbr(num);
 				}
-				else if (tags->flags.space)
+				else if (tags->flags.space)//0 *
 				{
 					if (num >= 0)
 					{
@@ -165,18 +231,34 @@ static int print_int_with_width(t_tag *tags, long long num)
 					{
 						res += printf_putchar('-');
 						width--;
-						//proverit', esli eto long long samaya bolshaya
 						num *= -1;
 					}
 					len = get_len(num);
 					while (width-- > len)
 						res += printf_putchar('0');
 					res += printf_putnbr(num);
+				}
+				else//0*
+				{
+					if (num >=0)
+					{
+						while (width-- > len)
+							res += printf_putchar('0');
+						res += printf_putnbr(num);
+					}
+					else
+					{
+						res += printf_putchar('-');
+						while (width-- > len)
+							res += printf_putchar('0');
+						num *= -1;
+						res += printf_putnbr(num);
+					}
 				}
 			}
-			else
+			else//*
 			{
-				if (tags->flags.sign)
+				if (tags->flags.sign)//+*
 				{
 					while (width-- > len)
 						res += printf_putchar(' ');
@@ -184,7 +266,7 @@ static int print_int_with_width(t_tag *tags, long long num)
 						res += printf_putchar('+');
 					res += printf_putnbr(num);
 				}
-				else if (tags->flags.space)
+				else if (tags->flags.space)// *
 				{
 					while (width-- > len)
 						res += printf_putchar(' ');
@@ -192,6 +274,13 @@ static int print_int_with_width(t_tag *tags, long long num)
 						res += printf_putchar(' ');
 					res += printf_putnbr(num);
 				}
+				else//*
+				{
+					while (width-- > len)
+						res += printf_putchar(' ');
+					res += printf_putnbr(num);
+				}
+				
 			}
 		}
 	}
@@ -208,7 +297,16 @@ static int print_int_with_precision(t_tag *tags, long long num)
 	if (num > 0 && (tags->flags.sign || tags->flags.space))
 		len++;
 	if (tags->precision.num)
-		res += print_digit(num, res, tags, len);
+	{
+		if (num < 0)
+		{
+			res += printf_putchar('-');
+			num *= -1;
+			res = print_digit(num, res, tags, len - 1);
+		}
+		else
+			res = print_digit(num, res, tags, len);
+	}
 	else if (num != 0)
 		res += printf_putnbr(num);
 	return (res);
@@ -225,9 +323,18 @@ int	print_int(t_tag *tags, va_list list)
 	else if (tags->modifier.hh)
 		num = (char)va_arg(list, int);
 	else if (tags->modifier.l)
-		num = (long)va_arg(list, int);
+		num = va_arg(list, long);
 	else if (tags->modifier.ll)
-		num = (long long)va_arg(list, int);
+	{
+		num = va_arg(list, long long);
+		//podumat' chto sdelat'. mozhet voobshe otdel'nuyu funkciyu ili vezde dobavit kod gde umnozhayu na -1
+		if (num + 1 == -9223372036854775807)
+		{
+			res += printf_putchar('-');
+			res += printf_putchar('9');
+			num = 223372036854775808;
+		}
+	}
 	else
 		num = va_arg(list, int);
 	if (tags->width.is_exist)
