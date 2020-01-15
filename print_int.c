@@ -76,7 +76,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 	res = 0;
 	len = get_len(num, tags, 1);
 	width = tags->width.num;
-	if (!(tags->width.is_exist) && tags->precision.is_exist)
+	if (tags->width.num == 0 && tags->precision.is_exist)
 	{
 		if (num < 0)
 		{

@@ -20,12 +20,12 @@ void	check_di()
 {
 	int	x = 0;
 	int	y = 0;
-	int	width[5] = {0,4,5,8,12};
+	int	width[4] = {4,5,8,12};
 	int	precision[5] = {0,4,5,8,12};
 	int	num[3] = {0,11111,-11111};
 
-	x = 1;
-	while (x < 5)
+	x = 0;
+	while (x < 4)
 	{
 		y = 0;
 		while (y < 5)
@@ -248,6 +248,10 @@ int	main(int argc, char **argv)
 		check_d(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
 	else
 	{
+		// printf("'%03.2d'\n", -1);
+		// ft_printf("'%03.2d'\n", -1);
+		// printf("@moulitest: '%5.d' '%5.0d'\n", 0, 0);
+		// ft_printf("@moulitest: '%5.d' '%5.0d'\n", 0, 0);
 		check_s();
 		check_c();
 		check_p();
