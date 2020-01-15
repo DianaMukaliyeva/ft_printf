@@ -16,8 +16,93 @@ void	check_c()
 	
 }
 
+void	check_di()
+{
+	int	x = 0;
+	int	y = 0;
+	int	width[5] = {0,4,5,8,12};
+	int	precision[5] = {0,4,5,8,12};
+	int	num[3] = {0,11111,-11111};
+
+	x = 1;
+	while (x < 5)
+	{
+		y = 0;
+		while (y < 5)
+		{
+			printf("\033[0;32mtest 1.1' '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'% *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'% *.*d'\n", width[x], precision[y], num[1]);
+
+			printf("\033[0;32mtest 1.2'-'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%-*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%-*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.3'+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%+*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%+*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.4'0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%0*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%0*.*d'\n", width[x], precision[y], num[1]);
+			
+			// printf("\033[0;32mtest 1.5  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			// printf("'% *.*d'\n", width[x], precision[y], num[1]);
+			// ft_printf("'% *.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.6'-+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%-+*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%-+*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.7'-0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%-0*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%-0*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.8'- '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%- *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%- *.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.9'+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%+0*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%+0*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.10'+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%+ *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%+ *.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.11' +'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'% +*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'% +*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.12'0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%0 *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%0 *.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.13'-+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%-+0*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%-+0*.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.14'-+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%-+ *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%-+ *.*d'\n", width[x], precision[y], num[1]);
+			
+			printf("\033[0;32mtest 1.15'+0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%+0 *.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%+0 *.*d'\n", width[x], precision[y], num[1]);
+			
+
+			printf("\033[0;32mtest 1.16'- 0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			printf("'%- 0+*.*d'\n", width[x], precision[y], num[1]);
+			ft_printf("'%- 0+*.*d'\n", width[x], precision[y], num[1]);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	check_d(int width, int precision, int num)
 {
+	
 	// printf("'%5.25lld'\n", -9223372036854775808);
 	// ft_printf("'%5.25lld'\n", -9223372036854775808);
 	// printf("'%5.lld'\n", -9223372036854775807);
@@ -30,6 +115,8 @@ void	check_d(int width, int precision, int num)
 
 	// printf("'%-+10.5d'\n", 4242);
 	// ft_printf("'%-+10.5d'\n", 4242);
+
+
 	printf("\033[0;32mtest 1.1\n\033[0m");
 	printf("'% *.*d'\n", width, precision, num);
 	ft_printf("'% *.*d'\n", width, precision, num);
@@ -164,6 +251,7 @@ int	main(int argc, char **argv)
 		check_s();
 		check_c();
 		check_p();
+		check_di();
 		// check_d(atoi(argv[1]), atoi(argv[2]));
 		check_percent();
 		check_o();
