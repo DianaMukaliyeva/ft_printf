@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/14 11:28:57 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/15 19:57:24 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int					print_unsigned_low_hex(t_tag *tags, va_list list);
 int					print_unsigned_octal(t_tag *tags, va_list list);
 int					print_unsigned_upper_hex(t_tag *tags, va_list list);
 int					printf_putchar(char c);
-int					printf_putnbr(long long n);
+int					printf_putnbr(intmax_t n);
 int					printf_putstr(char const *str);
 int					refill_tags(t_tag *tags, char symbol, va_list list);
 

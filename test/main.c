@@ -16,14 +16,84 @@ void	check_c()
 	
 }
 
-void	check_d()
+void	check_d(int width, int precision, int num)
 {
-
+	// printf("'%5.25lld'\n", -9223372036854775808);
+	// ft_printf("'%5.25lld'\n", -9223372036854775808);
+	// printf("'%5.lld'\n", -9223372036854775807);
+	// ft_printf("'%5.lld'\n", -9223372036854775807);
 	// printf("'%50.2d'\n", -1234);
 	// ft_printf("'%50.2d'\n", -1234);
 	
-	printf("'%3.2d'\n", -123);
-	ft_printf("'%3.2d'\n", -123);
+	// printf("'%3.2d'\n", -123);
+	// ft_printf("'%3.2d'\n", -123);
+
+	// printf("'%-+10.5d'\n", 4242);
+	// ft_printf("'%-+10.5d'\n", 4242);
+	printf("\033[0;32mtest 1.1\n\033[0m");
+	printf("'% *.*d'\n", width, precision, num);
+	ft_printf("'% *.*d'\n", width, precision, num);
+
+	printf("\033[0;32mtest 1.2\n\033[0m");
+	printf("'%-*.*d'\n", width, precision, num);
+	ft_printf("'%-*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.3\n\033[0m");
+	printf("'%+*.*d'\n", width, precision, num);
+	ft_printf("'%+*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.4\n\033[0m");
+	printf("'%0*.*d'\n", width, precision, num);
+	ft_printf("'%0*.*d'\n", width, precision, num);
+	
+	// printf("\033[0;32mtest 1.5\n\033[0m");
+	// printf("'% *.*d'\n", width, precision, num);
+	// ft_printf("'% *.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.6\n\033[0m");
+	printf("'%-+*.*d'\n", width, precision, num);
+	ft_printf("'%-+*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.7\n\033[0m");
+	printf("'%-0*.*d'\n", width, precision, num);
+	ft_printf("'%-0*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.8\n\033[0m");
+	printf("'%- *.*d'\n", width, precision, num);
+	ft_printf("'%- *.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.9\n\033[0m");
+	printf("'%+0*.*d'\n", width, precision, num);
+	ft_printf("'%+0*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.10\n\033[0m");
+	printf("'%+ *.*d'\n", width, precision, num);
+	ft_printf("'%+ *.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.11\n\033[0m");
+	printf("'% +*.*d'\n", width, precision, num);
+	ft_printf("'% +*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.12\n\033[0m");
+	printf("'%0 *.*d'\n", width, precision, num);
+	ft_printf("'%0 *.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.13\n\033[0m");
+	printf("'%-+0*.*d'\n", width, precision, num);
+	ft_printf("'%-+0*.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.14\n\033[0m");
+	printf("'%-+ *.*d'\n", width, precision, num);
+	ft_printf("'%-+ *.*d'\n", width, precision, num);
+	
+	printf("\033[0;32mtest 1.15\n\033[0m");
+	printf("'%+0 *.*d'\n", width, precision, num);
+	ft_printf("'%+0 *.*d'\n", width, precision, num);
+	
+
+	printf("\033[0;32mtest 1.16\n\033[0m");
+	printf("'%- 0+*.*d'\n", width, precision, num);
+	ft_printf("'%- 0+*.*d'\n", width, precision, num);
 }
 void	check_percent()
 {
@@ -70,8 +140,8 @@ int	main(int argc, char **argv)
 				check_c();
 			else if (c == 'p')
 				check_p();
-			else if (c == 'd')
-				check_d();
+			// else if (c == 'd')
+			// 	check_d();
 			else if (c == 'o')
 				check_o();
 			else if (c == 'u')
@@ -81,18 +151,20 @@ int	main(int argc, char **argv)
 			else if (c == 'X')
 				check_big_x();
 			else if (c == 'f')
-				check_f;
+				check_f();
 			else if (c == '%')
 				check_percent();
 			i++;
 		}
 	}
+	else if (argc > 3)
+		check_d(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
 	else
 	{
 		check_s();
 		check_c();
 		check_p();
-		check_d();
+		// check_d(atoi(argv[1]), atoi(argv[2]));
 		check_percent();
 		check_o();
 		check_u();
@@ -110,8 +182,7 @@ int	main(int argc, char **argv)
 		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
 		// ft_printf("ft_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
 
-		// printf("'%50.4lld'\n", -9223372036854775808);
-		// ft_printf("'%lld'\n", -9223372036854775808);
+		
 
 		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%-+3.0d' ppp\n", -42, -57897, "Hello", 0);
 		// printf("num = %d\n", num);

@@ -6,13 +6,13 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:04:27 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 23:04:43 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/15 19:58:57 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_putnbr(long long n)
+int	printf_putnbr(intmax_t n)
 {
 	int	res;
 
@@ -20,11 +20,6 @@ int	printf_putnbr(long long n)
 	if (n < 0)
 	{
 		res += printf_putchar('-');
-		if (n == -2147483648)
-		{
-			res += printf_putchar('2');
-			n = -147483648;
-		}
 		n *= -1;
 	}
 	if (n / 10 > 0)
