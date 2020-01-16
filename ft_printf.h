@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/15 19:57:24 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/16 19:41:57 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+//# include <stdint.h>
 
 typedef struct		s_flag
 {
@@ -59,9 +60,11 @@ int					print_char(t_tag *tags, va_list list);
 int					print_double_with_big_e(t_tag *tags, va_list list);
 int					print_double_with_e(t_tag *tags, va_list list);
 int					print_double(t_tag *tags, va_list list);
+int					print_int3(t_tag *tags, va_list list);
+int					print_int2(t_tag *tags, va_list list);
 int					print_int(t_tag *tags, va_list list);
 int					print_memory(t_tag *tags, va_list list);
-int					print_percent(t_tag *tags);
+int					print_percent(void);
 int					print_str(t_tag *tags, va_list list);
 int					print_unsigned_int(t_tag *tags, va_list list);
 int					print_unsigned_low_hex(t_tag *tags, va_list list);

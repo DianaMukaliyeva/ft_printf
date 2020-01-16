@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 19:43:24 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/15 20:01:29 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:47:58 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,18 @@ static int	get_len(intmax_t num, t_tag *tags, int check_plus)
 
 static int	print_digit_precision(intmax_t num, int res, t_tag *tags, int len)
 {
+	if (num < 0)
+	{
+		res += printf_putchar('-');
+		num *= -1;
+		tags->precision.num++;
+	}
+	else if (num == 0 && tags->flags.left_align == 0 && (tags->flags.sign || tags->flags.space))
+		tags->precision.num--;
 	if (len < tags->precision.num)
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
-	if (tags->precision.num != 0 || num != 0)
+	if (tags->precision.num > 0 || num != 0)
 		res += printf_putnbr(num);
 	return (res);
 }
@@ -76,17 +84,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 	res = 0;
 	len = get_len(num, tags, 1);
 	width = tags->width.num;
-	if (tags->width.num == 0 && tags->precision.is_exist)
-	{
-		if (num < 0)
-		{
-			res += printf_putchar('-');
-			num *= -1;
-			len--;
-		}
-		res = print_digit_precision(num, res, tags, len);
-	}
-	else if (tags->precision.is_exist)
+	if (tags->precision.is_exist)
 	{
 		if (tags->flags.left_align)//est minus i precision
 		{
@@ -111,7 +109,13 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 			else//-*.*
 			{
 				res = print_digit_precision(num, res, tags, len);
-				while (width-- > tags->precision.num)
+				if (len < tags->precision.num)
+					while (width-- > tags->precision.num)
+						res += printf_putchar(' ');
+				else
+					while (width-- > len)
+						res += printf_putchar(' ');
+				if (tags->width.num != 0 && tags->precision.num == 0 && num == 0)
 					res += printf_putchar(' ');
 			}
 		}
@@ -119,9 +123,14 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 		{
 			if (tags->flags.sign)//+*.*
 			{
+				// len = get_len(num, tags, 0);
 				width--;
-				while (width-- > len)
-					res += printf_putchar(' ');
+				if (len < tags->precision.num)
+					while (width-- > tags->precision.num)
+						res += printf_putchar(' ');
+				else
+					while (width-- >= len)
+						res += printf_putchar(' ');
 				res += print_sign_or_space(&num, '+', 0);
 				res = print_digit_precision(num, res, tags, len - 1);
 				if (tags->precision.num == 0 && num == 0)
@@ -130,8 +139,12 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 			else if (tags->flags.space)// *.*
 			{
 				width--;
-				while (width-- > len)
-					res += printf_putchar(' ');
+				if (len < tags->precision.num)
+					while (width-- > tags->precision.num)
+						res += printf_putchar(' ');
+				else
+					while (width-- >= len)
+						res += printf_putchar(' ');
 				res += print_sign_or_space(&num, ' ', 0);
 				res = print_digit_precision(num, res, tags, len - 1);
 				if (tags->precision.num == 0 && num == 0)
@@ -148,14 +161,14 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 						while (width-- > tags->precision.num)
 							res += printf_putchar(' ');
 					res = print_digit_precision(num, res, tags, len);
-					if (tags->precision.num == 0 && num == 0)
+					if (tags->width.num && tags->precision.num == 0 && num == 0)
 						res += printf_putchar(' ');
 				}
 				else
 				{
 					width--;
 					if (len > tags->precision.num)
-						while (width-- > len)
+						while (width-- >= len)
 							res += printf_putchar(' ');
 					else
 						while (width-- > tags->precision.num)

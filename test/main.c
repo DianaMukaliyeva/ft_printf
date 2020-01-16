@@ -20,84 +20,122 @@ void	check_di()
 {
 	int	x = 0;
 	int	y = 0;
-	int	width[4] = {4,5,8,12};
-	int	precision[5] = {0,4,5,8,12};
-	int	num[3] = {0,11111,-11111};
+	int	width[9] = {0,1,2,4,5,7,8,12,100};
+	int	precision[9] = {0,1,2,4,5,7,8,12,100};
+	// int	precision[9] = {0,1,2,7,100};
+	int	num[6] = {0,11111,-11111,1,10, -4};
+	int	res = 0;
+	int	ft_res = 0;
+	int	dif = 0;
+	int number = num[0];
 
 	x = 0;
-	while (x < 4)
+	while (x < 9)
 	{
 		y = 0;
-		while (y < 5)
+		while (y < 9)
 		{
 			printf("\033[0;32mtest 1.1' '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'% *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'% *.*d'\n", width[x], precision[y], num[1]);
+			res = printf("'% *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'% *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
 
 			printf("\033[0;32mtest 1.2'-'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%-*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%-*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.3'+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%+*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%+*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.4'0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%0*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%0*.*d'\n", width[x], precision[y], num[1]);
-			
-			// printf("\033[0;32mtest 1.5  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			// printf("'% *.*d'\n", width[x], precision[y], num[1]);
-			// ft_printf("'% *.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.6'-+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%-+*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%-+*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.7'-0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%-0*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%-0*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.8'- '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%- *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%- *.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.9'+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%+0*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%+0*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.10'+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%+ *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%+ *.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.11' +'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'% +*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'% +*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.12'0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%0 *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%0 *.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.13'-+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%-+0*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%-+0*.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.14'-+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%-+ *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%-+ *.*d'\n", width[x], precision[y], num[1]);
-			
-			printf("\033[0;32mtest 1.15'+0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%+0 *.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%+0 *.*d'\n", width[x], precision[y], num[1]);
-			
+			res = printf("'%-*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
 
-			printf("\033[0;32mtest 1.16'- 0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
-			printf("'%- 0+*.*d'\n", width[x], precision[y], num[1]);
-			ft_printf("'%- 0+*.*d'\n", width[x], precision[y], num[1]);
+			printf("\033[0;32mtest 1.3'+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.4'0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%0*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			// printf("\033[0;32mtest 1.5  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			// rs += printf("'% *.*d'\n", width[x], precision[y], number);
+			// ft_rs += ft_printf("'% *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.6'-+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.7'-0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-0*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-0*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.8'- '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%- *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.9'+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+0*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.10'+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+ *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+ *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.11' +'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'% +*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'% +*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.12'0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0 *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%0 *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.13'-+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+0*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+0*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.14'-+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+ *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+ *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.15'+0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0 *.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+0 *.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+
+			printf("\033[0;32mtest 1.16'- 0+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- 0+*.*d'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%- 0+*.*d'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;			
 			y++;
 		}
 		x++;
 	}
+	printf("ITOGO DIFF %d\n", dif);
 }
 
 void	check_d(int width, int precision, int num)
@@ -184,7 +222,122 @@ void	check_d(int width, int precision, int num)
 }
 void	check_percent()
 {
+	int	x = 0;
+	int	y = 0;
+	int	width[9] = {0,1,2,4,5,7,8,12,100};
+	int	precision[9] = {0,1,2,4,5,7,8,12,100};
+	// int	precision[9] = {0,1,2,7,100};
+	int	res = 0;
+	int	ft_res = 0;
+	int	dif = 0;
 
+	x = 0;
+	while (x < 9)
+	{
+		y = 0;
+		while (y < 9)
+		{
+			printf("\033[0;32mtest 1.1' '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'% *.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'% *.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.2'-'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-*.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%-*.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.3'+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+*.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%+*.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.4'0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0*.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%0*.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			// printf("\033[0;32mtest 1.5  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			// rs += printf("'% *.*%'\n", width[x], precision[y]);
+			// ft_rs += ft_printf("'% *.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.6'-+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+*.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%-+*.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.7'-0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-0*.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%-0*.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.8'- '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- *.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%- *.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.9'+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0*.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%+0*.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.10'+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+ *.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%+ *.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.11' +'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'% +*.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'% +*.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.12'0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0 *.%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%0 *.%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.13'-+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+0*.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%-+0*.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.14'-+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+ *.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%-+ *.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.15'+0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0 *.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%+0 *.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+
+
+			printf("\033[0;32mtest 1.16'- 0+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- 0+.*%'\n", width[x], precision[y]);
+			ft_res = ft_printf("'%- 0+.*%'\n", width[x], precision[y]);
+			if (res != ft_res)
+				dif++;
+			y++;
+		}
+		x++;
+	}
+	printf("%% ITOGO DIFF %d\n", dif);
 }
 void	check_o()
 {
@@ -248,16 +401,18 @@ int	main(int argc, char **argv)
 		check_d(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
 	else
 	{
-		// printf("'%03.2d'\n", -1);
-		// ft_printf("'%03.2d'\n", -1);
-		// printf("@moulitest: '%5.d' '%5.0d'\n", 0, 0);
-		// ft_printf("@moulitest: '%5.d' '%5.0d'\n", 0, 0);
+		printf("'%lld'\n", -9223372036854775808);
+		ft_printf("'%lld'\n", 9223372036854775808);
+		printf("'%5.25lld'\n", -9223372036854775808);
+		ft_printf("'%5.25lld'\n", -9223372036854775808);
+		// printf("'%.50lld'\n", -9223372036854775807);
+		// ft_printf("'%.50lld'\n", -9223372036854775807);
 		check_s();
 		check_c();
 		check_p();
-		check_di();
+		// check_di();
 		// check_d(atoi(argv[1]), atoi(argv[2]));
-		check_percent();
+		// check_percent();
 		check_o();
 		check_u();
 		check_x();

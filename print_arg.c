@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/14 11:28:44 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/16 19:38:31 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	print_arg2(char modifier, t_tag *tags, va_list list)
 	if (modifier == 'o')
 		res += print_unsigned_octal(tags, list);
 	else if (modifier == 'd' || modifier == 'i')
-		res += print_int(tags, list);
+		res += print_int3(tags, list);
 	else if (modifier == 'u')
 		res += print_unsigned_int(tags, list);
 	else if (modifier == 'x')
@@ -59,7 +59,7 @@ static int	print_arg3(char modifier, t_tag *tags, va_list list)
 	else if (modifier == 'g')
 		res += print_double(tags, list);
 	else if (modifier == '%')
-		res += print_percent(tags);
+		res += print_percent();
 	return (res);
 }
 
