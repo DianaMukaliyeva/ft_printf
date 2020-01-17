@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 09:32:49 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:35:17 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 19:54:11 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		fill_modifiers(t_tag *tags, char symbol)
 		tags->modifier.big_l = 1;
 }
 
-static void		fill_amount(t_amount_char *amount, char symbol, va_list list)
+static void		fill_amount(t_amount_char *amount, char symbol, va_list list)//neobhodimo menyat' esli zvezdochka i chislo otricatel'noe, to dlya precion nichego, a dlya width prosto d plyusom, minus uidet vo flag left_align
 {
 	amount->is_exist = 1;
 	if (symbol == '*')

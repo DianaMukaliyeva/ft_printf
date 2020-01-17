@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:55 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:12:43 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 20:32:42 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ static int	get_print_len(uintmax_t num, t_tag *tags)
 	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
 		len--;
 	else
+	{
 		if (tags->precision.num > len)
 			len = tags->precision.num;
-	if (tags->flags.hash)
+	}
+	if (tags->flags.hash && num != 0)
 		len += 2;
 	return (len);
 }
@@ -117,11 +119,11 @@ int			print_unsigned_low_hex(t_tag *tags, va_list list)
 	else if (tags->modifier.hh)
 		num = (unsigned char)va_arg(list, uintmax_t);
 	else if (tags->modifier.l)
-		num = (unsigned long) va_arg(list, uintmax_t);
+		num = (unsigned long)va_arg(list, uintmax_t);
 	else if (tags->modifier.ll)
-		num = (unsigned long long) va_arg(list, uintmax_t);
+		num = (unsigned long long)va_arg(list, uintmax_t);
 	else
-		num = (unsigned int) va_arg(list, uintmax_t);
+		num = (unsigned int)va_arg(list, uintmax_t);
 	print_len = get_print_len(num, tags);
 	res += print_with_flags(num, tags, print_len);
 	return (res);

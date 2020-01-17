@@ -34,7 +34,7 @@ static int	get_print_len(uintmax_t num, t_tag *tags)
 	else
 		if (tags->precision.num > len)
 			len = tags->precision.num;
-	if (tags->flags.hash && !tags->precision.is_exist)
+	if (tags->flags.hash && !tags->precision.is_exist && num != 0)
 		len++;
 	return (len);
 }
@@ -49,14 +49,14 @@ static int	print_digit_precision(uintmax_t num, t_tag *tags)
 	if (len < tags->precision.num)
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
-	if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
+	if (!tags->precision.is_exist || tags->precision.num || num != 0 || tags->flags.hash)
 		res += printf_unsigned_putnbr(num, 8);
 	return (res);
 }
 
 static int	print_sign(t_tag *tags, uintmax_t num)
 {
-	if (tags->flags.hash && (!tags->precision.num) && num >= 0)
+	if (tags->flags.hash && (!tags->precision.num) && num != 0)
 		return (printf_putchar('0'));
 	return (0);
 }
