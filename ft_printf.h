@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:41:57 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 00:19:42 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-//# include <stdint.h>
+# include <stdint.h>
 
 typedef struct		s_flag
 {
@@ -66,6 +66,7 @@ int					print_int(t_tag *tags, va_list list);
 int					print_memory(t_tag *tags, va_list list);
 int					print_percent(void);
 int					print_str(t_tag *tags, va_list list);
+int					print_str2(t_tag *tags, va_list list);
 int					print_unsigned_int(t_tag *tags, va_list list);
 int					print_unsigned_low_hex(t_tag *tags, va_list list);
 int					print_unsigned_octal(t_tag *tags, va_list list);

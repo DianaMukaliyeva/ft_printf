@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:38:31 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 00:19:52 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	print_arg1(char modifier, t_tag *tags, va_list list)
 
 	res = 0;
 	if (modifier == 's')
-		res += print_str(tags, list);
+		res += print_str2(tags, list);
 	else if (modifier == 'c')
 		res += print_char(tags, list);
 	else if (modifier == 'p')

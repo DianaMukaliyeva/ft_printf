@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/14 11:51:56 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/16 19:52:47 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int	calculate_and_print(t_tag *tags, char *str, int len)
 			res += print_str_of_len(precision, str, width - precision);
 		else
 			res += print_str_of_len(precision, str, width - len);
-	else if (tags->flags.zero)
-		res += print_without_align(str, tags, len, '0');
+	// else if (tags->flags.zero)
+	// 	res += print_without_align(str, tags, len, '0');
 	else
 		res += print_without_align(str, tags, len, ' ');
 	return (res);
@@ -83,12 +83,12 @@ static int	print_without_precision(t_tag *tags, char *str)
 		while (width-- > ft_strlen(str))
 			res += printf_putchar(' ');
 	}
-	else if (tags->flags.zero)
-	{
-		while (width-- > ft_strlen(str))
-			res += printf_putchar('0');
-		res += printf_putstr(str);
-	}
+	// else if (tags->flags.zero)
+	// {
+	// 	while (width-- > ft_strlen(str))
+	// 		res += printf_putchar('0');
+	// 	res += printf_putstr(str);
+	// }
 	else
 	{
 		while (width-- > ft_strlen(str))

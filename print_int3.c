@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/16 19:12:37 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 00:10:42 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
 			if (tags->flags.zero && !tags->precision.is_exist)
 			{
 				res += print_sign(num, tags);
-				while (width-- > print_len)//vozmozno tut budet lishnij pechatat'sya
+				while (width-- > print_len)
 					res += printf_putchar('0');
 				res += print_digit_precision(num, tags);
 			}
 			else
 			{
-				while (width-- > print_len)//vozmozno tut budet lishnij pechatat'sya
+				while (width-- > print_len)
 					res += printf_putchar(' ');
 				res += print_sign(num, tags);
 				res += print_digit_precision(num, tags);
