@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:10:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/14 11:20:56 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 18:37:12 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,14 @@ static int	print_with_width(char c, int width, int flag_zero, int flag_minus)
 	return (res);
 }
 
-int			print_char(t_tag *tags, va_list list)
+int			print_char(t_tag *tags, char c)
 {
 	int		res;
-	char	c;
 	int		width;
 	int		flag_zero;
 	int		flag_minus;
 
 	res = 0;
-	c = va_arg(list, int);
 	width = tags->width.num;
 	flag_zero = tags->flags.zero;
 	flag_minus = tags->flags.left_align;

@@ -6,11 +6,12 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 09:32:49 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 09:51:25 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 19:35:17 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void		fill_flags(t_tag *tags, char symbol)
 {
@@ -60,17 +61,26 @@ static void		fill_amount(t_amount_char *amount, char symbol, va_list list)
 	if (symbol == '*')
 	{
 		amount->asterisk = 1;
-		amount->num = va_arg(list, int);
+		amount->num = va_arg(list, uintmax_t);
+		if (amount->num < 0)
+			amount->num *= -1;
 	}
 	else
+	{
+		if (amount->asterisk == 1)
+		{
+			amount->asterisk = 0;
+			amount->num = 0;
+		}
 		amount->num = amount->num * 10 + symbol - 48;
+	}
 }
 
 int				refill_tags(t_tag *tags, char symbol, va_list list)
 {
 	const char	*flags = "+- 0#";
 	const char	*numbers = "1234567890*";
-	const char	*modifiers = "hlL";
+	const char	*modifiers = "hlLzjt";
 
 	if (ft_strchr(numbers, symbol))
 		if (tags->precision.is_exist == 1)

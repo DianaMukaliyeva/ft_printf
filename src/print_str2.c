@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 02:14:04 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 19:37:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,13 @@ static int	calculate_and_print(t_tag *tags, char *str)
 	}
 	else
 	{
-		while (tags->width.num-- > len)
-			res += printf_putchar(' ');
+		if (tags->flags.zero)
+			while (tags->width.num-- > len)
+				res += printf_putchar('0');
+		else
+			while (tags->width.num-- > len)
+				res += printf_putchar(' ');
+		
 		res += printf_putstr(str);
 	}
 	return (res);

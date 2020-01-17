@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 15:11:09 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 18:52:47 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ char				*ft_strchr(const char *str, int ch);
 int					ft_strlen(const char *str);
 int					parse_specifiers(va_list list, const char *format, int *i);
 int					print_arg(char modifier, t_tag *tags, va_list list);
-int					print_char(t_tag *tags, va_list list);
+int					print_char(t_tag *tags, char c);
 int					print_double_with_big_e(t_tag *tags, va_list list);
 int					print_double_with_e(t_tag *tags, va_list list);
 int					print_double(t_tag *tags, va_list list);
-int					print_hex(int num, int big);
+int					print_hex(uintmax_t num, int big);
 int					print_int3(t_tag *tags, va_list list);
 int					print_int2(t_tag *tags, va_list list);
 int					print_int(t_tag *tags, va_list list);
@@ -75,6 +75,7 @@ int					print_unsigned_upper_hex(t_tag *tags, va_list list);
 int					printf_putchar(char c);
 int					printf_putnbr(intmax_t n, int base);
 int					printf_putstr(char const *str);
+int					printf_unsigned_putnbr(uintmax_t n, int base);
 int					refill_tags(t_tag *tags, char symbol, va_list list);
 
 #endif

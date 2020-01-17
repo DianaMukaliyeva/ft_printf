@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 12:52:23 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 18:39:45 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				parse_specifiers(va_list list, const char *format, int *i)
 		else if (refill_tags(tags, format[*i], list))
 			continue ;
 		else
-			res += printf_putchar(format[*i]);
+			res += print_char(tags, format[*i]);
 		break ;
 	}
 	free(tags);

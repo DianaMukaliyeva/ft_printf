@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 13:46:38 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 19:31:29 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	print_arg1(char modifier, t_tag *tags, va_list list)
 	if (modifier == 's')
 		res += print_str2(tags, list);
 	else if (modifier == 'c')
-		res += print_char(tags, list);
+		res += print_char(tags, va_arg(list, int));
 	else if (modifier == 'p')
 		res += print_memory(tags, list);
 	return (res);
@@ -59,7 +59,8 @@ static int	print_arg3(char modifier, t_tag *tags, va_list list)
 	else if (modifier == 'g')
 		res += print_double(tags, list);
 	else if (modifier == '%')
-		res += print_percent();
+		res += print_char(tags, '%');
+		// res += print_percent();
 	return (res);
 }
 

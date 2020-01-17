@@ -753,39 +753,66 @@ int	main(int argc, char **argv)
 		check_d(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
 	else
 	{
-		printf("'%lld'\n", -9223372036854775808);
-		ft_printf("'%lld'\n", 9223372036854775808);
-		printf("'%5.25lld'\n", -9223372036854775808);
-		ft_printf("'%5.25lld'\n", -9223372036854775808);
-		printf("@moulitest: %s\n", NULL);
-		ft_printf("@moulitest: %s\n", NULL);
-		printf("%s %s\n", NULL, "string");
-		ft_printf("%s %s\n", NULL, "string");
+		// printf("'%u'\n", -9223372036854775808);
+		// ft_printf("'%u'\n", -9223372036854775808);
+		// printf("'%5.25lld'\n", -9223372036854775808);
+		// ft_printf("'%5.25lld'\n", -9223372036854775808);
+		// printf("@moulitest: %s\n", NULL);
+		// ft_printf("@moulitest: %s\n", NULL);
+		// printf("'%04.0bs' \n", "string");
+		// ft_printf("'%04.0cs' \n", 'b');
 		
-		printf("'%#5o'\n", 55);
-		ft_printf("'%#5o'\n", 55);
-		
-		
-		printf("'%#05o'\n", 55);
-		ft_printf("'%#05o'\n", 55);
-		
-		printf("'%#.5o'\n", 55);
-		ft_printf("'%#.5o'\n", 55);
-		printf("'%o'\n", 55);
-		ft_printf("'%o'\n", 55);
-		
-		printf("'%5o'\n", 55);
-		ft_printf("'%5o'\n", 55);
+		// printf("'%#5o'\n", 55);
+		// ft_printf("'%#5o'\n", 55);
 		
 		
-		printf("'%00o'\n", 55);
-		ft_printf("'%00o'\n", 55);
+		// printf("'%#05o'\n", 55);
+		// ft_printf("'%#05o'\n", 55);
 		
-		printf("'%#.o'\n", 55);
-		ft_printf("'%#.o'\n", 55);
+		// printf("'%#.5o'\n", 55);
+		// ft_printf("'%#.5o'\n", 55);
+		// printf("'%o'\n", 55);
+		// ft_printf("'%o'\n", 55);
 		
-		printf("%x\n", 42);
-		ft_printf("%x\n", 42);
+		// printf("'%5o'\n", 55);
+		// ft_printf("'%5o'\n", 55);
+		
+		
+		// printf("'%00o'\n", 55);
+		// ft_printf("'%00o'\n", 55);
+		
+		printf("'%#-8o'\n", 55);
+		ft_printf("'%#-8o'\n", 55);
+		
+		printf("'%#8o'\n", 55);
+		ft_printf("'%#8o'\n", 55);
+		
+		printf("'%#-8.5o'\n", 0);
+		ft_printf("'%#-8.5o'\n", 0);
+		
+		printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		// printf("%lu\n", -42);
+		// ft_printf("%lu\n", -42);
+
+		// printf("'%#8x'\n", 42);
+		// ft_printf("'%#8x'\n", 42);
+		// printf("'%#08x'\n", 42);
+		// ft_printf("'%#08x'\n", 42);
+
+		// printf("'%#8.6x'\n", 42);
+		// ft_printf("'%#8.6x'\n", 42);
+		// printf("'%#08.6x'\n", 42);
+		// ft_printf("'%#08.6x'\n", 42);
+
+		printf("{%*d}\n", -5, 42);
+		ft_printf("{%*d}\n", -5, 42);
+
+		printf("{%*3d}\n", 5, 0);
+		ft_printf("{%*3d}\n", 5, 0);
+
+		// printf("%x\n", 42);
+		// ft_printf("%x\n", 42);
 		// printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
 		// ft_printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
 		// printf("% Z%s\n", "test");

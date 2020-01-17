@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_low_hex.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:55 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 15:11:43 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 19:12:43 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int	get_len_without_sign(intmax_t num)
+static int	get_len_without_sign(uintmax_t num)
 {
 	int	len;
 
@@ -24,7 +24,7 @@ static int	get_len_without_sign(intmax_t num)
 	return (len);
 }
 
-static int	get_print_len(intmax_t num, t_tag *tags)
+static int	get_print_len(uintmax_t num, t_tag *tags)
 {
 	int	len;
 
@@ -34,12 +34,12 @@ static int	get_print_len(intmax_t num, t_tag *tags)
 	else
 		if (tags->precision.num > len)
 			len = tags->precision.num;
-	if (tags->flags.hash && !tags->precision.is_exist)
-		len++;
+	if (tags->flags.hash)
+		len += 2;
 	return (len);
 }
 
-static int	print_digit_precision(intmax_t num, t_tag *tags)
+static int	print_digit_precision(uintmax_t num, t_tag *tags)
 {
 	int	res;
 	int	len;
@@ -54,14 +54,14 @@ static int	print_digit_precision(intmax_t num, t_tag *tags)
 	return (res);
 }
 
-static int	print_sign(t_tag *tags)
+static int	print_sign(t_tag *tags, uintmax_t num)
 {
-	if (tags->flags.hash && (!tags->precision.num))
-		return (printf_putchar('0'));
+	if (tags->flags.hash && num != 0)
+		return (printf_putstr("0x"));
 	return (0);
 }
 
-static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
+static int	print_with_flags(uintmax_t num, t_tag *tags, int print_len)
 {
 	int	res;
 	int	width;
@@ -72,7 +72,7 @@ static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
 	{
 		if (tags->flags.left_align)
 		{
-			res += print_sign(tags);
+			res += print_sign(tags, num);
 			res += print_digit_precision(num, tags);
 			width -= res;
 			while (width-- > 0)
@@ -82,7 +82,7 @@ static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
 		{
 			if (tags->flags.zero && !tags->precision.is_exist)
 			{
-				res += print_sign(tags);
+				res += print_sign(tags, num);
 				while (width-- > print_len)
 					res += printf_putchar('0');
 				res += print_digit_precision(num, tags);
@@ -91,14 +91,14 @@ static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(tags);
+				res += print_sign(tags, num);
 				res += print_digit_precision(num, tags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(tags);
+		res += print_sign(tags, num);
 		res += print_digit_precision(num, tags);
 	}
 	
@@ -108,20 +108,20 @@ static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
 int			print_unsigned_low_hex(t_tag *tags, va_list list)
 {
 	int			res;
-	intmax_t	num;
+	uintmax_t	num;
 	int			print_len;
 
 	res = 0;
 	if (tags->modifier.h)
-		num = (unsigned short int)va_arg(list, int);
+		num = (unsigned short int)va_arg(list, uintmax_t);
 	else if (tags->modifier.hh)
-		num = (unsigned char)va_arg(list, int);
+		num = (unsigned char)va_arg(list, uintmax_t);
 	else if (tags->modifier.l)
-		num = (unsigned long) va_arg(list, long);
+		num = (unsigned long) va_arg(list, uintmax_t);
 	else if (tags->modifier.ll)
-		num = (unsigned long long) va_arg(list, intmax_t);
+		num = (unsigned long long) va_arg(list, uintmax_t);
 	else
-		num = (unsigned int) va_arg(list, int);
+		num = (unsigned int) va_arg(list, uintmax_t);
 	print_len = get_print_len(num, tags);
 	res += print_with_flags(num, tags, print_len);
 	return (res);

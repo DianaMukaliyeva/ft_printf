@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hex.c                                        :+:      :+:    :+:   */
+/*   printf_unsigned_putnbr.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 15:05:45 by diana             #+#    #+#             */
-/*   Updated: 2020/01/17 18:52:39 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/17 18:48:16 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/17 18:51:03 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_hex(uintmax_t num, int big)
+int	printf_unsigned_putnbr(uintmax_t n, int base)
 {
-	char	*big_hex;
-	char	*small_hex;
 	int		res;
 
 	res = 0;
-	big_hex = "0123456789ABCDEF";
-	small_hex = "0123456789abcdef";
-	if (num == 0)
-		return (printf_putchar('0'));
-	if (num >= 16)
-		res += print_hex(num / 16, big);
-	if (big)
-		res += printf_putchar(big_hex[num % 16]);
-	else
-		res += printf_putchar(small_hex[num % 16]);
+	
+	if (n / base > 0)
+		res += printf_putnbr(n / base, base);
+	res += printf_putchar((n % base) + '0');
 	return (res);
 }
