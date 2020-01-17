@@ -1,5 +1,6 @@
-#include "../ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <stdio.h>
+#include <stdint.h>
 
 void	check_s()
 {
@@ -567,6 +568,131 @@ void	check_percent()
 }
 void	check_o()
 {
+	// printf("'%#.o %#.0o'\n", 0, 0);
+	// ft_printf("'%#.o %#.0o'\n", 0, 0);
+	// printf("'%#5.o' '%#.0o'\n", 54, -54);
+	// ft_printf("'%#5.o' '%#.0o'\n", 54, -54);
+	// printf("'%-+#5.5o' '%#1.10o'\n", 54, -54);
+	// ft_printf("'%-+#5.5o' '%#1.10o'\n", 54, -54);
+	
+	int	x = 0;
+	int	y = 0;
+	int	width[9] = {0,1,2,4,5,7,8,12,100};
+	int	precision[9] = {0,1,2,4,5,7,8,12,100};
+	// int	precision[9] = {0,1,2,7,100};
+	intmax_t	num[6] = {0,11111,-11111,1,10, -4};
+	int	res = 0;
+	int	ft_res = 0;
+	int	dif = 0;
+	int number = num[0];
+
+	x = 0;
+	while (x < 9)
+	{
+		y = 0;
+		while (y < 9)
+		{
+			printf("\033[0;32mtest 1.1' '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'% *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'% *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.2'-'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.3'+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.4'0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%0*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			// printf("\033[0;32mtest 1.5  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			// rs += printf("'% *.*o'\n", width[x], precision[y], number);
+			// ft_rs += ft_printf("'% *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.6'-+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.7'-0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-0*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-0*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.8'- '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%- *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.9'+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+0*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.10'+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+ *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+ *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.11' +'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'% +*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'% +*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.12'0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%0 *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%0 *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.13'-+0'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+0*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+0*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.14'-+ '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%-+ *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%-+ *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+			printf("\033[0;32mtest 1.15'+0 '  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%+0 *.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%+0 *.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;
+
+
+			printf("\033[0;32mtest 1.16'- 0+'  width = %d, precision = %d\n\033[0m", width[x], precision[y]);
+			res = printf("'%- 0+*.*o'\n", width[x], precision[y], number);
+			ft_res = ft_printf("'%- 0+*.*o'\n", width[x], precision[y], number);
+			if (res != ft_res)
+				dif++;			
+			y++;
+		}
+		x++;
+	}
+	printf("OCTAL ITOGO DIFF %d\n", dif);
 
 }
 void	check_p()
@@ -635,6 +761,33 @@ int	main(int argc, char **argv)
 		ft_printf("@moulitest: %s\n", NULL);
 		printf("%s %s\n", NULL, "string");
 		ft_printf("%s %s\n", NULL, "string");
+		
+		printf("'%#5o'\n", 55);
+		ft_printf("'%#5o'\n", 55);
+		
+		
+		printf("'%#05o'\n", 55);
+		ft_printf("'%#05o'\n", 55);
+		
+		printf("'%#.5o'\n", 55);
+		ft_printf("'%#.5o'\n", 55);
+		printf("'%o'\n", 55);
+		ft_printf("'%o'\n", 55);
+		
+		printf("'%5o'\n", 55);
+		ft_printf("'%5o'\n", 55);
+		
+		
+		printf("'%00o'\n", 55);
+		ft_printf("'%00o'\n", 55);
+		
+		printf("'%#.o'\n", 55);
+		ft_printf("'%#.o'\n", 55);
+		
+		printf("%x\n", 42);
+		ft_printf("%x\n", 42);
+		// printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
+		// ft_printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
 		// printf("% Z%s\n", "test");
 		// ft_printf("% Z%s\n", "test");
 		// printf("'%.50lld'\n", -9223372036854775807);
@@ -645,7 +798,7 @@ int	main(int argc, char **argv)
 		// check_di();
 		// check_d(atoi(argv[1]), atoi(argv[2]));
 		// check_percent();
-		check_o();
+		// check_o();
 		check_u();
 		check_x();
 		check_big_x();

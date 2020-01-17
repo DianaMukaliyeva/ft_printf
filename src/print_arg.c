@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 00:19:52 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 13:46:38 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	print_arg2(char modifier, t_tag *tags, va_list list)
 
 	res = 0;
 	if (modifier == 'o')
-		res += print_unsigned_octal(tags, list);
+		res += print_octal(tags, list);
 	else if (modifier == 'd' || modifier == 'i')
 		res += print_int3(tags, list);
 	else if (modifier == 'u')

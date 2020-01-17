@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+         #
+#    By: diana <diana@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 17:15:47 by dmukaliy          #+#    #+#              #
-#    Updated: 2020/01/09 11:06:43 by dmukaliy         ###   ########.fr        #
+#    Updated: 2020/01/17 13:32:35 by diana            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =  libftprintf.a
-SRC = *.c
+SRC = ./src/*.c
 FLAGS = -Wall -Wextra -Werror -c
-HEADER = ./
+HEADER = ./includes
 OBJ = *.o
 
 all: $(NAME)

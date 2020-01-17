@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putnbr.c                                    :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 23:04:27 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:10:14 by diana            ###   ########.fr       */
+/*   Created: 2020/01/17 15:05:45 by diana             #+#    #+#             */
+/*   Updated: 2020/01/17 15:31:22 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_putnbr(intmax_t n)
+int	print_hex(int num, int big)
 {
-	int	res;
+	char	*big_hex;
+	char	*small_hex;
+	int		res;
 
 	res = 0;
-	if (n + 1 == -9223372036854775807)
-		return (printf_putstr("9223372036854775808"));
-	if (n < 0)
-	{
-		res += printf_putchar('-');
-		n *= -1;
-	}
-	if (n / 10 > 0)
-		res += printf_putnbr(n / 10);
-	res += printf_putchar((n % 10) + '0');
+	big_hex = "0123456789ABCDEF";
+	small_hex = "0123456789abcdef";
+	if (num == 0)
+		return (printf_putchar('0'));
+	if (num >= 16)
+		res += print_hex(num / 16, big);
+	if (big)
+		res += printf_putchar(big_hex[num % 16]);
+	else
+		res += printf_putchar(small_hex[num % 16]);
 	return (res);
 }

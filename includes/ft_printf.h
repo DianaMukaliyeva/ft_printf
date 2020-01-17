@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 00:19:42 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 15:11:09 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int					print_char(t_tag *tags, va_list list);
 int					print_double_with_big_e(t_tag *tags, va_list list);
 int					print_double_with_e(t_tag *tags, va_list list);
 int					print_double(t_tag *tags, va_list list);
+int					print_hex(int num, int big);
 int					print_int3(t_tag *tags, va_list list);
 int					print_int2(t_tag *tags, va_list list);
 int					print_int(t_tag *tags, va_list list);
@@ -69,10 +70,10 @@ int					print_str(t_tag *tags, va_list list);
 int					print_str2(t_tag *tags, va_list list);
 int					print_unsigned_int(t_tag *tags, va_list list);
 int					print_unsigned_low_hex(t_tag *tags, va_list list);
-int					print_unsigned_octal(t_tag *tags, va_list list);
+int					print_octal(t_tag *tags, va_list list);
 int					print_unsigned_upper_hex(t_tag *tags, va_list list);
 int					printf_putchar(char c);
-int					printf_putnbr(intmax_t n);
+int					printf_putnbr(intmax_t n, int base);
 int					printf_putstr(char const *str);
 int					refill_tags(t_tag *tags, char symbol, va_list list);
 

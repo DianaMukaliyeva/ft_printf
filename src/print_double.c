@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_double_with_big_e.c                          :+:      :+:    :+:   */
+/*   print_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:14:51 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/13 10:33:29 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/17 13:41:04 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_double_with_big_e(t_tag *tags, va_list list)
+int	print_double(t_tag *tags, va_list list)
 {
 	int		res;
 	double	num;
@@ -20,6 +20,6 @@ int	print_double_with_big_e(t_tag *tags, va_list list)
 	res = 0;
 	num = va_arg(list, double);
 	if (tags->precision.is_exist)
-		res += printf_putnbr((int)num);
+		res += printf_putnbr((int)num, 10);
 	return (res);
 }

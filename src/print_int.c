@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 19:43:24 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 00:05:03 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/17 13:41:50 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	print_digit_precision(intmax_t num, int res, t_tag *tags, int len)
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
 	if (tags->precision.num > 0 || num != 0)
-		res += printf_putnbr(num);
+		res += printf_putnbr(num, 10);
 	return (res);
 }
 
@@ -59,7 +59,7 @@ static int	print_sign_or_space(intmax_t *num, char c, int should_print_number)
 	{
 		if (n >= 0)
 			res += printf_putchar(c);
-		res += printf_putnbr(n);
+		res += printf_putnbr(n, 10);
 	}
 	else
 	{
@@ -189,7 +189,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 			else if (tags->flags.space)
 				res += print_sign_or_space(&num, ' ', 1);
 			else
-				res += printf_putnbr(num);
+				res += printf_putnbr(num, 10);
 			width -= res;
 			while (width-- > 0)
 				res += printf_putchar(' ');
@@ -205,7 +205,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 					len = get_len(num, tags, 0);
 					while (width-- > len)
 						res += printf_putchar('0');
-					res += printf_putnbr(num);
+					res += printf_putnbr(num, 10);
 				}
 				else if (tags->flags.space)//0 *
 				{
@@ -214,7 +214,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 					len = get_len(num, tags, 0);
 					while (width-- > len)
 						res += printf_putchar('0');
-					res += printf_putnbr(num);
+					res += printf_putnbr(num, 10);
 				}
 				else//0*
 				{
@@ -222,7 +222,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 					{
 						while (width-- > len)
 							res += printf_putchar('0');
-						res += printf_putnbr(num);
+						res += printf_putnbr(num, 10);
 					}
 					else
 					{
@@ -230,7 +230,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 						while (width-- > len)
 							res += printf_putchar('0');
 						num *= -1;
-						res += printf_putnbr(num);
+						res += printf_putnbr(num, 10);
 					}
 				}
 			}
@@ -242,7 +242,7 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 						res += printf_putchar(' ');
 					if (num >= 0)
 						res += printf_putchar('+');
-					res += printf_putnbr(num);
+					res += printf_putnbr(num, 10);
 				}
 				else if (tags->flags.space)
 				{
@@ -250,13 +250,13 @@ static int	print_calculate(t_tag *tags, intmax_t num)
 						res += printf_putchar(' ');
 					if (num >= 0)
 						res += printf_putchar(' ');
-					res += printf_putnbr(num);
+					res += printf_putnbr(num, 10);
 				}
 				else
 				{
 					while (width-- > len)
 						res += printf_putchar(' ');
-					res += printf_putnbr(num);
+					res += printf_putnbr(num, 10);
 				}
 			}
 		}
@@ -287,6 +287,6 @@ int			print_int(t_tag *tags, va_list list)
 	else if (tags->flags.space)
 		res += print_sign_or_space(&num, ' ', 1);
 	else
-		res += printf_putnbr(num);
+		res += printf_putnbr(num, 10);
 	return (res);
 }
