@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 20:28:52 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/17 23:49:22 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	print_str_left(t_tag *tags, char *str)
 	else
 		len = ft_strlen(str);
 	res = 0;
-	if (!str)
-	{
-		if (!tags->precision.is_exist)
-			len = 6;
-		if (len >= 6)
-			res += printf_putstr("(null)");
-		len = 0;
-	}
+	// if (!str)
+	// {
+	// 	if (!tags->precision.is_exist)
+	// 		len = 6;
+	// 	if (len >= 6)
+	// 		res += printf_putstr("(null)");
+	// 	len = 0;
+	// }
 	while (len-- > 0 && *str)
 		res += printf_putchar(*str++);
 	width -= res;
@@ -57,8 +57,12 @@ static int	calculate_and_print(t_tag *tags, char *str)
 		precision = len;
 	if (precision < len)
 	{
-		while (tags->width.num-- > precision)
-			res += printf_putchar(' ');
+		if (tags->flags.zero)
+			while (tags->width.num-- > precision)
+				res += printf_putchar('0');
+		else
+			while (tags->width.num-- > precision)
+				res += printf_putchar(' ');
 		tags->width.num++;
 		res += print_str_left(tags, str);
 	}
@@ -82,7 +86,7 @@ int			print_str2(t_tag *tags, va_list list)
 	str = va_arg(list, char*);
 	if (!str)
 		str = "(null)";
-	if (tags->width.num <= 0 || tags->flags.left_align)
+	if (tags->width.num == 0 || tags->flags.left_align)
 		return (print_str_left(tags, str));
 	else
 		return (calculate_and_print(tags, str));

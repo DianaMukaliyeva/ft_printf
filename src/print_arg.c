@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:31:29 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/18 19:06:56 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static int	print_arg1(char modifier, t_tag *tags, va_list list)
 {
@@ -60,7 +59,6 @@ static int	print_arg3(char modifier, t_tag *tags, va_list list)
 		res += print_double(tags, list);
 	else if (modifier == '%')
 		res += print_char(tags, '%');
-		// res += print_percent();
 	return (res);
 }
 

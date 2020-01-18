@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_int.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:20 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 18:50:40 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/18 16:33:44 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	print_digit_precision(uintmax_t num, t_tag *tags)
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
 	if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
-		res += printf_unsigned_putnbr(num, 10);
+		res += printf_putnbr(num, 10);
 	return (res);
 }
 

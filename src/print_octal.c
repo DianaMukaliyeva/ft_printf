@@ -50,7 +50,7 @@ static int	print_digit_precision(uintmax_t num, t_tag *tags)
 		while (len++ < tags->precision.num)
 			res += printf_putchar('0');
 	if (!tags->precision.is_exist || tags->precision.num || num != 0 || tags->flags.hash)
-		res += printf_unsigned_putnbr(num, 8);
+		res += printf_putnbr(num, 8);
 	return (res);
 }
 

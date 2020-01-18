@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 18:52:47 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/18 19:07:20 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,8 @@ int					print_unsigned_low_hex(t_tag *tags, va_list list);
 int					print_octal(t_tag *tags, va_list list);
 int					print_unsigned_upper_hex(t_tag *tags, va_list list);
 int					printf_putchar(char c);
-int					printf_putnbr(intmax_t n, int base);
+int					printf_putnbr(uintmax_t n, int base);
 int					printf_putstr(char const *str);
-int					printf_unsigned_putnbr(uintmax_t n, int base);
 int					refill_tags(t_tag *tags, char symbol, va_list list);
 
 #endif

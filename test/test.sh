@@ -1,1 +1,1 @@
-gcc main.c -L../ -lftprintf && ./a.out
+gcc *.c -L../ -lftprintf && ./a.out
