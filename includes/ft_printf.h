@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/18 19:07:20 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/19 14:38:22 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <stdint.h>
+
+
+#include <stdio.h>
 
 typedef struct		s_flag
 {

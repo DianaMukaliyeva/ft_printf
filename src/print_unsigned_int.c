@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:20 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/18 16:33:44 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/19 00:23:32 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ static int	get_print_len(uintmax_t num, t_tag *tags)
 	len = get_len_without_sign(num);
 	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
 		len--;
-	else
-		if (tags->precision.num > len)
-			len = tags->precision.num;
+	else if (tags->precision.num > len)
+		len = tags->precision.num;
 	if (tags->flags.hash && !tags->precision.is_exist)
 		len++;
 	return (len);

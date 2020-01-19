@@ -113,6 +113,7 @@ int	main(int argc, char **argv)
 	int	num = 0;
 	int	i = 0;
 	char	c;
+	num = 55;
 	if (argc == 2)
 	{
 		while (argv[1][i])
@@ -143,8 +144,8 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		// printf("'%5.25lld'\n", -9223372036854775808);
-		// ft_printf("'%5.25lld'\n", -9223372036854775808);
+		// printf("'%5.25d'\n", -9223372036854775808);
+		// ft_printf("'%5.25d'\n", -9223372036854775808);
 		// printf("@moulitest: %s\n", NULL);
 		// ft_printf("@moulitest: %s\n", NULL);
 		printf("'%04.0s' \n", "string");
@@ -156,8 +157,13 @@ int	main(int argc, char **argv)
 		printf("'%-25lld'\n", -9223372036854775808);
 		ft_printf("'%-25lld'\n", -9223372036854775808);
 		
-		printf("'%d'\n", -808);
-		ft_printf("'%d'\n", -808);
+		printf("'%Lf'\n", -9223372036854775807.54);
+		ft_printf("'%Lf'\n", -9223372036854775807.54);
+		
+		printf("%d = \n", printf("'%p' \n", 0));
+		printf("%d = \n", ft_printf("'%p' \n", 0));
+		// ft_printf("'%p' \n", 0);
+		
 		// printf("'%#5o'\n", 55);
 		// ft_printf("'%#5o'\n", 55);
 		

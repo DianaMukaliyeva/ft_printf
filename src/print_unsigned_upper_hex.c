@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_upper_hex.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:13:30 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 20:29:38 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/19 00:24:05 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ static int	get_print_len(uintmax_t num, t_tag *tags)
 	len = get_len_without_sign(num);
 	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
 		len--;
-	else
-		if (tags->precision.num > len)
-			len = tags->precision.num;
+	else if (tags->precision.num > len)
+		len = tags->precision.num;
 	if (tags->flags.hash && num != 0)
 		len += 2;
 	return (len);

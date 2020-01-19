@@ -1,5 +1,6 @@
 #include "../includes/ft_printf.h"
 
+#include <stdio.h>
 void	check_di()
 {
 	int	x = 0;
@@ -7,11 +8,11 @@ void	check_di()
 	int	width[9] = {0,1,2,4,5,7,8,12,100};
 	int	precision[9] = {0,1,2,-4,5,7,8,12,100};
 	// int	precision[9] = {0,1,2,7,100};
-	int	num[6] = {0,11111,-11111,1,10, -4};
+	int	num[6] = {0,11111,-9223372036854775808,1,10, -4};
 	int	res = 0;
 	int	ft_res = 0;
 	int	dif = 0;
-	int number = num[2];
+	int number = num[3];
 
 	x = 0;
 	while (x < 9)

@@ -1,5 +1,6 @@
 #include "../includes/ft_printf.h"
 
+#include <stdio.h>
 void	check_s()
 {
 	int	x = 0;

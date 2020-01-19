@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_specifier.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 18:39:45 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/19 17:24:17 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				parse_specifiers(va_list list, const char *format, int *i)
 
 	res = 0;
 	tags = create_tag();
+	//etu funkciyu mozhno sovmestit' s refill tags
 	while (format[++(*i)])
 	{
 		if (is_type(format[*i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refill_tags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 09:32:49 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:54:11 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/18 23:48:13 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				refill_tags(t_tag *tags, char symbol, va_list list)
 	const char	*numbers = "1234567890*";
 	const char	*modifiers = "hlLzjt";
 
+//sravnivat' s odnoj strokoj i srazu na meste vse menyat'
 	if (ft_strchr(numbers, symbol))
 		if (tags->precision.is_exist == 1)
 			fill_amount(&tags->precision, symbol, list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_int3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/17 18:24:53 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/19 00:23:11 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ static int	get_print_len(intmax_t num, t_tag *tags)
 	len = get_len_without_sign(num);
 	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
 		len--;
-	else
-		if (tags->precision.num > len)
-			len = tags->precision.num;
+	else if (tags->precision.num > len)
+		len = tags->precision.num;
 	if (num < 0 || tags->flags.space || tags->flags.sign)
 		len++;
 	return (len);
@@ -123,15 +122,15 @@ int			print_int3(t_tag *tags, va_list list)
 
 	res = 0;
 	if (tags->modifier.h)
-		num = (short int)va_arg(list, int);
+		num = (short int)va_arg(list, intmax_t);
 	else if (tags->modifier.hh)
-		num = (char)va_arg(list, int);
+		num = (char)va_arg(list, intmax_t);
 	else if (tags->modifier.l)
-		num = va_arg(list, long);
+		num = (long int)va_arg(list, intmax_t);
 	else if (tags->modifier.ll)
-		num = va_arg(list, intmax_t);
+		num = (long long int)va_arg(list, intmax_t);
 	else
-		num = va_arg(list, int);
+		num = (int)va_arg(list, intmax_t);
 	print_len = get_print_len(num, tags);
 	res += print_with_flags(num, tags, print_len);
 	return (res);
