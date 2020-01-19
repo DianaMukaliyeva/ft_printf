@@ -163,6 +163,10 @@ int	main(int argc, char **argv)
 		
 		printf("%d = \n", printf("'%p' \n", 0));
 		printf("%d = \n", ft_printf("'%p' \n", 0));
+		
+		printf("'%+5*d' \n", -10, 58);
+		ft_printf("'%+5*d' \n", -10, 58);
+		
 		// ft_printf("'%p' \n", 0);
 		
 		// printf("'%#5o'\n", 55);

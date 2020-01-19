@@ -6,33 +6,25 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 23:49:22 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 00:42:59 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int	print_str_left(t_tag *tags, char *str)
+static int	print_str_left(t_flag flags, char *str)
 {
 	int	res;
 	int	len;
 	int	width;
 
-	width = tags->width.num;
-	if (tags->precision.is_exist)
-		len = tags->precision.num;
+	width = flags.width_num;
+	if (flags.precision_exist)
+		len = flags.precision_num;
 	else
 		len = ft_strlen(str);
 	res = 0;
-	// if (!str)
-	// {
-	// 	if (!tags->precision.is_exist)
-	// 		len = 6;
-	// 	if (len >= 6)
-	// 		res += printf_putstr("(null)");
-	// 	len = 0;
-	// }
 	while (len-- > 0 && *str)
 		res += printf_putchar(*str++);
 	width -= res;
@@ -41,7 +33,7 @@ static int	print_str_left(t_tag *tags, char *str)
 	return (res);
 }
 
-static int	calculate_and_print(t_tag *tags, char *str)
+static int	calculate_and_print(t_flag flags, char *str)
 {
 	int	res;
 	int	precision;
@@ -51,43 +43,43 @@ static int	calculate_and_print(t_tag *tags, char *str)
 	if (!str)
 		len = 6;
 	res = 0;
-	if (tags->precision.is_exist)
-		precision = tags->precision.num;
+	if (flags.precision_exist)
+		precision = flags.precision_num;
 	else
 		precision = len;
 	if (precision < len)
 	{
-		if (tags->flags.zero)
-			while (tags->width.num-- > precision)
+		if (flags.zero)
+			while (flags.width_num-- > precision)
 				res += printf_putchar('0');
 		else
-			while (tags->width.num-- > precision)
+			while (flags.width_num-- > precision)
 				res += printf_putchar(' ');
-		tags->width.num++;
-		res += print_str_left(tags, str);
+		flags.width_num++;
+		res += print_str_left(flags, str);
 	}
 	else
 	{
-		if (tags->flags.zero)
-			while (tags->width.num-- > len)
+		if (flags.zero)
+			while (flags.width_num-- > len)
 				res += printf_putchar('0');
 		else
-			while (tags->width.num-- > len)
+			while (flags.width_num-- > len)
 				res += printf_putchar(' ');
 		res += printf_putstr(str);
 	}
 	return (res);
 }
 
-int			print_str2(t_tag *tags, va_list list)
+int			print_str2(t_flag flags, va_list list)
 {
 	char	*str;
 
 	str = va_arg(list, char*);
 	if (!str)
 		str = "(null)";
-	if (tags->width.num == 0 || tags->flags.left_align)
-		return (print_str_left(tags, str));
+	if (flags.width_num == 0 || flags.minus)
+		return (print_str_left(flags, str));
 	else
-		return (calculate_and_print(tags, str));
+		return (calculate_and_print(flags, str));
 }

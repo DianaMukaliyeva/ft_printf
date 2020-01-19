@@ -6,12 +6,11 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 14:25:15 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 00:55:27 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static int	get_len_without_sign(uintmax_t num)
 {
@@ -24,7 +23,7 @@ static int	get_len_without_sign(uintmax_t num)
 	return (len);
 }
 
-static int	get_print_len(long double num, t_tag *tags)
+static int	get_print_len(long double num, t_flag flags)
 {
 	int	len;
 	int	len_before_comma;
@@ -33,8 +32,8 @@ static int	get_print_len(long double num, t_tag *tags)
 	int	prec;
 
 	len = 0;
-	prec = tags->precision.num;
-	if (num < 0 || tags->flags.space || tags->flags.sign)
+	prec = flags.precision_num;
+	if (num < 0 || flags.space || flags.plus)
 	{
 		num *= -1;
 		len++;
@@ -44,15 +43,15 @@ static int	get_print_len(long double num, t_tag *tags)
 	while (prec-- > 0)
 		ko *= 10;
 	len_after_comma = get_len_without_sign((int)ko);
-	// if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
+	// if (num == 0 && flags->precision.is_exist && flags.precision_num == 0)
 	// 	len--;
-	if (tags->precision.num > len_after_comma)
-		len_after_comma = tags->precision.num;
+	if (flags.precision_num > len_after_comma)
+		len_after_comma = flags.precision_num;
 	len = len + len_before_comma + len_after_comma;
 	return (len);
 }
 
-static int	print_digit_precision(long double num, t_tag *tags)
+static int	print_digit_precision(long double num, t_flag flags)
 {
 	int	res;
 	long double	ko;
@@ -63,7 +62,7 @@ static int	print_digit_precision(long double num, t_tag *tags)
 		num *= -1;
 	
 	res += printf_putnbr((uintmax_t)num, 10);
-	prec = tags->precision.num;
+	prec = flags.precision_num;
 	ko = (num - (int)num);
 	while (prec-- > 0)
 	{
@@ -75,85 +74,85 @@ static int	print_digit_precision(long double num, t_tag *tags)
 	res += printf_putchar('.');
 	res += printf_putnbr((uintmax_t)ko + 1, 10);
 	// len_after_comma = get_len_without_sign((int)(num % (int)num));
-	// if (num < 0 || tags->flags.space || tags->flags.sign)
+	// if (num < 0 || flags.space || flags.plus)
 	// 	len--;
-	// if (len < tags->precision.num)
-	// 	while (len++ < tags->precision.num)
+	// if (len < flags.precision_num)
+	// 	while (len++ < flags.precision_num)
 	// 		res += printf_putchar('0');
-	// if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
+	// if (!flags->precision.is_exist || flags.precision_num > 0 || num != 0)
 	// 	res += printf_putnbr(num, 10);
 	return (res);
 }
 
-static int	print_sign(long double num, t_tag *tags)
+static int	print_sign(long double num, t_flag flags)
 {
 	if (num < 0)
 		return (printf_putchar('-'));
-	if (tags->flags.sign)
+	if (flags.plus)
 		return (printf_putchar('+'));
-	if (tags->flags.space)
+	if (flags.space)
 		return (printf_putchar(' '));
 	return (0);
 }
 
-static int	print_with_flags(long double num, t_tag *tags, int print_len)
+static int	print_with_flags(long double num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
 
-	width = tags->width.num;
+	width = flags.width_num;
 	res = 0;
 	if (width > print_len)
 	{
-		if (tags->flags.left_align)
+		if (flags.minus)
 		{
-			res += print_sign(num, tags);
-			res += print_digit_precision(num, tags);
+			res += print_sign(num, flags);
+			res += print_digit_precision(num, flags);
 			width -= res;
 			while (width-- > 0)
 				res += printf_putchar(' ');
 		}
 		else
 		{
-			if (tags->flags.zero && !tags->precision.is_exist)
+			if (flags.zero && !flags.precision_exist)
 			{
-				res += print_sign(num, tags);
+				res += print_sign(num, flags);
 				while (width-- > print_len)
 					res += printf_putchar('0');
-				res += print_digit_precision(num, tags);
+				res += print_digit_precision(num, flags);
 			}
 			else
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(num, tags);
-				res += print_digit_precision(num, tags);
+				res += print_sign(num, flags);
+				res += print_digit_precision(num, flags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(num, tags);
-		res += print_digit_precision(num, tags);
+		res += print_sign(num, flags);
+		res += print_digit_precision(num, flags);
 	}
 	
 	return (res);
 }
 
-int			print_double(t_tag *tags, va_list list)
+int			print_double(t_flag flags, va_list list)
 {
 	int			res;
 	long double	num;
 	int			print_len;
 
 	res = 0;
-	if (tags->modifier.big_l)
+	if (flags.big_l)
 		num = (long double)va_arg(list, long double);
 	else
 		num = va_arg(list, double);
-	if (tags->precision.num == 0)
-		tags->precision.num = 6;
-	print_len = get_print_len(num, tags);
-	res += print_with_flags(num, tags, print_len);
+	if (flags.precision_num == 0)
+		flags.precision_num = 6;
+	print_len = get_print_len(num, flags);
+	res += print_with_flags(num, flags, print_len);
 	return (res);
 }

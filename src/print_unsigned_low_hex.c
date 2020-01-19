@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:55 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 00:23:55 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 00:37:17 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,104 +24,104 @@ static int	get_len_without_sign(uintmax_t num)
 	return (len);
 }
 
-static int	get_print_len(uintmax_t num, t_tag *tags)
+static int	get_print_len(uintmax_t num, t_flag flags)
 {
 	int	len;
 
 	len = get_len_without_sign(num);
-	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
+	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
 		len--;
-	else if (tags->precision.num > len)
-		len = tags->precision.num;
-	if (tags->flags.hash && num != 0)
+	else if (flags.precision_num > len)
+		len = flags.precision_num;
+	if (flags.hash && num != 0)
 		len += 2;
 	return (len);
 }
 
-static int	print_digit_precision(uintmax_t num, t_tag *tags)
+static int	print_digit_precision(uintmax_t num, t_flag flags)
 {
 	int	res;
 	int	len;
 
 	res = 0;
 	len = get_len_without_sign(num);
-	if (len < tags->precision.num)
-		while (len++ < tags->precision.num)
+	if (len < flags.precision_num)
+		while (len++ < flags.precision_num)
 			res += printf_putchar('0');
-	if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
+	if (!flags.precision_exist || flags.precision_num > 0 || num != 0)
 		res += print_hex(num, 0);
 	return (res);
 }
 
-static int	print_sign(t_tag *tags, uintmax_t num)
+static int	print_sign(t_flag flags, uintmax_t num)
 {
-	if (tags->flags.hash && num != 0)
+	if (flags.hash && num != 0)
 		return (printf_putstr("0x"));
 	return (0);
 }
 
-static int	print_with_flags(uintmax_t num, t_tag *tags, int print_len)
+static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
 
-	width = tags->width.num;
+	width = flags.width_num;
 	res = 0;
 	if (width > print_len)
 	{
-		if (tags->flags.left_align)
+		if (flags.minus)
 		{
-			res += print_sign(tags, num);
-			res += print_digit_precision(num, tags);
+			res += print_sign(flags, num);
+			res += print_digit_precision(num, flags);
 			width -= res;
 			while (width-- > 0)
 				res += printf_putchar(' ');
 		}
 		else
 		{
-			if (tags->flags.zero && !tags->precision.is_exist)
+			if (flags.zero && !flags.precision_exist)
 			{
-				res += print_sign(tags, num);
+				res += print_sign(flags, num);
 				while (width-- > print_len)
 					res += printf_putchar('0');
-				res += print_digit_precision(num, tags);
+				res += print_digit_precision(num, flags);
 			}
 			else
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(tags, num);
-				res += print_digit_precision(num, tags);
+				res += print_sign(flags, num);
+				res += print_digit_precision(num, flags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(tags, num);
-		res += print_digit_precision(num, tags);
+		res += print_sign(flags, num);
+		res += print_digit_precision(num, flags);
 	}
 	
 	return (res);
 }
 
-int			print_unsigned_low_hex(t_tag *tags, va_list list)
+int			print_unsigned_low_hex(t_flag flags, va_list list)
 {
 	int			res;
 	uintmax_t	num;
 	int			print_len;
 
 	res = 0;
-	if (tags->modifier.h)
+	if (flags.h)
 		num = (unsigned short int)va_arg(list, uintmax_t);
-	else if (tags->modifier.hh)
+	else if (flags.hh)
 		num = (unsigned char)va_arg(list, uintmax_t);
-	else if (tags->modifier.l)
+	else if (flags.l)
 		num = (unsigned long)va_arg(list, uintmax_t);
-	else if (tags->modifier.ll)
+	else if (flags.ll)
 		num = (unsigned long long)va_arg(list, uintmax_t);
 	else
 		num = (unsigned int)va_arg(list, uintmax_t);
-	print_len = get_print_len(num, tags);
-	res += print_with_flags(num, tags, print_len);
+	print_len = get_print_len(num, flags);
+	res += print_with_flags(num, flags, print_len);
 	return (res);
 }

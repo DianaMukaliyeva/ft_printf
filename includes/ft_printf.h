@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 14:38:22 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 01:41:49 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,61 +23,44 @@
 
 typedef struct		s_flag
 {
-	int	left_align;
-	int	sign;
+	int	minus;
+	int	plus;
 	int	space;
 	int	zero;
 	int	hash;
-}					t_flag;
-
-typedef struct		s_amount_char
-{
-	int	is_exist;
-	int	num;
-	int	asterisk;
-}					t_amount_char;
-
-typedef struct		s_modifier
-{
+	int	width_exist;
+	int	width_asterisk;
+	int	width_num;
+	int	precision_exist;
+	int	precision_asterisk;
+	int	precision_num;
 	int	h;
 	int	hh;
 	int	l;
 	int	ll;
 	int	big_l;
-}					t_modifier;
-
-typedef struct		s_tag
-{
-	t_flag			flags;
-	t_amount_char	width;
-	t_amount_char	precision;
-	t_modifier		modifier;
-}					t_tag;
+}					t_flag;
 
 int					ft_printf(const char *format, ...);
 char				*ft_strchr(const char *str, int ch);
 int					ft_strlen(const char *str);
-int					parse_specifiers(va_list list, const char *format, int *i);
-int					print_arg(char modifier, t_tag *tags, va_list list);
-int					print_char(t_tag *tags, char c);
-int					print_double_with_big_e(t_tag *tags, va_list list);
-int					print_double_with_e(t_tag *tags, va_list list);
-int					print_double(t_tag *tags, va_list list);
+int					parse_flags(va_list list, const char *format, int *i);
+int					print_arg(char modifier, t_flag flags, va_list list);
+int					print_char(t_flag flags, char c);
+int					print_double_with_big_e(t_flag flags, va_list list);
+int					print_double_with_e(t_flag flags, va_list list);
+int					print_double(t_flag flags, va_list list);
 int					print_hex(uintmax_t num, int big);
-int					print_int3(t_tag *tags, va_list list);
-int					print_int2(t_tag *tags, va_list list);
-int					print_int(t_tag *tags, va_list list);
-int					print_memory(t_tag *tags, va_list list);
+int					print_int3(t_flag flags, va_list list);
+int					print_memory(t_flag flags, va_list list);
 int					print_percent(void);
-int					print_str(t_tag *tags, va_list list);
-int					print_str2(t_tag *tags, va_list list);
-int					print_unsigned_int(t_tag *tags, va_list list);
-int					print_unsigned_low_hex(t_tag *tags, va_list list);
-int					print_octal(t_tag *tags, va_list list);
-int					print_unsigned_upper_hex(t_tag *tags, va_list list);
+int					print_str2(t_flag flags, va_list list);
+int					print_unsigned_int(t_flag flags, va_list list);
+int					print_unsigned_low_hex(t_flag flags, va_list list);
+int					print_octal(t_flag flags, va_list list);
+int					print_unsigned_upper_hex(t_flag flags, va_list list);
 int					printf_putchar(char c);
 int					printf_putnbr(uintmax_t n, int base);
 int					printf_putstr(char const *str);
-int					refill_tags(t_tag *tags, char symbol, va_list list);
 
 #endif

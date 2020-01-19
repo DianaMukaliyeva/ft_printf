@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:10:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 18:37:12 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/20 00:30:58 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,14 @@ static int	print_with_width(char c, int width, int flag_zero, int flag_minus)
 	return (res);
 }
 
-int			print_char(t_tag *tags, char c)
+int			print_char(t_flag flags, char c)
 {
 	int		res;
-	int		width;
-	int		flag_zero;
-	int		flag_minus;
 
 	res = 0;
-	width = tags->width.num;
-	flag_zero = tags->flags.zero;
-	flag_minus = tags->flags.left_align;
-	if (width == 0)
+	if (flags.width_num == 0)
 		res += printf_putchar(c);
 	else
-		res += print_with_width(c, width, flag_zero, flag_minus);
+		res += print_with_width(c, flags.width_num, flags.zero, flags.minus);
 	return (res);
 }

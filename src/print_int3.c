@@ -6,12 +6,11 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/19 00:23:11 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 01:42:26 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static int	get_len_without_sign(intmax_t num)
 {
@@ -28,21 +27,21 @@ static int	get_len_without_sign(intmax_t num)
 	return (len);
 }
 
-static int	get_print_len(intmax_t num, t_tag *tags)
+static int	get_print_len(intmax_t num, t_flag flags)
 {
 	int	len;
 
 	len = get_len_without_sign(num);
-	if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
+	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
 		len--;
-	else if (tags->precision.num > len)
-		len = tags->precision.num;
-	if (num < 0 || tags->flags.space || tags->flags.sign)
+	else if (flags.precision_num > len)
+		len = flags.precision_num;
+	if (num < 0 || flags.space || flags.plus)
 		len++;
 	return (len);
 }
 
-static int	print_digit_precision(intmax_t num, t_tag *tags)
+static int	print_digit_precision(intmax_t num, t_flag flags)
 {
 	int	res;
 	int	len;
@@ -51,87 +50,87 @@ static int	print_digit_precision(intmax_t num, t_tag *tags)
 	if (num < 0)
 		num *= -1;
 	len = get_len_without_sign(num);
-	if (len < tags->precision.num)
-		while (len++ < tags->precision.num)
+	if (len < flags.precision_num)
+		while (len++ < flags.precision_num)
 			res += printf_putchar('0');
-	if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
+	if (!flags.precision_exist || flags.precision_num > 0 || num != 0)
 		res += printf_putnbr(num, 10);
 	return (res);
 }
 
-static int	print_sign(intmax_t num, t_tag *tags)
+static int	print_sign(intmax_t num, t_flag flags)
 {
 	if (num < 0)
 		return (printf_putchar('-'));
-	if (tags->flags.sign)
+	if (flags.plus)
 		return (printf_putchar('+'));
-	if (tags->flags.space)
+	if (flags.space)
 		return (printf_putchar(' '));
 	return (0);
 }
 
-static int	print_with_flags(intmax_t num, t_tag *tags, int print_len)
+static int	print_with_flags(intmax_t num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
 
-	width = tags->width.num;
+	width = flags.width_num;
 	res = 0;
 	if (width > print_len)
 	{
-		if (tags->flags.left_align)
+		if (flags.minus)
 		{
-			res += print_sign(num, tags);
-			res += print_digit_precision(num, tags);
+			res += print_sign(num, flags);
+			res += print_digit_precision(num, flags);
 			width -= res;
 			while (width-- > 0)
 				res += printf_putchar(' ');
 		}
 		else
 		{
-			if (tags->flags.zero && !tags->precision.is_exist)
+			if (flags.zero && !flags.precision_exist)
 			{
-				res += print_sign(num, tags);
+				res += print_sign(num, flags);
 				while (width-- > print_len)
 					res += printf_putchar('0');
-				res += print_digit_precision(num, tags);
+				res += print_digit_precision(num, flags);
 			}
 			else
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(num, tags);
-				res += print_digit_precision(num, tags);
+				res += print_sign(num, flags);
+				res += print_digit_precision(num, flags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(num, tags);
-		res += print_digit_precision(num, tags);
+		res += print_sign(num, flags);
+		res += print_digit_precision(num, flags);
 	}
 	
 	return (res);
 }
 
-int			print_int3(t_tag *tags, va_list list)
+int			print_int3(t_flag flags, va_list list)
 {
 	int			res;
 	intmax_t	num;
 	int			print_len;
 
 	res = 0;
-	if (tags->modifier.h)
+	if (flags.h)
 		num = (short int)va_arg(list, intmax_t);
-	else if (tags->modifier.hh)
+	else if (flags.hh)
 		num = (char)va_arg(list, intmax_t);
-	else if (tags->modifier.l)
+	else if (flags.l)
 		num = (long int)va_arg(list, intmax_t);
-	else if (tags->modifier.ll)
+	else if (flags.ll)
 		num = (long long int)va_arg(list, intmax_t);
 	else
 		num = (int)va_arg(list, intmax_t);
-	print_len = get_print_len(num, tags);
-	res += print_with_flags(num, tags, print_len);
+	print_len = get_print_len(num, flags);
+	res += print_with_flags(num, flags, print_len);
 	return (res);
 }
