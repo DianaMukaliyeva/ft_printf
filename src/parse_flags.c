@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 01:42:13 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 01:58:05 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,8 @@ static int		fill_numbers(t_flag *flags, char symbol, va_list list)//neobhodimo m
 		if (flags->precision_exist)
 		{
 			flags->precision_asterisk = 1;
-			if (num < 0)//kak budet esli pridet takoe %*.54*d, -8
-				flags->precision_num = 0;
-			flags->precision_num = num;
+			if (num >= 0)//kak budet esli pridet takoe %*.54*d, -8
+				flags->precision_num = num;
 		}
 		else
 		{
@@ -112,7 +111,7 @@ int				fill_flags(t_flag *flags, char symbol, va_list list)
 		return (fill_other_flags(flags, symbol));
 }
 
-static t_flag	create_flag(void)
+static t_flag	get_empty_flags(void)
 {
 	t_flag	flags;
 
@@ -141,7 +140,7 @@ int				parse_flags(va_list list, const char *format, int *i)
 	int		res;
 
 	res = 0;
-	flags = create_flag();
+	flags = get_empty_flags();
 	while (format[++(*i)])
 	{
 		if (fill_flags(&flags, format[*i], list))
