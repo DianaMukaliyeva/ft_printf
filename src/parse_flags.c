@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 01:58:05 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 16:30:16 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static int		fill_other_flags(t_flag *flags, char symbol)
 {
+	if (ft_strchr("-+ #", symbol))
+		flags->precision_num = 0;
 	if (symbol == '-')
 		flags->minus = 1;
 	else if (symbol == '+')
@@ -35,6 +37,8 @@ static int		fill_other_flags(t_flag *flags, char symbol)
 	}
 	else if (symbol == 'l')
 	{
+		flags->h = 0;
+		flags->hh = 0;
 		if (flags->l == 1)
 		{
 			flags->l = 0;
@@ -44,8 +48,18 @@ static int		fill_other_flags(t_flag *flags, char symbol)
 			flags->l = 1;
 	}
 	else if (symbol == 'L')
+	{
+		flags->h = 0;
+		flags->hh = 0;
+		flags->l = 0;
+		flags->ll = 0;
 		flags->big_l = 1;
-	else if (!ft_strchr("zjt$", symbol))
+	}
+	else if (symbol == 'j')
+		flags->j = 1;
+	else if (symbol == 'z')
+		flags->z = 1;
+	else if (!ft_strchr("t$", symbol))
 		return (0);
 	return (1);
 }
@@ -64,6 +78,8 @@ static int		fill_numbers(t_flag *flags, char symbol, va_list list)//neobhodimo m
 			flags->precision_asterisk = 1;
 			if (num >= 0)//kak budet esli pridet takoe %*.54*d, -8
 				flags->precision_num = num;
+			else
+				flags->precision_exist = 0;
 		}
 		else
 		{
@@ -103,6 +119,7 @@ int				fill_flags(t_flag *flags, char symbol, va_list list)
 	if (symbol == '.')
 	{
 		flags->precision_exist = 1;
+		flags->precision_num = 0;
 		return (1);
 	}
 	else if (ft_strchr("1234567890*", symbol))
@@ -125,6 +142,8 @@ static t_flag	get_empty_flags(void)
 	flags.l = 0;
 	flags.ll = 0;
 	flags.big_l = 0;
+	flags.j = 0;
+	flags.z = 0;
 	flags.precision_exist = 0;
 	flags.precision_asterisk = 0;
 	flags.precision_num = 0;
@@ -145,7 +164,7 @@ int				parse_flags(va_list list, const char *format, int *i)
 	{
 		if (fill_flags(&flags, format[*i], list))
 			continue ;
-		if (ft_strchr("cspdiouxXf%%", format[*i]))
+		if (ft_strchr("cCsSpdiouUxXf%%", format[*i]))
 			res += print_arg(format[*i], flags, list);
 		else
 			res += print_char(flags, format[*i]);

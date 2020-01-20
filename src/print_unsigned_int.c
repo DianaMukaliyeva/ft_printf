@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_int.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:20 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 00:40:23 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 16:31:00 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 		}
 		else
 		{
-			if (flags.zero && !flags.precision_exist)
+			if (flags.zero && !flags.precision_num)
 			{
 				res += print_sign(flags);
 				while (width-- > print_len)
@@ -110,14 +110,18 @@ int			print_unsigned_int(t_flag flags, va_list list)
 	int			print_len;
 
 	res = 0;
-	if (flags.h)
-		num = (unsigned short int)va_arg(list, uintmax_t);
-	else if (flags.hh)
-		num = (unsigned char)va_arg(list, uintmax_t);
+	if (flags.z)
+		num = (size_t)va_arg(list, intmax_t);
+	else if (flags.j)
+		num = va_arg(list, intmax_t);
 	else if (flags.l)
 		num = (unsigned long)va_arg(list, uintmax_t);
 	else if (flags.ll)
 		num = (unsigned long long)va_arg(list, uintmax_t);
+	else if (flags.h)
+		num = (unsigned short int)va_arg(list, uintmax_t);
+	else if (flags.hh)
+		num = (unsigned char)va_arg(list, uintmax_t);
 	else
 		num = (unsigned int)va_arg(list, uintmax_t);
 	print_len = get_print_len(num, flags);

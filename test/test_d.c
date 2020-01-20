@@ -12,7 +12,7 @@ void	check_di()
 	int	res = 0;
 	int	ft_res = 0;
 	int	dif = 0;
-	int number = num[3];
+	int number = num[5];
 
 	x = 0;
 	while (x < 9)

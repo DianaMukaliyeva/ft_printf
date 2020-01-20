@@ -25,88 +25,6 @@ void	check_big_x()
 {
 
 }
-void	check_d(int width, int precision, int num)
-{
-	
-	// printf("'%5.25lld'\n", -9223372036854775808);
-	// ft_printf("'%5.25lld'\n", -9223372036854775808);
-	// printf("'%5.lld'\n", -9223372036854775807);
-	// ft_printf("'%5.lld'\n", -9223372036854775807);
-	// printf("'%50.2d'\n", -1234);
-	// ft_printf("'%50.2d'\n", -1234);
-	
-	// printf("'%3.2d'\n", -123);
-	// ft_printf("'%3.2d'\n", -123);
-
-	// printf("'%-+10.5d'\n", 4242);
-	// ft_printf("'%-+10.5d'\n", 4242);
-
-
-	printf("\033[0;32mtest 1.1\n\033[0m");
-	printf("'% *.*d'\n", width, precision, num);
-	ft_printf("'% *.*d'\n", width, precision, num);
-
-	printf("\033[0;32mtest 1.2\n\033[0m");
-	printf("'%-*.*d'\n", width, precision, num);
-	ft_printf("'%-*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.3\n\033[0m");
-	printf("'%+*.*d'\n", width, precision, num);
-	ft_printf("'%+*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.4\n\033[0m");
-	printf("'%0*.*d'\n", width, precision, num);
-	ft_printf("'%0*.*d'\n", width, precision, num);
-	
-	// printf("\033[0;32mtest 1.5\n\033[0m");
-	// printf("'% *.*d'\n", width, precision, num);
-	// ft_printf("'% *.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.6\n\033[0m");
-	printf("'%-+*.*d'\n", width, precision, num);
-	ft_printf("'%-+*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.7\n\033[0m");
-	printf("'%-0*.*d'\n", width, precision, num);
-	ft_printf("'%-0*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.8\n\033[0m");
-	printf("'%- *.*d'\n", width, precision, num);
-	ft_printf("'%- *.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.9\n\033[0m");
-	printf("'%+0*.*d'\n", width, precision, num);
-	ft_printf("'%+0*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.10\n\033[0m");
-	printf("'%+ *.*d'\n", width, precision, num);
-	ft_printf("'%+ *.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.11\n\033[0m");
-	printf("'% +*.*d'\n", width, precision, num);
-	ft_printf("'% +*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.12\n\033[0m");
-	printf("'%0 *.*d'\n", width, precision, num);
-	ft_printf("'%0 *.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.13\n\033[0m");
-	printf("'%-+0*.*d'\n", width, precision, num);
-	ft_printf("'%-+0*.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.14\n\033[0m");
-	printf("'%-+ *.*d'\n", width, precision, num);
-	ft_printf("'%-+ *.*d'\n", width, precision, num);
-	
-	printf("\033[0;32mtest 1.15\n\033[0m");
-	printf("'%+0 *.*d'\n", width, precision, num);
-	ft_printf("'%+0 *.*d'\n", width, precision, num);
-	
-
-	printf("\033[0;32mtest 1.16\n\033[0m");
-	printf("'%- 0+*.*d'\n", width, precision, num);
-	ft_printf("'%- 0+*.*d'\n", width, precision, num);
-}
 
 int	main(int argc, char **argv)
 {
@@ -144,150 +62,158 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		// printf("'%5.25d'\n", -9223372036854775808);
-		// ft_printf("'%5.25d'\n", -9223372036854775808);
-		// printf("@moulitest: %s\n", NULL);
-		// ft_printf("@moulitest: %s\n", NULL);
-		printf("'%04.0s' \n", "string");
-		ft_printf("'%04.0s' \n", "string");
+		printf("%f\n", 23.00041);
+		ft_printf("%f\n", 23.00041);
 		
-		printf("'%014s' \n", "string");
-		ft_printf("'%014s' \n", "string");
-		
-		printf("'%-25lld'\n", -9223372036854775808);
-		ft_printf("'%-25lld'\n", -9223372036854775808);
-		
-		
-		printf("'%Lf'\n", -9223372036854775807.54);
-		ft_printf("'%Lf'\n", -9223372036854775807.54);
-		
-		printf("%d = \n", printf("'%p' \n", 0));
-		printf("%d = \n", ft_printf("'%p' \n", 0));
-		
-		printf("'%+5*d' \n", -10, 58);
-		ft_printf("'%+5*d' \n", -10, 58);
-		
-		// ft_printf("'%p' \n", 0);
-		
-		// printf("'%#5o'\n", 55);
-		// ft_printf("'%#5o'\n", 55);
-		
-		
-		// printf("'%#05o'\n", 55);
-		// ft_printf("'%#05o'\n", 55);
-		
-		// printf("'%#.5o'\n", 55);
-		// ft_printf("'%#.5o'\n", 55);
-		// printf("'%o'\n", 55);
-		// ft_printf("'%o'\n", 55);
-		
-		// printf("'%5o'\n", 55);
-		// ft_printf("'%5o'\n", 55);
-		
-		
-		// printf("'%00o'\n", 55);
-		// ft_printf("'%00o'\n", 55);
-		
-		// printf("'%#-8o'\n", 55);
-		// ft_printf("'%#-8o'\n", 55);
-		
-		// printf("'%#8o'\n", 55);
-		// ft_printf("'%#8o'\n", 55);
-		
-		// printf("@moulitest: %.o %.0o\n", 0, 0);
-		// ft_printf("@moulitest: %.o %.0o\n", 0, 0);
+		printf("%f\n", 1.0);
+		ft_printf("%f\n", 1.0);
 
-		// printf("@moulitest: %5.o %5.0o\n", 0, 0);
-		// ft_printf("@moulitest: %5.o %5.0o\n", 0, 0);
+		printf("%f\n", 0.000001);
+		ft_printf("%f\n", 0.000001);
 
-		// printf("@moulitest: %#.o %#.0o\n", 0, 0);
-		// ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		printf("%f\n", -0.000001);
+		ft_printf("%f\n", -0.000001);
 
-		// printf("'%#.o'\n", 0);
-		// ft_printf("'%#.o'\n", 0);
-		
-		// printf("%#o\n", 0);
-		// ft_printf("%#o\n", 0);
+		printf("%f\n", -875.000001);
+		ft_printf("%f\n", -875.000001);
 
-		// printf("{%25.*d}\n", 15, 42);
-		// ft_printf("{%25.*d}\n", -15, 42);
+		printf("%f\n", 0.0894255);
+		ft_printf("%f\n", 0.0894255);
 
-		// printf("{%*d}\n", -5, 42);
-		// ft_printf("{%*d}\n", -5, 42);
+		printf("%f\n", 43.4399999);
+		ft_printf("%f\n", 43.4399999);
 
-		// printf("@moulitest: %#.o %#.0o\n", 0, 0);
-		// ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
-		// printf("%lu\n", -42);
-		// ft_printf("%lu\n", -42);
+		printf("%f\n", -5.0299999);
+		ft_printf("%f\n", -5.0299999);
 
-// printf("");
-// ft_printf("");
-		// printf("'%05bd'\n", 0);
-		// ft_printf("'%05bd'\n", 0);
+		printf("%f\n", 3.9999999);
+		ft_printf("%f\n", 3.9999999);
 
-		// printf("'%#0x'\n", 0);
-		// ft_printf("'%#0x'\n", 0);
-		// printf("'%#08x'\n", 42);
-		// ft_printf("'%#08x'\n", 42);
+		printf("%f\n", -5.9999999);
+		ft_printf("%f\n", -5.9999999);
 
-		// printf("'%#8.6x'\n", 42);
-		// ft_printf("'%#8.6x'\n", 42);
-		// printf("'%#08.6x'\n", 42);
-		// ft_printf("'%#08.6x'\n", 42);
+		printf("this %.0f float\n", 1.6);
+		ft_printf("this %.0f float\n", 1.6);
 
-		// printf("{%*d}\n", -5, 42);
-		// ft_printf("{%*d}\n", -5, 42);
+		printf("%.0f\n", -3.85);
+		ft_printf("%.0f\n", -3.85);
 
-		// printf("{%*3d}\n", 5, 0);
-		// ft_printf("{%*3d}\n", 5, 0);
+		printf("%.1f\n", -3.85);
+		ft_printf("%.1f\n", -3.85);
 
-		// printf("%x\n", 42);
-		// ft_printf("%x\n", 42);
-		// printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
-		// ft_printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
-		// printf("% Z%s\n", "test");
-		// ft_printf("% Z%s\n", "test");
-		// printf("'%.50lld'\n", -9223372036854775807);
-		// ft_printf("'%.50lld'\n", -9223372036854775807);
-		// check_s();
-		// check_c();
-		check_p();
-		// check_di();
-		// check_d(atoi(argv[1]), atoi(argv[2]));
-		// check_percent();
-		// check_o();
-		check_u();
-		check_x();
-		check_big_x();
-		check_f();
-		
-		
-		// printf("Kogda zakanch\n\n");
-		// printf("%2$d %2$d;\n","16",17);
-		// printf("%2$d %1$s; %1$d %1$s\n","16",17);
+		printf("%.3f\n", 1.0);
+		ft_printf("%.3f\n", 1.0);
 
-		// num = printf("dd_printf %s, '%-3.d'\n", "hello", 3, 9);
-		// num = printf("dd_printf %s, '%5bd'\n", "hello", 9, 7654321);
-		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
-		// ft_printf("ft_printf  '%05d' |||| '% 8d' '%7.3s', '%4.15d' ppp\n", -42, -57897, "Hello", 42);
+		printf("%.7f\n", 1.0);
+		ft_printf("%.7f\n", 1.0);
 
-		
+		printf("%.7f\n", 0.0000001);
+		ft_printf("%.7f\n", 0.0000001);
 
-		// num = printf("dd_printf  '%05d' |||| '% 8d' '%7.3s', '%-+3.0d' ppp\n", -42, -57897, "Hello", 0);
-		// printf("num = %d\n", num);
-		// ft_printf("ft_printf '%7.6ls', '%0+d' %d '%c'\n", "Hello", 9, 7654321, 'P');
-		// printf("dd_printf '%s'\n");
-		// ft_printf("ft_printf '%s'\n");
+		printf("%.7f\n", -0.0000001);
+		ft_printf("%.7f\n", -0.0000001);
 
-		// int d1=123, d2=42, d3=1543;
-   		// printf ("'%d'\n'%6d'\n'%6d'\n",d1,d2,d3);
-		// printf ("\n2.3 Вывод чисел c выравниванием по левому краю:\n");
-		// printf ("'%-d'\n'%-6d'\n'%-6d'\n",d1,d2,d3);
-		// printf("%.d %s\n", 5, "lol");
-		// ft_printf("%5.9d %s\n", 5, "lol");
-		// printf("flagi '%5-d'\n", 45);
+		printf("%.7f\n", 43.43999949);
+		ft_printf("%.7f\n", 43.43999949);
+
+		printf("%.7f\n", -5.02999949);
+		ft_printf("%.7f\n", -5.02999949);
+
+		printf("%.7f\n", 1.99999949);
+		ft_printf("%.7f\n", 1.99999949);
+
+		printf("%.7f\n", -0.99999949);
+		ft_printf("%.7f\n", -0.99999949);
+
+		printf("%.8f\n", 1.0);
+		ft_printf("%.8f\n", 1.0);
+
+		printf("%.8f\n", 23.375094499);
+		ft_printf("%.8f\n", 23.375094499);
+
+		printf("%#.0f\n", 7.4);
+		ft_printf("%#.0f\n", 7.4);
+
+		printf("%#.0f\n", -7.4);
+		ft_printf("%#.0f\n", -7.4);
+
+		printf("%Lf\n", 0.08942555l);
+		ft_printf("%Lf\n", 0.08942555l);
+
+		printf("%Lf\n", 43.4399999l);
+		ft_printf("%Lf\n", 43.4399999l);
+
+		printf("%Lf\n", -5.0299999l);
+		ft_printf("%Lf\n", -5.0299999l);
+
+		printf("%Lf\n", 3.9999999l);
+		ft_printf("%Lf\n", 3.9999999l);
+
+		printf("%Lf\n", -5.9999999l);
+		ft_printf("%Lf\n", -5.9999999l);
+
+		printf("%.7Lf\n", 1.0l);
+		ft_printf("%.7Lf\n", 1.0l);
+
+		printf("%.7Lf\n", 1.99999949l);
+		ft_printf("%.7Lf\n", 1.99999949l);
+
+		printf("%.7Lf\n", -0.99999949l);
+		ft_printf("%.7Lf\n", -0.99999949l);
+
+		printf("%.8Lf\n", 1.0l);
+		ft_printf("%.8Lf\n", 1.0l);
+
+		printf("%.8Lf\n", 23.375094499l);
+		ft_printf("%.8Lf\n", 23.375094499l);
+
+		printf("%.8Lf\n", -985.765426499l);
+		ft_printf("%.8Lf\n", -985.765426499l);
+
+		printf("%f\n", (double)42);
+		ft_printf("%f\n", (double)42);
 
 	}
 	printf("\nEND\n");
 	return (0);
 }
+
+
+/* for test
+
+		printf("'%10.0f'\n", -12.9999999);
+		ft_printf("'%10.0f'\n", -12.9999999);
+
+		printf("'%10.0f'\n", -12.44);
+		ft_printf("'%10.0f'\n", -12.44);
+
+		printf("'%f'\n", 54.27);
+		ft_printf("'%f'\n", 54.27);
+		
+		printf("'%f'\n", 54.0);
+		ft_printf("'%f'\n", 54.0);
+		
+		printf("'%5p' \n", 0);
+		ft_printf("'%5p' \n", 0);
+		
+		printf("'%014s' \n", "string");
+		ft_printf("'%014s' \n", "string");
+		
+		printf("'%.50lld'\n", -9223372036854775807);
+		ft_printf("'%.50lld'\n", -9223372036854775807);
+
+		printf("'%#8o'\n", 55);
+		ft_printf("'%#8o'\n", 55);
+		
+		printf("%lu\n", -42);
+		ft_printf("%lu\n", -42);
+
+		printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
+		ft_printf("'%# 5.3o' '%# 8.6o'\n", 6, 8975);
+
+		printf("%x\n", 42);
+		ft_printf("%x\n", 42);
+
+		printf("'%#8.6x'\n", 42);
+		ft_printf("'%#8.6x'\n", 42);
+*/

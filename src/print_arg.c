@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 01:15:41 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 15:01:52 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	print_arg1(char modifier, t_flag flags, va_list list)
 	int	res;
 
 	res = 0;
-	if (modifier == 's')
+	if (modifier == 's' || modifier == 'S')
 		res += print_str2(flags, list);
-	else if (modifier == 'c')
+	else if (modifier == 'c' || modifier == 'C')
 		res += print_char(flags, va_arg(list, int));
 	else if (modifier == 'p')
 		res += print_memory(flags, list);
@@ -37,6 +37,11 @@ static int	print_arg2(char modifier, t_flag flags, va_list list)
 		res += print_int3(flags, list);
 	else if (modifier == 'u')
 		res += print_unsigned_int(flags, list);
+	else if (modifier == 'U')
+	{
+		flags.l = 1;
+		res += print_unsigned_int(flags, list);
+	}
 	else if (modifier == 'x')
 		res += print_unsigned_low_hex(flags, list);
 	else if (modifier == 'X')
@@ -67,9 +72,9 @@ int			print_arg(char modifier, t_flag flags, va_list list)
 	int	res;
 
 	res = 0;
-	if (ft_strchr("csp", modifier))
+	if (ft_strchr("cCsSp", modifier))
 		res += print_arg1(modifier, flags, list);
-	else if (ft_strchr("diouxX", modifier))
+	else if (ft_strchr("diouUxX", modifier))
 		res += print_arg2(modifier, flags, list);
 	else if (ft_strchr("feEg%%", modifier))
 		res += print_arg3(modifier, flags, list);

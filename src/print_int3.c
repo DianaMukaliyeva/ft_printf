@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_int3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/20 01:42:26 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 16:30:44 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,20 @@ int			print_int3(t_flag flags, va_list list)
 	int			print_len;
 
 	res = 0;
-	if (flags.h)
-		num = (short int)va_arg(list, intmax_t);
-	else if (flags.hh)
-		num = (char)va_arg(list, intmax_t);
+	if (flags.z)
+		num = (size_t)va_arg(list, intmax_t);
+	else if (flags.j)
+		num = va_arg(list, intmax_t);
 	else if (flags.l)
 		num = (long int)va_arg(list, intmax_t);
 	else if (flags.ll)
 		num = (long long int)va_arg(list, intmax_t);
+	else if (flags.h)
+		num = (short int)va_arg(list, intmax_t);
+	else if (flags.hh)
+		num = (char)va_arg(list, intmax_t);
 	else
-		num = (int)va_arg(list, intmax_t);
+		num = va_arg(list, int);
 	print_len = get_print_len(num, flags);
 	res += print_with_flags(num, flags, print_len);
 	return (res);

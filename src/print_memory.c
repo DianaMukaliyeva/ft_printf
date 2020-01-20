@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 00:49:33 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/20 12:19:12 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_print_len(uintmax_t num, t_flag flags)
 		len--;
 	else if (flags.precision_num > len)
 		len = flags.precision_num;
-	if (flags.hash && num != 0)
+	if (flags.hash)
 		len += 2;
 	return (len);
 }
@@ -53,9 +53,9 @@ static int	print_digit_precision(uintmax_t num, t_flag flags)
 	return (res);
 }
 
-static int	print_sign(t_flag flags, uintmax_t num)
+static int	print_sign(t_flag flags)
 {
-	if (flags.hash && num != 0)
+	if (flags.hash)
 		return (printf_putstr("0x"));
 	return (0);
 }
@@ -71,7 +71,7 @@ static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 	{
 		if (flags.minus)
 		{
-			res += print_sign(flags, num);
+			res += print_sign(flags);
 			res += print_digit_precision(num, flags);
 			width -= res;
 			while (width-- > 0)
@@ -81,7 +81,7 @@ static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 		{
 			if (flags.zero && !flags.precision_exist)
 			{
-				res += print_sign(flags, num);
+				res += print_sign(flags);
 				while (width-- > print_len)
 					res += printf_putchar('0');
 				res += print_digit_precision(num, flags);
@@ -90,14 +90,14 @@ static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(flags, num);
+				res += print_sign(flags);
 				res += print_digit_precision(num, flags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(flags, num);
+		res += print_sign(flags);
 		res += print_digit_precision(num, flags);
 	}	
 	return (res);
