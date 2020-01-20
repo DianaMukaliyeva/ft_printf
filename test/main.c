@@ -148,20 +148,24 @@ int	main(int argc, char **argv)
 		// ft_printf("'%5.25d'\n", -9223372036854775808);
 		// printf("@moulitest: %s\n", NULL);
 		// ft_printf("@moulitest: %s\n", NULL);
-		printf("'%04.0s' \n", "string");
-		ft_printf("'%04.0s' \n", "string");
+		// printf("'%04.0s' \n", "string");
+		// ft_printf("'%04.0s' \n", "string");
 		
-		printf("'%014s' \n", "string");
-		ft_printf("'%014s' \n", "string");
+		// printf("'%014s' \n", "string");
+		// ft_printf("'%014s' \n", "string");
 		
-		printf("'%-25lld'\n", -9223372036854775808);
-		ft_printf("'%-25lld'\n", -9223372036854775808);
+		// printf("'%-25lld'\n", -9223372036854775808);
+		// ft_printf("'%-25lld'\n", -9223372036854775808);
 		
 		printf("'%Lf'\n", -9223372036854775807.54);
 		ft_printf("'%Lf'\n", -9223372036854775807.54);
 		
 		printf("%d = \n", printf("'%p' \n", 0));
 		printf("%d = \n", ft_printf("'%p' \n", 0));
+		
+		printf("'%*d'\n", -9, 54);
+		ft_printf("'%*d'\n", -9, 54);
+		
 		// ft_printf("'%p' \n", 0);
 		
 		// printf("'%#5o'\n", 55);
