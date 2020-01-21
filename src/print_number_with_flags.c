@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:22:52 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 16:40:09 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:20:53 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,46 +59,58 @@ char		*newstr_fill(size_t zero, size_t len, int can_put_zero)
 	return (str);
 }
 
+static char	*get_joinedstr(char *str, t_flag flags, int negative, int len)
+{
+	char	*temp;
+	char	*res;
+	int		width;
+
+	width = flags.width_num;
+	if (flags.minus)
+	{
+		temp = newstr_fill(flags.zero, width - len, flags.minus);
+		res = join_sign(str, negative, flags.plus, flags.space);
+		res = ft_strjoin(res, temp);
+	}
+	else
+	{
+		temp = newstr_fill(flags.zero, width - len, flags.precision_exist);
+		if (flags.zero && !flags.precision_exist)
+		{
+			res = ft_strjoin(temp, str);
+			res = join_sign(res, negative, flags.plus, flags.space);
+		}
+		else
+		{
+			res = join_sign(str, negative, flags.plus, flags.space);
+			res = ft_strjoin(temp, res);
+		}
+	}
+	free(temp);
+	return (res);
+}
+
 int			print_number_with_flags(char *str, t_flag flags, int negative)
 {
 	int		len;
-	char	*temp;
 	int		width;
-	
+	char	*res;
+
 	width = flags.width_num;
 	len = get_print_len(str, flags, negative);
 	if (width > len)
 	{
-		if (flags.minus)
-		{
-			temp = newstr_fill(flags.zero, width - len, flags.minus);
-			str = join_sign(str, negative, flags.plus, flags.space);
-			str = ft_strjoin(str, temp);
-		}
-		else
-		{
-			temp = newstr_fill(flags.zero, width - len, flags.precision_exist);
-			if (flags.zero && !flags.precision_exist)
-			{
-				str = ft_strjoin(temp, str);
-				str = join_sign(str, negative, flags.plus, flags.space);
-			}
-			else
-			{
-				str = join_sign(str, negative, flags.plus, flags.space);
-				str = ft_strjoin(temp, str);
-			}
-		}
-		len = ft_strlen(str);
-		write(1, str, len);
-		free(temp);
+		res = get_joinedstr(str, flags, negative, len);
+		len = ft_strlen(res);
+		write(1, res, len);
+		free(res);
 	}
 	else
 	{
-		str = join_sign(str, negative, flags.plus, flags.space);
-		len = ft_strlen(str);
-		write(1, str, len);
+		res = join_sign(str, negative, flags.plus, flags.space);
+		len = ft_strlen(res);
+		write(1, res, len);
+		free(res);
 	}
-	free(str);
 	return (len);
 }
