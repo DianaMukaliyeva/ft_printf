@@ -173,8 +173,12 @@ int	main(int argc, char **argv)
 		printf("%f\n", (double)42);
 		ft_printf("%f\n", (double)42);
 
+		printf("'%.50lld'\n", -9223372036854775808);
+		ft_printf("'%.50lld'\n", -9223372036854775808);
+
 	}
 	printf("\nEND\n");
+	while (1){};
 	return (0);
 }
 

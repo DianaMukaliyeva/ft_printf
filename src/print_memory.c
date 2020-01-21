@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 12:19:12 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/21 12:29:25 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static int	print_digit_precision(uintmax_t num, t_flag flags)
 static int	print_sign(t_flag flags)
 {
 	if (flags.hash)
-		return (printf_putstr("0x"));
+		return (print_with_flags("0x", 0, 0, 0));
 	return (0);
 }
 
-static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
+static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
@@ -103,18 +103,16 @@ static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
 	return (res);
 }
 
-int	print_memory(t_flag flags, va_list list)
+int	print_memory(t_flag flags, void *p)
 {
 	int		res;
-	void	*p;
 	uintmax_t	address;
 	int			print_len;
 
 	res = 0;
-	p = va_arg(list, void *);
 	address = (uintmax_t)p;
 	flags.hash = 1;
 	print_len = get_print_len(address, flags);
-	res += print_with_flags(address, flags, print_len);
+	res += st_print_with_flags(address, flags, print_len);
 	return (res);
 }

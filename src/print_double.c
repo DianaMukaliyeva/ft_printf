@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 17:34:00 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/21 11:39:30 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static int	print_sign(long double num, t_flag flags)
 	return (0);
 }
 
-static int	print_with_flags(long double num, t_flag flags, int print_len)
+static int	st_print_with_flags(long double num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
@@ -178,6 +178,6 @@ int			print_double(t_flag flags, va_list list)
 	if (!flags.precision_exist && flags.precision_num == 0)
 		flags.precision_num = 6;
 	print_len = get_print_len(num, flags);
-	res += print_with_flags(num, flags, print_len);
+	res += st_print_with_flags(num, flags, print_len);
 	return (res);
 }

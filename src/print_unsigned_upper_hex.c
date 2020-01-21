@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:13:30 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 16:31:10 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/21 11:38:34 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static int	print_digit_precision(uintmax_t num, t_flag flags)
 static int	print_sign(t_flag flags, uintmax_t num)
 {
 	if (flags.hash && num != 0)
-		return (printf_putstr("0X"));
+		return (print_with_flags("0X", 0, 0, 0));
 	return (0);
 }
 
-static int	print_with_flags(uintmax_t num, t_flag flags, int print_len)
+static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 {
 	int	res;
 	int	width;
@@ -126,6 +126,6 @@ int			print_unsigned_upper_hex(t_flag flags, va_list list)
 	else
 		num = (unsigned int)va_arg(list, uintmax_t);
 	print_len = get_print_len(num, flags);
-	res += print_with_flags(num, flags, print_len);
+	res += st_print_with_flags(num, flags, print_len);
 	return (res);
 }

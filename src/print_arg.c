@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/20 15:01:52 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/21 12:31:43 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,54 @@
 
 static int	print_arg1(char modifier, t_flag flags, va_list list)
 {
-	int	res;
-
-	res = 0;
 	if (modifier == 's' || modifier == 'S')
-		res += print_str2(flags, list);
+		return (print_str(flags, list));
 	else if (modifier == 'c' || modifier == 'C')
-		res += print_char(flags, va_arg(list, int));
+		return (print_char(flags, va_arg(list, int)));
 	else if (modifier == 'p')
-		res += print_memory(flags, list);
-	return (res);
+		return (print_memory(flags, va_arg(list, void *)));
+	else if (modifier == 'd' || modifier == 'i')
+		return (print_int(flags, list));
+	return (0);
 }
 
 static int	print_arg2(char modifier, t_flag flags, va_list list)
 {
-	int	res;
-
-	res = 0;
 	if (modifier == 'o')
-		res += print_octal(flags, list);
-	else if (modifier == 'd' || modifier == 'i')
-		res += print_int3(flags, list);
+		return (print_octal(flags, list));
 	else if (modifier == 'u')
-		res += print_unsigned_int(flags, list);
+		return (print_unsigned_int(flags, list));
 	else if (modifier == 'U')
 	{
 		flags.l = 1;
-		res += print_unsigned_int(flags, list);
+		return (print_unsigned_int(flags, list));
 	}
 	else if (modifier == 'x')
-		res += print_unsigned_low_hex(flags, list);
+		return (print_unsigned_low_hex(flags, list));
 	else if (modifier == 'X')
-		res += print_unsigned_upper_hex(flags, list);
-	return (res);
+		return (print_unsigned_upper_hex(flags, list));
+	return (0);
 }
 
 static int	print_arg3(char modifier, t_flag flags, va_list list)
 {
-	int	res;
-
-	res = 0;
 	if (modifier == 'f')
-		res += print_double(flags, list);
+		return (print_double(flags, list));
 	else if (modifier == 'e')
-		res += print_double_with_e(flags, list);
+		return (print_double_with_e(flags, list));
 	else if (modifier == 'E')
-		res += print_double_with_big_e(flags, list);
+		return (print_double_with_big_e(flags, list));
 	else if (modifier == 'g')
-		res += print_double(flags, list);
-	else if (modifier == '%')
-		res += print_char(flags, '%');
-	return (res);
+		return (print_double(flags, list));
+	return (0);
 }
 
 int			print_arg(char modifier, t_flag flags, va_list list)
 {
-	int	res;
-
-	res = 0;
-	if (ft_strchr("cCsSp", modifier))
-		res += print_arg1(modifier, flags, list);
-	else if (ft_strchr("diouUxX", modifier))
-		res += print_arg2(modifier, flags, list);
-	else if (ft_strchr("feEg%%", modifier))
-		res += print_arg3(modifier, flags, list);
-	return (res);
+	if (ft_strchr("cCdisSp", modifier))
+		return (print_arg1(modifier, flags, list));
+	else if (ft_strchr("ouUxX", modifier))
+		return (print_arg2(modifier, flags, list));
+	else
+		return (print_arg3(modifier, flags, list));
 }

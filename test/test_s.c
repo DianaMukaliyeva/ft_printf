@@ -120,4 +120,5 @@ void	check_s()
 		x++;
 	}
 	printf("STR ITOGO DIFF %d\n", dif);
+	while (1){};
 }

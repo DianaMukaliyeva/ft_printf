@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putstr.c                                    :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 23:05:42 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:55:39 by dmukaliy         ###   ########.fr       */
+/*   Created: 2019/10/17 18:47:47 by dmukaliy          #+#    #+#             */
+/*   Updated: 2019/10/23 19:24:32 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	printf_putstr(char const *str)
+void	*ft_memalloc(size_t size)
 {
-	int	res;
+	void	*mem;
 
-	res = 0;
-	while (str && *str)
-	{
-		res += printf_putchar(*str);
-		str++;
-	}
-	return (res);
+	if (!(mem = malloc(size)))
+		return (NULL);
+	ft_bzero(mem, size);
+	return (mem);
 }

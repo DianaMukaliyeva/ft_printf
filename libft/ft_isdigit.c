@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_percent.c                                    :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 12:53:09 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:38:16 by diana            ###   ########.fr       */
+/*   Created: 2019/10/17 18:46:15 by dmukaliy          #+#    #+#             */
+/*   Updated: 2019/10/17 18:46:16 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_percent(void)
+int	ft_isdigit(int c)
 {
-	return (printf_putchar('%'));
+	return (c >= 48 && c <= 57);
 }
