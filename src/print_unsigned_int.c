@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:12:20 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 11:39:46 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:59:09 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_print_len(uintmax_t num, t_flag flags)
 		len--;
 	else if (flags.precision_num > len)
 		len = flags.precision_num;
-	if (flags.hash && !flags.precision_exist)
+	if (flags.hash && !flags.precision_exist && num != 0)
 		len++;
 	return (len);
 }
@@ -52,9 +52,9 @@ static int	print_digit_precision(uintmax_t num, t_flag flags)
 	return (res);
 }
 
-static int	print_sign(t_flag flags)
+static int	print_sign(t_flag flags, uintmax_t num)
 {
-	if (flags.hash && !flags.precision_num)
+	if (flags.hash && !flags.precision_num && num != 0)
 		return (printf_putchar('0'));
 	return (0);
 }
@@ -70,7 +70,7 @@ static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 	{
 		if (flags.minus)
 		{
-			res += print_sign(flags);
+			res += print_sign(flags, num);
 			res += print_digit_precision(num, flags);
 			width -= res;
 			while (width-- > 0)
@@ -80,7 +80,7 @@ static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 		{
 			if (flags.zero && !flags.precision_num)
 			{
-				res += print_sign(flags);
+				res += print_sign(flags, num);
 				while (width-- > print_len)
 					res += printf_putchar('0');
 				res += print_digit_precision(num, flags);
@@ -89,14 +89,14 @@ static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 			{
 				while (width-- > print_len)
 					res += printf_putchar(' ');
-				res += print_sign(flags);
+				res += print_sign(flags, num);
 				res += print_digit_precision(num, flags);
 			}
 		}
 	}
 	else
 	{
-		res += print_sign(flags);
+		res += print_sign(flags, num);
 		res += print_digit_precision(num, flags);
 	}
 	
