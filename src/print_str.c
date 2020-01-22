@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 15:58:39 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:07:32 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*newstr_with_char(size_t zero, size_t len, int minus)
 	return (str);
 }
 
-int		print_with_flags(char *str, int width, int zero, int minus)
+int			print_with_flags(char *str, int width, int zero, int minus)
 {
 	char	*print;
 	int		len;

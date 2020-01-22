@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/21 16:48:00 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:02:03 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			print_int(t_flag flags, va_list list)
 	print_str = get_str_with_precision(num, flags);
 	if (!print_str)
 		return (-1);
-	res = print_number_with_flags(print_str, flags, num < 0);
+	res = print_number_with_flags(print_str, flags, num < 0 ? 1 : 0);
 	free(print_str);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:10:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 12:25:30 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:47:47 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,4 @@ int			print_char(t_flag flags, char c)
 		return (printf_putchar(c));
 	else
 		return (print_with_width(c, flags.width_num, flags.zero, flags.minus));
-}
-
-int			print_char2(t_flag flags, char c)
-{
-	int		res;
-	char	*str;
-
-	str = ft_strnew(1);
-	str[0] = c;
-	res = print_with_flags(str, flags.width_num, flags.zero, flags.minus);
-	free(str);
-	return (res);
 }

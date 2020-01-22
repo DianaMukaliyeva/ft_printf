@@ -120,6 +120,6 @@ void	check_di()
 		}
 		x++;
 	}
-	while(1){};
 	printf("ITOGO DIFF %d\n", dif);
+	while(1){};
 }

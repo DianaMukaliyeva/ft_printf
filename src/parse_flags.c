@@ -6,12 +6,11 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 15:46:18 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:39:45 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 static int		fill_other_flags(t_flag *flags, char symbol)
 {
@@ -64,7 +63,13 @@ static int		fill_other_flags(t_flag *flags, char symbol)
 	return (1);
 }
 
-static int		fill_numbers(t_flag *flags, char symbol, va_list list)//neobhodimo menyat' esli zvezdochka i chislo otricatel'noe, to dlya precion nichego, a dlya width prosto d plyusom, minus uidet vo flag left_align
+/*
+** neobhodimo menyat' esli zvezdochka i chislo otricatel'noe,
+** to dlya precion nichego, a dlya width prosto d plyusom,
+** minus uidet vo flag left_align
+*/
+
+static int		fill_numbers(t_flag *flags, char symbol, va_list list)
 {
 	int	num;
 
@@ -76,7 +81,7 @@ static int		fill_numbers(t_flag *flags, char symbol, va_list list)//neobhodimo m
 		if (flags->precision_exist)
 		{
 			flags->precision_asterisk = 1;
-			if (num >= 0)//kak budet esli pridet takoe %*.54*d, -8
+			if (num >= 0)
 				flags->precision_num = num;
 			else
 			{
@@ -115,7 +120,6 @@ static int		fill_numbers(t_flag *flags, char symbol, va_list list)//neobhodimo m
 	}
 	return (1);
 }
-
 
 int				fill_flags(t_flag *flags, char symbol, va_list list)
 {
