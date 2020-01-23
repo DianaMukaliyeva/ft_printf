@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/22 19:02:03 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 17:55:42 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,7 @@ static char	*itoa_positive(intmax_t num)
 	char	*str;
 
 	if (num + 1 == -9223372036854775807)
-	{
-		str = ft_strnew(19);
-		if (!str)
-			return (NULL);
 		str = ft_strdup("9223372036854775808");
-	}
 	else
 	{
 		num < 0 ? num *= -1 : 0;
