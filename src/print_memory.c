@@ -6,19 +6,17 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/22 20:02:48 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:02:47 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 static int	get_len_without_sign(uintmax_t num)
 {
 	int	len;
 
 	len = 1;
-	
 	if (num / 16 > 0)
 		len += get_len_without_sign(num / 16);
 	return (len);
@@ -99,13 +97,13 @@ static int	st_print_with_flags(uintmax_t num, t_flag flags, int print_len)
 	{
 		res += print_sign(flags);
 		res += print_digit_precision(num, flags);
-	}	
+	}
 	return (res);
 }
 
-int	print_memory(t_flag flags, void *p)
+int			print_memory(t_flag flags, void *p)
 {
-	int		res;
+	int			res;
 	uintmax_t	address;
 	int			print_len;
 

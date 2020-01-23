@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned_number_with_flags.c                 :+:      :+:    :+:   */
+/*   print_unsigned_number.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:06:10 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 12:41:10 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:02:24 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*add_sign_to_str(char const *str, t_flag flags, int base, uintmax_t 
 	return (res);
 }
 
-static char		*newstr_fill(size_t zero, size_t len, int can_put_zero)
+static char	*newstr_fill(size_t zero, size_t len, int can_put_zero)
 {
 	char	*str;
 	size_t	i;
@@ -100,7 +100,7 @@ static char	*get_full_str(char const *str, t_flag flags, int base, int len, int 
 	return (res);
 }
 
-int			print_unsigned_number_with_flags(char *str, t_flag flags, int base, uintmax_t num, int is_big_x)
+int			print_unsigned_number(char *str, t_flag flags, int base, uintmax_t num, int is_big_x)
 {
 	int		len;
 	int		width;

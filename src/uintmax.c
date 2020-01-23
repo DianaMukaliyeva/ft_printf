@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 12:38:12 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 13:03:27 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	get_len_without_sign(uintmax_t num, int base)
 	int	len;
 
 	len = 1;
-	
 	if (num / base > 0)
 		len += get_len_without_sign(num / base, base);
 	return (len);
@@ -77,7 +76,6 @@ static char	*get_str_with_precision(uintmax_t num, t_flag flags, int base, int i
 	return (str);
 }
 
-
 int			print_unsigned_num(t_flag flags, uintmax_t num, int base, int is_big_x)
 {
 	int			res;
@@ -101,7 +99,7 @@ int			print_unsigned_num(t_flag flags, uintmax_t num, int base, int is_big_x)
 	print_str = get_str_with_precision(num, flags, base, is_big_x);
 	if (!print_str)
 		return (-1);
-	res = print_unsigned_number_with_flags(print_str, flags, base, num, is_big_x);
+	res = print_unsigned_number(print_str, flags, base, num, is_big_x);
 	free(print_str);
 	return (res);
 }
