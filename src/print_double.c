@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 14:24:05 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 23:09:10 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static char	*itoa_double_with_precision(long double num, int precision)
 	if ((uintmax_t)drob > 0 || precision > 0)
 	{
 		temp = ft_strdup(res);
+		free(res);
 		res = ft_strjoin(temp, ".");
 		ft_strdel(&temp);
 		if (drob > 0)
@@ -70,6 +71,7 @@ static char	*itoa_double_with_precision(long double num, int precision)
 				return (NULL);
 			temp = ft_memset(temp, '0', precision - len_after_comma);
 			temp2 = ft_strdup(res);
+			free(res);
 			res = ft_strjoin(temp2, temp);
 			ft_strdel(&temp);
 			ft_strdel(&temp2);
@@ -78,6 +80,7 @@ static char	*itoa_double_with_precision(long double num, int precision)
 		{
 			temp = ft_itoa((uintmax_t)drob);
 			temp2 = ft_strdup(res);
+			free(res);
 			res = ft_strjoin(temp2, temp);
 			ft_strdel(&temp);
 			ft_strdel(&temp2);

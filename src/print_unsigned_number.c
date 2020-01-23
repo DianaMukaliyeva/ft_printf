@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_number.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:06:10 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 13:02:24 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 22:52:40 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static char	*add_sign_to_str(char const *str, t_flag flags, int base, uintmax_t 
 		res = ft_strjoin("0x", str);
 	else
 		res = ft_strdup(str);
-	if (!res)
-		return (NULL);
 	return (res);
 }
 

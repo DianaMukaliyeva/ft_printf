@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 22:08:08 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/23 22:20:43 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static void	fill_other_flags(t_flag *flags, char symbol)
 	}
 	else if (symbol == 'l')
 	{
-		flags->h = 0;
-		flags->hh = 0;
+		// flags->h = 0;
+		// flags->hh = 0;
 		if (flags->l == 1)
 		{
 			flags->l = 0;
@@ -47,17 +47,19 @@ static void	fill_other_flags(t_flag *flags, char symbol)
 			flags->l = 1;
 	}
 	else if (symbol == 'L')
-	{
-		flags->h = 0;
-		flags->hh = 0;
-		flags->l = 0;
-		flags->ll = 0;
+	// {
+	// 	flags->h = 0;
+	// 	flags->hh = 0;
+	// 	flags->l = 0;
+	// 	flags->ll = 0;
 		flags->big_l = 1;
-	}
-	else if (symbol == 'j')
+	// }
+	symbol == 'j' ? flags->j = 1 : 0;
+	symbol == 'z' ? flags->z = 1 : 0;
+	/* else if (symbol == 'j')
 		flags->j = 1;
 	else if (symbol == 'z')
-		flags->z = 1;
+		flags->z = 1; */
 	// else if (!ft_strchr("$t", symbol))
 	// 	return (0);
 	// return (1);
@@ -148,7 +150,7 @@ static t_flag	get_empty_flags(void)
 	flags.precision_exist = 0;
 	flags.precision_asterisk = 0;
 	flags.precision_num = 0;
-	flags.width_exist = 0;
+	// flags.width_exist = 0;
 	flags.width_asterisk = 0;
 	flags.width_num = 0;
 	return (flags);

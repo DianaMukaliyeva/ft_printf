@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_number_with_flags.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:22:52 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 12:48:57 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 22:46:31 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static char	*add_sign_to_str(char const *str, int negative, int plus, int space)
 		res = ft_strjoin(" ", str);
 	else
 		res = ft_strdup(str);
-	if (!res)
-		return (NULL);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/23 17:55:42 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/23 22:41:22 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static int	get_len_without_sign(intmax_t num)
 	int	len;
 
 	len = 1;
-	if (num < 0)
-		num *= -1;
 	if (num + 1 == -9223372036854775807)
 		return (19);
-	if (num / 10 > 0)
+	if (num < 0)
+		num *= -1;
+	if (num / 10 > 0)//poprobovat' dlya skorosti while loop
 		len += get_len_without_sign(num / 10);
 	return (len);
 }
@@ -36,8 +36,6 @@ static char	*itoa_positive(intmax_t num)
 	{
 		num < 0 ? num *= -1 : 0;
 		str = ft_itoa(num);
-		if (!str)
-			return (NULL);
 	}
 	return (str);
 }

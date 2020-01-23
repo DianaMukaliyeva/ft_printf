@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   uintmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 13:03:27 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 23:10:36 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static char	*get_str_with_precision(uintmax_t num, t_flag flags, int base, int i
 	else
 	{
 		str = ft_strnew(len + 1);
+		if (!str)
+			return (NULL);
 		ft_itoa_base(num, str, base, is_big_x, &i);
 	}
 	if (!str)

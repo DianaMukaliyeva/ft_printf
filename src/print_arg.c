@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 21:42:03 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/23 23:10:15 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	print_arg3(char modifier, t_flag flags, va_list list)
 {
 	if (modifier == 'f')
 		return (print_double(flags, list));
-	else if (modifier == 'e')
-		return (print_double_with_e(flags, list));
-	else if (modifier == 'E')
-		return (print_double_with_big_e(flags, list));
+	// else if (modifier == 'e')
+	// 	return (print_double_with_e(flags, list));
+	// else if (modifier == 'E')
+	// 	return (print_double_with_big_e(flags, list));
 	else if (modifier == 'g')
 		return (print_double(flags, list));
 	return (0);
