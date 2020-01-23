@@ -71,6 +71,9 @@ int	main(int argc, char **argv)
 		// printf("%f\n", 0.000001);
 		// ft_printf("%f\n", 0.000001);
 
+		printf("%f\n", -0.000001);
+		ft_printf("%f\n", -0.000001);
+
 		// printf("%f\n", -0.000001);
 		// ft_printf("%f\n", -0.000001);
 
@@ -179,22 +182,22 @@ int	main(int argc, char **argv)
 		// printf("'%*.*.*c'\n", 15, 7, 3, 'h');
 		// ft_printf("'%*.*.*c'\n", 15, 7, 3, 'h');
 
-		printf("@moulitest: %#.o %#.0o\n", 0, 0);
-		ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		// printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		// ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
 
-		printf("@moulitest: %#.x %#.0x\n", 0, 0);
-		ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
+		// printf("@moulitest: %#.x %#.0x\n", 0, 0);
+		// ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
 
-		printf("@moulitest: %#.u %#.0u\n", 0, 0);
-		ft_printf("@moulitest: %#.u %#.0u\n", 0, 0);
+		// printf("@moulitest: %#.u %#.0u\n", 0, 0);
+		// ft_printf("@moulitest: %#.u %#.0u\n", 0, 0);
 
-		printf("'%#X'\n", 42);
-		ft_printf("'%#X'\n", 42);
+		// printf("'%#X'\n", 42);
+		// ft_printf("'%#X'\n", 42);
 
-		printf("'%#0 33..1..#00d'\n", 256);
-		printf("'%#0 33..1..#00d'\n", 256);
-		ft_printf("'%#0 33..1..#00d'\n", 256);
-		ft_printf("'%#0 33..1..#00d'\n", 256);
+		// printf("'%#0 33..1..#00d'\n", 256);
+		// printf("'%#0 33..1..#00d'\n", 256);
+		// ft_printf("'%#0 33..1..#00d'\n", 256);
+		// ft_printf("'%#0 33..1..#00d'\n", 256);
 
 	}
 	printf("\nEND\n");

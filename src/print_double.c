@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 13:09:29 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 14:24:05 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,152 +22,88 @@ static int	get_len_without_sign(uintmax_t num)
 	return (len);
 }
 
-static int	get_print_len(long double num, t_flag flags)
+static char	*itoa_double_with_precision(long double num, int precision)
 {
-	int			len;
-	int			len_before_comma;
+	char		*res;
+	char		*temp;
+	char		*temp2;
+	long double	drob;
 	int			len_after_comma;
-	long double	ko;
-	int			prec;
-
-	len = 0;
-	prec = flags.precision_num;
-	if (num < 0 || flags.space || flags.plus)
-	{
-		if (num < 0)
-			num *= -1;
-		len++;
-	}
-	ko = (num - (uintmax_t)num);
-	while (prec-- > 0 && ko != 0)
-		ko *= 10;
-	if ((uintmax_t)ko > 0 && (uintmax_t)(ko + 0.5) - (uintmax_t)ko == 1)
-	{
-		ko = 0;
-		prec = flags.precision_num - 1;
-		num++;
-	}
-	len_before_comma = get_len_without_sign((int)num);
-	len_after_comma = get_len_without_sign((int)ko);
-/*
-**if (num == 0 && flags->precision.is_exist && flags.precision_num == 0)
-** 	len--;
-** if (flags.precision_num > len_after_comma)
-** len_after_comma = flags.precision_num;
-*/
-	len = len + len_before_comma + flags.precision_num;
-	if ((uintmax_t)ko == 0 && !flags.precision_num)
-		len--;
-	if (len_after_comma)
-		len++;
-	return (len);
-}
-
-static int	print_digit_precision(long double num, t_flag flags)
-{
-	int			res;
-	long double	ko;
-	int			len_after_comma;
-	int			prec;
 	intmax_t	num_before;
+	int			prec_copy;
 
-	res = 0;
+	prec_copy = precision;
 	num_before = (intmax_t)num;
-	if (num_before < 0)
-		num_before *= -1;
-	if (num < 0)
-		num *= -1;
-	prec = flags.precision_num;
-	ko = (num - (uintmax_t)num);
-	while (prec-- > 0 && ko != 0)
-		ko *= 10;
+	drob = (num - (uintmax_t)num);
+	while (drob > 0 && prec_copy-- > 0)
+		drob *= 10;
 /*
-** printf("\nko = %ju\n", (uintmax_t)ko);
-** printf("ko = %Lf\n", ko);
-** if ((ko >= 0.99 && ko <= 2))
+** printf("\nko = %ju\n", (uintmax_t)drob);
+** printf("drob = %Lf\n", drob);
+** if ((drob >= 0.99 && drob <= 2))
 **printf("\n'%Lf\n", num);
 */
-	if ((ko - (uintmax_t)ko) >= 0.9 && (uintmax_t)ko)
-		ko += 0.5;
-	if (((uintmax_t)ko > 0 && (uintmax_t)(ko - (uintmax_t)ko) >= 0.9) || (ko >= 0.9 && ko <= 1))
+	if ((drob - (uintmax_t)drob) >= 0.9 && (uintmax_t)drob)
+		drob += 0.5;
+	// printf("\n'%d'\n", (int)drob);
+	// if (drob < 1.000000) || (drob >= 0.9 && drob < 1)
+	// 	printf("\n'%Lf'\n", drob);
+	if (((uintmax_t)drob > 0 && (uintmax_t)(drob - (uintmax_t)drob) >= 0.9))
 	{
-		ko = 0;
-		prec = flags.precision_num - 1;
+		drob = 0;
+		prec_copy = precision - 1;
 		num_before++;
 	}
-	res += printf_putnbr(num_before, 10);
-	if ((uintmax_t)ko != 0 || flags.precision_num > 0)
+	res = ft_itoa(num_before);
+	if ((uintmax_t)drob > 0 || precision > 0)
 	{
-		res += printf_putchar('.');
-		len_after_comma = get_len_without_sign((uintmax_t)ko);
-		while (len_after_comma++ < flags.precision_num)
-			res += printf_putchar('0');
-		res += printf_putnbr((uintmax_t)ko, 10);
-	}
-	while (prec-- > 0)
-		res += printf_putchar('0');
-	return (res);
-}
-
-static int	print_sign(long double num, t_flag flags)
-{
-	if (num < 0)
-		return (printf_putchar('-'));
-	if (flags.plus)
-		return (printf_putchar('+'));
-	if (flags.space)
-		return (printf_putchar(' '));
-	return (0);
-}
-
-static int	st_print_with_flags(long double num, t_flag flags, int print_len)
-{
-	int	res;
-	int	width;
-
-	width = flags.width_num;
-	res = 0;
-	if (width > print_len)
-	{
-		if (flags.minus)
-		{
-			res += print_sign(num, flags);
-			res += print_digit_precision(num, flags);
-			width -= res;
-			while (width-- > 0)
-				res += printf_putchar(' ');
-		}
+		temp = ft_strdup(res);
+		res = ft_strjoin(temp, ".");
+		ft_strdel(&temp);
+		if (drob > 0)
+			len_after_comma = get_len_without_sign((uintmax_t)drob);
 		else
+			len_after_comma = 0;
+		if (len_after_comma < precision)
 		{
-			if (flags.zero && !flags.precision_exist)
-			{
-				res += print_sign(num, flags);
-				while (width-- > print_len)
-					res += printf_putchar('0');
-				res += print_digit_precision(num, flags);
-			}
-			else
-			{
-				while (width-- > print_len)
-					res += printf_putchar(' ');
-				res += print_sign(num, flags);
-				res += print_digit_precision(num, flags);
-			}
+			if (!(temp = ft_strnew(precision - len_after_comma)))
+				return (NULL);
+			temp = ft_memset(temp, '0', precision - len_after_comma);
+			temp2 = ft_strdup(res);
+			res = ft_strjoin(temp2, temp);
+			ft_strdel(&temp);
+			ft_strdel(&temp2);
+		}
+		if (drob > 0)
+		{
+			temp = ft_itoa((uintmax_t)drob);
+			temp2 = ft_strdup(res);
+			res = ft_strjoin(temp2, temp);
+			ft_strdel(&temp);
+			ft_strdel(&temp2);
 		}
 	}
-	else
-	{
-		res += print_sign(num, flags);
-		res += print_digit_precision(num, flags);
-	}
 	return (res);
+}
+
+static char	*get_str_with_precision(long double num, t_flag flags)
+{
+	char	*str;
+
+	if (num < 0)
+		num *= -1;
+	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
+		str = ft_strnew(1);
+	else
+		str = itoa_double_with_precision(num, flags.precision_num);
+	return (str);
 }
 
 int			print_double(t_flag flags, va_list list)
 {
 	int			res;
 	long double	num;
-	int			print_len;
+	char		*print_str;
 
 	res = 0;
 	if (flags.big_l)
@@ -176,7 +112,10 @@ int			print_double(t_flag flags, va_list list)
 		num = (long double)va_arg(list, double);
 	if (!flags.precision_exist && flags.precision_num == 0)
 		flags.precision_num = 6;
-	print_len = get_print_len(num, flags);
-	res += st_print_with_flags(num, flags, print_len);
+	print_str = get_str_with_precision(num, flags);
+	if (!print_str)
+		return (-1);
+	res = print_number_with_flags(print_str, flags, num < 0 ? 1 : 0);
+	free(print_str);
 	return (res);
 }
