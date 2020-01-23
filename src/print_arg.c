@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 12:48:29 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 21:42:03 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int			print_arg(char modifier, t_flag flags, va_list list)
 		return (print_arg1(modifier, flags, list));
 	else if (ft_strchr("oOuUxX", modifier))
 		return (print_arg2(modifier, flags, list));
-	else
+	else if (ft_strchr("feEg", modifier))
 		return (print_arg3(modifier, flags, list));
+	else
+		return (print_char(flags, modifier));
 }

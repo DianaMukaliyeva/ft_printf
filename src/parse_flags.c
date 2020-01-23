@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 13:04:14 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 22:08:08 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		fill_other_flags(t_flag *flags, char symbol)
+static void	fill_other_flags(t_flag *flags, char symbol)
 {
 	if (ft_strchr("-+ #", symbol))
 		flags->precision_num = 0;
@@ -58,18 +58,12 @@ static int		fill_other_flags(t_flag *flags, char symbol)
 		flags->j = 1;
 	else if (symbol == 'z')
 		flags->z = 1;
-	else if (!ft_strchr("t$", symbol))
-		return (0);
-	return (1);
+	// else if (!ft_strchr("$t", symbol))
+	// 	return (0);
+	// return (1);
 }
 
-/*
-** neobhodimo menyat' esli zvezdochka i chislo otricatel'noe,
-** to dlya precion nichego, a dlya width prosto d plyusom,
-** minus uidet vo flag left_align
-*/
-
-static int		fill_numbers(t_flag *flags, char symbol, va_list list)
+static void	fill_numbers(t_flag *flags, char symbol, va_list list)
 {
 	int	num;
 
@@ -118,10 +112,10 @@ static int		fill_numbers(t_flag *flags, char symbol, va_list list)
 		}
 		flags->width_num = flags->width_num * 10 + symbol - 48;
 	}
-	return (1);
+	// return (1);
 }
 
-int				fill_flags(t_flag *flags, char symbol, va_list list)
+/* static int		fill_flags(t_flag *flags, char symbol, va_list list)
 {
 	if (symbol == '.')
 	{
@@ -133,7 +127,7 @@ int				fill_flags(t_flag *flags, char symbol, va_list list)
 		return (fill_numbers(flags, symbol, list));
 	else
 		return (fill_other_flags(flags, symbol));
-}
+} */
 
 static t_flag	get_empty_flags(void)
 {
@@ -165,17 +159,33 @@ int				parse_flags(va_list list, const char *format, int *i)
 	t_flag	flags;
 	int		res;
 
-	res = 0;
 	flags = get_empty_flags();
+	/* while (format[++(*i)] && fill_flags(&flags, format[(*i)], list))
+		continue ;
+	if (format[(*i)])
+		res = print_arg(format[*i], flags, list); */
 	while (format[++(*i)])
+	{
+		if (format[(*i)] == '.')
+		{
+			flags.precision_exist = 1;
+			flags.precision_num = 0;
+		}
+		else if (ft_strchr("1234567890*", format[(*i)]))
+			fill_numbers(&flags, format[(*i)], list);
+		else if (ft_strchr("-+ #hlLjzt$", format[(*i)]))
+			fill_other_flags(&flags, format[(*i)]);
+		else
+			break;
+	}
+	res = print_arg(format[*i], flags, list);
+	/* while (format[++(*i)])
 	{
 		if (fill_flags(&flags, format[*i], list))
 			continue ;
-		if (ft_strchr("cCsSpdioOuUxXf", format[*i]))
-			res += print_arg(format[*i], flags, list);
 		else
-			res += print_char(flags, format[*i]);
+			res = print_arg(format[*i], flags, list);
 		break ;
-	}
+	} */
 	return (res);
 }
