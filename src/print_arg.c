@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 12:31:43 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/23 12:48:29 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,18 @@ static int	print_arg1(char modifier, t_flag flags, va_list list)
 
 static int	print_arg2(char modifier, t_flag flags, va_list list)
 {
-	if (modifier == 'o')
-		return (print_octal(flags, list));
-	else if (modifier == 'u')
-		return (print_unsigned_int(flags, list));
-	else if (modifier == 'U')
-	{
+	int	base;
+	int	is_big_x;
+
+	base = 10;
+	is_big_x = modifier == 'X' ? 1 : 0;
+	if (modifier == 'o' || modifier == 'O')
+		base = 8;
+	else if (modifier == 'x' || modifier == 'X')
+		base = 16;
+	if (modifier == 'U' || modifier == 'O')
 		flags.l = 1;
-		return (print_unsigned_int(flags, list));
-	}
-	else if (modifier == 'x')
-		return (print_unsigned_low_hex(flags, list));
-	else if (modifier == 'X')
-		return (print_unsigned_upper_hex(flags, list));
-	return (0);
+	return (print_unsigned_num(flags, va_arg(list, uintmax_t), base, is_big_x));
 }
 
 static int	print_arg3(char modifier, t_flag flags, va_list list)
@@ -60,7 +58,7 @@ int			print_arg(char modifier, t_flag flags, va_list list)
 {
 	if (ft_strchr("cCdisSp", modifier))
 		return (print_arg1(modifier, flags, list));
-	else if (ft_strchr("ouUxX", modifier))
+	else if (ft_strchr("oOuUxX", modifier))
 		return (print_arg2(modifier, flags, list));
 	else
 		return (print_arg3(modifier, flags, list));

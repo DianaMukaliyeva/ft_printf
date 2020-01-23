@@ -176,8 +176,25 @@ int	main(int argc, char **argv)
 		// printf("'%.50lld'\n", -9223372036854775808);
 		// ft_printf("'%.50lld'\n", -9223372036854775808);
 
-		printf("'%+d'\n", 8);
-		ft_printf("'%+d'\n", 8);
+		// printf("'%*.*.*c'\n", 15, 7, 3, 'h');
+		// ft_printf("'%*.*.*c'\n", 15, 7, 3, 'h');
+
+		printf("@moulitest: %#.o %#.0o\n", 0, 0);
+		ft_printf("@moulitest: %#.o %#.0o\n", 0, 0);
+
+		printf("@moulitest: %#.x %#.0x\n", 0, 0);
+		ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
+
+		printf("@moulitest: %#.u %#.0u\n", 0, 0);
+		ft_printf("@moulitest: %#.u %#.0u\n", 0, 0);
+
+		printf("'%#X'\n", 42);
+		ft_printf("'%#X'\n", 42);
+
+		printf("'%#0 33..1..#00d'\n", 256);
+		printf("'%#0 33..1..#00d'\n", 256);
+		ft_printf("'%#0 33..1..#00d'\n", 256);
+		ft_printf("'%#0 33..1..#00d'\n", 256);
 
 	}
 	printf("\nEND\n");
