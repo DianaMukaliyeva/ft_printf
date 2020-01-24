@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/22 19:07:32 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/24 17:45:53 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ static char	*get_str_with_precision(char *str, t_flag flags)
 	return (res);
 }
 
-int			print_str(t_flag flags, va_list list)
+int			print_str(t_flag flags, char *str)
 {
-	char	*str;
 	int		res;
 
-	str = va_arg(list, char*);
 	if (!str)
 		str = "(null)";
 	str = get_str_with_precision(str, flags);

@@ -6,14 +6,14 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 18:28:33 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 23:00:08 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/24 18:42:54 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_putchar(char c)
+int	printf_putchar(char c, int fd)
 {
-	write(1, &c, 1);
+	write(fd, &c, 1);
 	return (1);
 }

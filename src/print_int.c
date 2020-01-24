@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/23 22:41:22 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 19:18:15 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	get_len_without_sign(intmax_t num)
+int			get_len_without_sign_signed_num(intmax_t num)
 {
 	int	len;
 
@@ -21,8 +21,8 @@ static int	get_len_without_sign(intmax_t num)
 		return (19);
 	if (num < 0)
 		num *= -1;
-	if (num / 10 > 0)//poprobovat' dlya skorosti while loop
-		len += get_len_without_sign(num / 10);
+	while ((num /= 10) > 0)
+		len++;
 	return (len);
 }
 
@@ -47,7 +47,7 @@ static char	*get_str_with_precision(intmax_t num, t_flag flags)
 	char	*str_temp;
 	int		len;
 
-	len = get_len_without_sign(num);
+	len = get_len_without_sign_signed_num(num);
 	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
 		str = ft_strnew(1);
 	else

@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 15:57:35 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/24 19:58:21 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	get_len_without_sign(uintmax_t num, int base)
 	int	len;
 
 	len = 1;
-	if (num / base > 0)
-		len += get_len_without_sign(num / base, base);
+	while ((num /= base) > 0)
+		len++;
 	return (len);
 }
 
@@ -41,7 +41,7 @@ static void	ft_itoa_base(uintmax_t num, char *str, uintmax_t base, int is_big_x,
 		str[(*i)++] = small_hex[num % base];
 }
 
-char	*get_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x)
+char		*get_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x)
 {
 	char	*str;
 	char	*temp;
@@ -80,8 +80,8 @@ char	*get_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x)
 
 int			print_unsigned_num(t_flag flags, uintmax_t num, int base, int is_big_x)
 {
-	int			res;
-	char		*print_str;
+	int		res;
+	char	*print_str;
 
 	res = 0;
 	if (flags.z)

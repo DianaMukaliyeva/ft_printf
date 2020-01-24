@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:44:25 by dmukaliy          #+#    #+#             */
-/*   Updated: 2019/10/17 18:44:26 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/24 18:38:18 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@ char	*ft_strchr(const char *s, int c)
 			return (temp);
 		temp++;
 	}
-	if (c == '\0')
-		return (temp);
 	return (NULL);
 }

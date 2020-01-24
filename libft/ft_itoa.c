@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:50:38 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/21 14:15:50 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:13:58 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int		get_size(intmax_t n)
 char	*ft_itoa(intmax_t n)
 {
 	intmax_t	num;
-	char	*res;
-	int		size;
+	char		*res;
+	int			size;
 
 	size = get_size(n);
 	num = n;
