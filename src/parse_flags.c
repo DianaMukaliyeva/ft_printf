@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 22:20:43 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 15:45:36 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	fill_other_flags(t_flag *flags, char symbol)
 	{
 		// flags->h = 0;
 		// flags->hh = 0;
+		flags->big_l = 0;
 		if (flags->l == 1)
 		{
 			flags->l = 0;
@@ -47,13 +48,14 @@ static void	fill_other_flags(t_flag *flags, char symbol)
 			flags->l = 1;
 	}
 	else if (symbol == 'L')
-	// {
+	{
 	// 	flags->h = 0;
 	// 	flags->hh = 0;
-	// 	flags->l = 0;
-	// 	flags->ll = 0;
-		flags->big_l = 1;
-	// }
+		if (flags->big_l || flags->l)
+			flags->big_l = 0;
+		else
+			flags->big_l = 1;
+	}
 	symbol == 'j' ? flags->j = 1 : 0;
 	symbol == 'z' ? flags->z = 1 : 0;
 	/* else if (symbol == 'j')

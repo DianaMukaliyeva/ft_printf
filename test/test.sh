@@ -1,1 +1,0 @@
-gcc *.c -L../ -lftprintf && ./a.out

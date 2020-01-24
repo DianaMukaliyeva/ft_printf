@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   uintmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 23:10:36 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 15:57:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_itoa_base(uintmax_t num, char *str, uintmax_t base, int is_big_x,
 		str[(*i)++] = small_hex[num % base];
 }
 
-static char	*get_str_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x)
+char	*get_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x)
 {
 	char	*str;
 	char	*temp;
@@ -98,7 +98,7 @@ int			print_unsigned_num(t_flag flags, uintmax_t num, int base, int is_big_x)
 		num = (unsigned char)num;
 	else
 		num = (unsigned int)num;
-	print_str = get_str_with_precision(num, flags, base, is_big_x);
+	print_str = get_with_precision(num, flags, base, is_big_x);
 	if (!print_str)
 		return (-1);
 	res = print_unsigned_number(print_str, flags, base, num, is_big_x);

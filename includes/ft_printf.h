@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 23:09:29 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 15:57:26 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdint.h>
 # include "../libft/libft.h"
 
 
@@ -29,7 +28,6 @@ typedef struct		s_flag
 	int	space;
 	int	zero;
 	int	hash;
-	// int	width_exist;
 	int	width_asterisk;
 	int	width_num;
 	int	precision_exist;
@@ -57,7 +55,7 @@ int					print_unsigned_num(t_flag flags, uintmax_t num, int base, int is_big_x);
 int					print_unsigned_number(char *str, t_flag flags, int base, uintmax_t num, int is_big_x);
 int					print_hex(uintmax_t num, int big);
 int					printf_putchar(char c);
-// int					printf_putnbr(uintmax_t n, int base);
 int					print_with_flags(char *str, int width, int zero, int left_align);
+char				*get_with_precision(uintmax_t num, t_flag flags, int base, int is_big_x);
 
 #endif

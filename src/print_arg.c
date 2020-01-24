@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 23:10:15 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 13:02:28 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	print_arg1(char modifier, t_flag flags, va_list list)
 {
-	if (modifier == 's' || modifier == 'S')
+	if (modifier == 's')
 		return (print_str(flags, list));
 	else if (modifier == 'c' || modifier == 'C')
 		return (print_char(flags, va_arg(list, int)));
@@ -56,7 +56,7 @@ static int	print_arg3(char modifier, t_flag flags, va_list list)
 
 int			print_arg(char modifier, t_flag flags, va_list list)
 {
-	if (ft_strchr("cCdisSp", modifier))
+	if (ft_strchr("cCdisp", modifier))
 		return (print_arg1(modifier, flags, list));
 	else if (ft_strchr("oOuUxX", modifier))
 		return (print_arg2(modifier, flags, list));

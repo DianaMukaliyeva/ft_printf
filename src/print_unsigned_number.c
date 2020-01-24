@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned_number.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 12:06:10 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 22:52:40 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/24 16:04:25 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static char	*add_sign_to_str(char const *str, t_flag flags, int base, uintmax_t 
 	res = NULL;
 	if (flags.hash && !flags.precision_num && num != 0 && base != 16)
 		res = ft_strjoin("0", str);
-	else if (flags.hash && num != 0 && base == 16 && is_big_x)
+	else if (flags.hash && num != 0 && base == 16 && is_big_x == 1)
 		res = ft_strjoin("0X", str);
-	else if (flags.hash && num != 0 && base == 16 && !is_big_x)
+	else if ((flags.hash && num != 0 && base == 16) || is_big_x == -1)
 		res = ft_strjoin("0x", str);
 	else
 		res = ft_strdup(str);
@@ -108,7 +108,7 @@ int			print_unsigned_number(char *str, t_flag flags, int base, uintmax_t num, in
 	len = ft_strlen(str);
 	if (flags.hash && !flags.precision_num && num != 0 && base != 16)
 		len++;
-	else if (flags.hash && !flags.precision_num && num != 0 && base == 16)
+	else if ((flags.hash && num != 0 && base == 16) || is_big_x == -1)
 		len += 2;
 	if (width > len)
 		res = get_full_str(str, flags, base, len, is_big_x, num);
