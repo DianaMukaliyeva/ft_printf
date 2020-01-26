@@ -102,7 +102,7 @@ int			print_double(t_flag flags, va_list list)
 	char		*print_str;
 
 	res = 0;
-	if (flags.big_l)
+	if (flags.big_l || flags.l)
 		num = (long double)va_arg(list, long double);
 	else
 		num = (long double)va_arg(list, double);
