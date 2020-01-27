@@ -6,13 +6,13 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
-/*   Updated: 2020/01/24 19:18:15 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 12:01:34 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			get_len_without_sign_signed_num(intmax_t num)
+int			get_len_num(intmax_t num)
 {
 	int	len;
 
@@ -47,7 +47,7 @@ static char	*get_str_with_precision(intmax_t num, t_flag flags)
 	char	*str_temp;
 	int		len;
 
-	len = get_len_without_sign_signed_num(num);
+	len = get_len_num(num);
 	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
 		str = ft_strnew(1);
 	else

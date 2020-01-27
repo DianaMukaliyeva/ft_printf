@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 19:58:21 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:56:51 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ static void	ft_itoa_base(uintmax_t num, char *str, uintmax_t base, int is_big_x,
 	if (num == 0)
 		str[*i] = '0';
 	else if (num >= base)
-	{
 		ft_itoa_base(num / base, str, base, is_big_x, i);
-	}
 	if (is_big_x && num != 0)
 		str[(*i)++] = big_hex[num % base];
 	else if (num != 0)

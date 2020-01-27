@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 18:07:03 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 11:48:05 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		fill_other_flags(t_flag *flags, char symbol)
 		flags->l = flags->l == 1 ? 0 : 1;
 	}
 	else if (symbol == 'L')
-		flags->big_l = (flags->big_l || flags->l) ? 0 : 1;//big_l and l in double
+		flags->big_l = (flags->big_l || flags->l) ? 0 : 1;
 	symbol == 'j' ? flags->j = 1 : 0;
 	symbol == 'z' ? flags->z = 1 : 0;
 }

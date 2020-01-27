@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 19:17:16 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 12:01:40 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int					print_with_flags(char *str, int width, int zero,\
 					int left_align);
 char				*get_with_precision(uintmax_t num, t_flag flags,\
 					int base, int is_big_x);
-int					get_len_without_sign_signed_num(intmax_t num);
+int					get_len_num(intmax_t num);
 
 #endif
