@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 18:43:16 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 15:59:08 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/27 15:00:23 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:23:39 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strrev(char *str)
 {
-	char	*temp;
-	char	*result;
+	char	tmp;
+	int		i;
+	int		j;
 
-	result = dest;
-	temp = (char*)src;
-	while (*temp)
-		*result++ = *temp++;
-	*result = '\0';
-	return (dest);
+	i = 0;
+	j = ft_strlen(str) - 1;
+	while (i < j)
+	{
+		tmp = str[i];
+		str[i] = str[j];
+		str[j] = tmp;
+		j--;
+		i++;
+	}
+	return (str);
 }

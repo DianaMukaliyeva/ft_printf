@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 17:30:08 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 19:53:39 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 15:01:49 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strrev(char *str);
 char				*ft_itoa(intmax_t n);
 
 #endif

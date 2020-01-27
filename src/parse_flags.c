@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 11:48:05 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:39:11 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static t_flag	get_empty_flags(void)
 	flags.precision_num = 0;
 	flags.width_asterisk = 0;
 	flags.width_num = 0;
+	flags.ident = 0;
 	return (flags);
 }
 

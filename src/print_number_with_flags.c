@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_number_with_flags.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:22:52 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/23 22:46:31 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/27 16:49:18 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*add_sign_to_str(char const *str, int negative, int plus, int space)
 	char	*res;
 
 	res = NULL;
+	if (!str)
+		return (NULL);
 	if (negative)
 		res = ft_strjoin("-", str);
 	else if (plus)
@@ -55,19 +57,18 @@ static char	*get_full_str2(char const *str, t_flag flags, int negative, int len)
 	int		width;
 
 	width = flags.width_num;
-	temp = newstr_fill(flags.zero, width - len, flags.precision_exist);
-	if (flags.zero && !flags.precision_exist)
+	if (flags.ident == 'f')
+		temp = newstr_fill(flags.zero, width - len, 0);
+	else
+		temp = newstr_fill(flags.zero, width - len, flags.precision_exist);
+	if (flags.zero && (!flags.precision_exist || flags.ident == 'f'))
 	{
 		temp2 = ft_strjoin(temp, str);
-		if (!temp || !temp2)
-			return (NULL);
 		res = add_sign_to_str(temp2, negative, flags.plus, flags.space);
 	}
 	else
 	{
 		temp2 = add_sign_to_str(str, negative, flags.plus, flags.space);
-		if (!temp || !temp2)
-			return (NULL);
 		res = ft_strjoin(temp, temp2);
 	}
 	free(temp2);
