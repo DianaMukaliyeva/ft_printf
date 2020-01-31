@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 17:30:08 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 15:01:49 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:35:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_list
 void				*ft_memset(void *b, int c, size_t len);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
+int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strcat(char *restrict s1, const char *restrict s2);
 char				*ft_strchr(const char *s, int c);

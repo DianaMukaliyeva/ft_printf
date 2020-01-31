@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/29 18:53:18 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:08:31 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,45 @@ static t_flag	get_empty_flags(void)
 	return (flags);
 }
 
+static	int		print_effect(const char *str, int *i, int fd)
+{
+	char	*color;
+	int		len;
+	int		x;
+	int		res;
+
+	res = 5;
+	len = 4;
+	x = 0;
+	color = ft_strnew(len);
+	while (x < len - 1)
+	{
+		color[x] = str[*i];
+		*i = *i + 1;
+		x++;
+	}
+	if (!ft_strcmp(color, "<R>"))
+		write(fd, "\x1b[31m", 5);
+	else if (!ft_strcmp(color, "<G>"))
+		write(fd, "\x1b[32m", 5);
+	else if (!ft_strcmp(color, "<Y>"))
+		write(fd, "\x1b[33m", 5);
+	else if (!ft_strcmp(color, "<B>"))
+		write(fd, "\x1b[34m", 5);
+	else if (!ft_strcmp(color, "<M>"))
+		write(fd, "\x1b[35m", 5);
+	else if (!ft_strcmp(color, "<C>"))
+		write(fd, "\x1b[36m", 5);
+	else if (!ft_strcmp(color, "<0>"))
+		write(fd, "\x1b[0m", 5);
+	else
+	{
+		res -= 5;
+		*i = *i - 3;
+	}
+	return (res);
+}
+
 int				parse_flags(va_list list, const char *format, int *i, int fd)
 {
 	t_flag	flags;
@@ -124,8 +163,11 @@ int				parse_flags(va_list list, const char *format, int *i, int fd)
 
 	flags = get_empty_flags();
 	flags.fd = fd;
+	res = 0;
 	while (format[++(*i)])
 	{
+		if (format[*i] == '<' && fd == 1)
+			res += print_effect(format, i, fd);
 		if (format[*i] == '.')
 		{
 			flags.precision_exist = 1;
@@ -138,6 +180,6 @@ int				parse_flags(va_list list, const char *format, int *i, int fd)
 		else
 			break ;
 	}
-	res = print_arg(format[*i], flags, list);
+	res += print_arg(format[*i], flags, list);
 	return (res);
 }
