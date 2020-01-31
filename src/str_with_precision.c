@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 10:47:07 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 16:40:48 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:44:18 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ static void	ft_itoa_base(uintmax_t num, char *str, uintmax_t base, char ident)
 {
 	char	*big_hex;
 	char	*small_hex;
-	int		index;
 	char	*temp;
 
 	temp = str;
-	index = 0;
 	big_hex = "0123456789ABCDEF";
 	small_hex = "0123456789abcdef";
 	if (num == 0)
@@ -40,7 +38,6 @@ static void	ft_itoa_base(uintmax_t num, char *str, uintmax_t base, char ident)
 	}
 	while (num > 0)
 	{
-		index = num % base;
 		if (ident == 'X')
 			*temp++ = big_hex[num % base];
 		else

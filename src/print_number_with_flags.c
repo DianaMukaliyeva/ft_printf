@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:22:52 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 16:49:18 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/28 16:34:49 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			print_number_with_flags(char *str, t_flag flags, int negative)
 	if (!res)
 		return (-1);
 	len = ft_strlen(res);
-	write(1, res, len);
+	write(flags.fd, res, len);
 	free(res);
 	return (len);
 }

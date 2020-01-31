@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 17:14:16 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:16:10 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@ static char	*put_num_to_str(char *res, long double drob, int precision, int len)
 {
 	char		*temp;
 	char		*temp2;
+	int			prec_copy;
+	// int			count;
 
-	if (len < precision)
+	// if (precision > 18)
+	// {
+	// 	prec_copy = 18;
+	// 	count = 0;
+	// }
+	// else
+		prec_copy = precision;
+	if (len < prec_copy)
 	{
-		if (!(temp = ft_strnew(precision - len)))
+		if (!(temp = ft_strnew(prec_copy - len)))
 			return (NULL);
-		temp = ft_memset(temp, '0', precision - len);
+		temp = ft_memset(temp, '0', prec_copy - len);
 		temp2 = ft_strdup(res);
 		free(res);
 		res = ft_strjoin(temp2, temp);
@@ -37,6 +46,21 @@ static char	*put_num_to_str(char *res, long double drob, int precision, int len)
 		ft_strdel(&temp);
 		ft_strdel(&temp2);
 	}
+	// if (precision > 18)
+	// {
+	// 	drob = drob - (uintmax_t)drob;
+	// 	while (precision != prec_copy)
+	// 	{
+	// 		drob *= 10;
+	// 		precision--;
+	// 		count++;
+	// 	}
+	// 	if (drob > 0)
+	// 		res = put_num_to_str(res, drob, count, get_len_num((uintmax_t)drob));
+	// 	else
+	// 		res = put_num_to_str(res, drob, count, 0);
+
+	// }
 	return (res);
 }
 
@@ -75,12 +99,15 @@ static char	*itoa_double_with_prec(long double num, int precision, int hash)
 	intmax_t	num_before;
 	int			prec_copy;
 
-	prec_copy = precision;
+	// if (precision > 18)
+	// 	prec_copy = 18;
+	// else
+		prec_copy = precision;
 	num_before = (intmax_t)num;
 	drob = (num - (uintmax_t)num);
 	while (drob > 0 && prec_copy-- > 0)
 		drob *= 10;
-	copy_drob = drob + 0.5;
+		copy_drob = drob + 0.5;
 	if (((int)copy_drob > (int)drob && get_len_num((int)copy_drob) > precision)\
 		|| ((int)copy_drob > 0 && (int)(copy_drob - (int)copy_drob) >= 0.9))
 	{
@@ -90,7 +117,11 @@ static char	*itoa_double_with_prec(long double num, int precision, int hash)
 	res = ft_itoa(num_before);
 	if (!res)
 		return (NULL);
-	res = get_drob_part(res, copy_drob, precision, hash);
+		// printf(" double = %Lf\n", drob);
+	if (drob > 0)
+		res = get_drob_part(res, copy_drob, precision, hash);
+	else
+		res = get_drob_part(res, drob, precision, hash);
 	return (res);
 }
 

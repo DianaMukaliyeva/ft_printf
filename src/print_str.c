@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/24 17:45:53 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/28 16:45:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ static char	*newstr_with_char(size_t zero, size_t len, int minus)
 	return (str);
 }
 
-int			print_with_flags(char *str, int width, int zero, int minus)
+int			print_with_flags(char *str, int width, t_flag flags)
 {
 	char	*print;
 	int		len;
 	char	*temp;
+	int		minus;
 
+	minus = flags.minus;
 	len = ft_strlen(str);
 	if (width > len)
 	{
-		temp = newstr_with_char(zero, width - len, minus);
+		temp = newstr_with_char(flags.zero, width - len, minus);
 		if (minus)
 			print = ft_strjoin(str, temp);
 		else
@@ -48,12 +50,12 @@ int			print_with_flags(char *str, int width, int zero, int minus)
 		if (!print)
 			return (-1);
 		len = ft_strlen(print);
-		write(1, print, len);
+		write(flags.fd, print, len);
 		free(temp);
 		free(print);
 	}
 	else
-		write(1, str, len);
+		write(flags.fd, str, len);
 	return (len);
 }
 
@@ -82,7 +84,7 @@ int			print_str(t_flag flags, char *str)
 	str = get_str_with_precision(str, flags);
 	if (!str)
 		return (-1);
-	res = print_with_flags(str, flags.width_num, flags.zero, flags.minus);
+	res = print_with_flags(str, flags.width_num, flags);
 	free(str);
 	return (res);
 }

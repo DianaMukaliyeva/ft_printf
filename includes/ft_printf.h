@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 16:39:00 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/28 16:46:17 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ int					print_oux(t_flag flags, uintmax_t num, int base);
 int					print_unsigned_num(char *str, t_flag flags,\
 					int base, uintmax_t num);
 int					printf_putchar(char c, int fd);
-int					print_with_flags(char *str, int width, int zero,\
-					int left_align);
+int					print_with_flags(char *str, int width, t_flag flags);
 char				*str_with_precision(uintmax_t num, t_flag flags, int base);
 int					get_len_num(intmax_t num);
 

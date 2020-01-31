@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:00:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 16:43:53 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/28 17:17:05 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	find_base(char modifier, t_flag flags, uintmax_t number)
 	int	base;
 
 	base = 10;
-	if (modifier == 'o' || modifier == 'O')
+	if (modifier == 'b')
+		base = 2;
+	else if (modifier == 'o' || modifier == 'O')
 		base = 8;
 	else if (modifier == 'x' || modifier == 'X')
 		base = 16;
@@ -31,7 +33,7 @@ int			print_arg(char modifier, t_flag flags, va_list list)
 	flags.ident = modifier;
 	if (modifier == '\0')
 		return (0);
-	else if (ft_strchr("oOuUxX", modifier))
+	else if (ft_strchr("boOuUxX", modifier))
 		return (find_base(modifier, flags, va_arg(list, uintmax_t)));
 	else if (modifier == 'f')
 		return (print_double(flags, list));

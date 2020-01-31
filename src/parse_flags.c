@@ -6,7 +6,7 @@
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 21:11:47 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 16:39:11 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:53:18 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static t_flag	get_empty_flags(void)
 	flags.width_asterisk = 0;
 	flags.width_num = 0;
 	flags.ident = 0;
+	flags.fd = 1;
 	return (flags);
 }
 
@@ -125,15 +126,15 @@ int				parse_flags(va_list list, const char *format, int *i, int fd)
 	flags.fd = fd;
 	while (format[++(*i)])
 	{
-		if (format[(*i)] == '.')
+		if (format[*i] == '.')
 		{
 			flags.precision_exist = 1;
 			flags.precision_num = 0;
 		}
-		else if (ft_strchr("1234567890*", format[(*i)]))
-			fill_numbers(&flags, format[(*i)], list);
-		else if (ft_strchr("-+ #hlLjzt$", format[(*i)]))
-			fill_other_flags(&flags, format[(*i)]);
+		else if (ft_strchr("1234567890*", format[*i]))
+			fill_numbers(&flags, format[*i], list);
+		else if (ft_strchr("-+ #hlLjzt$", format[*i]))
+			fill_other_flags(&flags, format[*i]);
 		else
 			break ;
 	}
