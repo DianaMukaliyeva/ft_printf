@@ -6,7 +6,7 @@
 /*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/02/02 17:03:57 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/02 19:57:21 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
+# include "./libft.h"
 # include <stdio.h>//udalit'
 
 /*
