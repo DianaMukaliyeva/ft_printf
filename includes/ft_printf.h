@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/31 20:58:57 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/02/02 17:03:57 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,32 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 # include <stdio.h>//udalit'
+
+/*
+**<D> - Black foreground color
+**<R> - Red foreground color
+**<G> - Green foreground color
+**<Y> - Yellow foreground color
+**<B> - Blue foreground color
+**<M> - Magenta foreground color
+**<C> - Cyan foreground color
+**<W> - White foreground color
+**<d> - Black background color
+**<r> - Red background color
+**<g> - Green background color
+**<y> - Yellow background color
+**<b> - Blue background color
+**<m> - Magenta background color
+**<c> - Cyan background color
+**<w> - White background color
+**<o> - Inverse off
+**<0> - Reset / Normal
+**<f> - Bold
+**<i> - Italic
+**<_> - Underline
+**<q> - Reverse
+**<n> - Conceal
+*/
 
 typedef struct		s_flag
 {
@@ -46,9 +72,10 @@ int					ft_printf(const char *format, ...);
 int					fd_printf(int fd, const char *format, ...);
 int					parse_flags(va_list list, const char *format,\
 					int *i, int fd);
-int					print_arg(char modifier, t_flag flags, va_list list);
+int					print_arg(const char *format, int *i, t_flag flags, va_list list);
 int					print_char(t_flag flags, char c);
 int					print_double(t_flag flags, va_list list);
+int					print_effect(const char *str, int *i, int fd);
 int					print_int(t_flag flags, va_list list);
 int					print_memory(t_flag flags, void *p);
 int					print_str(t_flag flags, char *str);

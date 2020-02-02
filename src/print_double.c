@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/31 20:16:10 by dmukaliy         ###   ########.fr       */
+/*   Updated: 2020/02/02 15:08:20 by diana            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static char	*itoa_double_with_prec(long double num, int precision, int hash)
 	drob = (num - (uintmax_t)num);
 	while (drob > 0 && prec_copy-- > 0)
 		drob *= 10;
-		copy_drob = drob + 0.5;
+	copy_drob = drob + 0.5;
 	if (((int)copy_drob > (int)drob && get_len_num((int)copy_drob) > precision)\
 		|| ((int)copy_drob > 0 && (int)(copy_drob - (int)copy_drob) >= 0.9))
 	{
