@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putstr.c                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 23:05:42 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 19:55:39 by dmukaliy         ###   ########.fr       */
+/*   Created: 2019/10/17 18:43:16 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:59:08 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	printf_putstr(char const *str)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	int	res;
+	char	*temp;
+	char	*result;
 
-	res = 0;
-	while (str && *str)
-	{
-		res += printf_putchar(*str);
-		str++;
-	}
-	return (res);
+	result = dest;
+	temp = (char*)src;
+	while (*temp)
+		*result++ = *temp++;
+	*result = '\0';
+	return (dest);
 }

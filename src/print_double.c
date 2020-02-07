@@ -3,157 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   print_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 14:25:15 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/07 15:41:44 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-static int	get_len_without_sign(uintmax_t num)
+static char	*itoa_double(long double num, int precision)
 {
-	int	len;
+	char	*res;
+	char	*temp;
+	char	*str_num;
 
-	len = 1;
-	
-	if (num / 10 > 0)
-		len += get_len_without_sign(num / 10);
-	return (len);
-}
-
-static int	get_print_len(long double num, t_tag *tags)
-{
-	int	len;
-	int	len_before_comma;
-	int	len_after_comma;
-	long double	ko;
-	int	prec;
-
-	len = 0;
-	prec = tags->precision.num;
-	if (num < 0 || tags->flags.space || tags->flags.sign)
+	res = ft_strnew(1);
+	while (precision > 0)
 	{
-		num *= -1;
-		len++;
+		if (!res)
+			return (NULL);
+		temp = ft_strdup(res);
+		free(res);
+		num *= 10;
+		str_num = ft_itoa((int)num);
+		res = ft_strjoin(temp, str_num);
+		free(temp);
+		free(str_num);
+		precision--;
+		num = num - (int)num;
 	}
-	len_before_comma = get_len_without_sign((int)num);
-	ko = (num - (int)num);
-	while (prec-- > 0)
-		ko *= 10;
-	len_after_comma = get_len_without_sign((int)ko);
-	// if (num == 0 && tags->precision.is_exist && tags->precision.num == 0)
-	// 	len--;
-	if (tags->precision.num > len_after_comma)
-		len_after_comma = tags->precision.num;
-	len = len + len_before_comma + len_after_comma;
-	return (len);
-}
-
-static int	print_digit_precision(long double num, t_tag *tags)
-{
-	int	res;
-	long double	ko;
-	int	prec;
-
-	res = 0;
-	if (num < 0)
-		num *= -1;
-	
-	res += printf_putnbr((uintmax_t)num, 10);
-	prec = tags->precision.num;
-	ko = (num - (int)num);
-	while (prec-- > 0)
-	{
-		ko *= 10;
-
-	}
-	// printf("!%Lf, %d\n", ko, prec);
-	// printf("\n[%d]\n", (int) ko);
-	res += printf_putchar('.');
-	res += printf_putnbr((uintmax_t)ko + 1, 10);
-	// len_after_comma = get_len_without_sign((int)(num % (int)num));
-	// if (num < 0 || tags->flags.space || tags->flags.sign)
-	// 	len--;
-	// if (len < tags->precision.num)
-	// 	while (len++ < tags->precision.num)
-	// 		res += printf_putchar('0');
-	// if (!tags->precision.is_exist || tags->precision.num > 0 || num != 0)
-	// 	res += printf_putnbr(num, 10);
 	return (res);
 }
 
-static int	print_sign(long double num, t_tag *tags)
+static void	ft_rounding(long double *num, int precision)
 {
+	double		round;
+
+	round = 0.5;
+	while (precision-- > 0)
+		round /= 10;
+	*num = *num + round;
+}
+
+static char	*get_str_with_precision(long double num, t_flag flags)
+{
+	char		*str;
+	char		*temp;
+	char		*str_after_dot;
+
 	if (num < 0)
-		return (printf_putchar('-'));
-	if (tags->flags.sign)
-		return (printf_putchar('+'));
-	if (tags->flags.space)
-		return (printf_putchar(' '));
-	return (0);
+		num *= -1;
+	ft_rounding(&num, flags.precision_num);
+	if (!(str = ft_itoa((intmax_t)num)))
+		return (NULL);
+	if (flags.precision_num == 0 && !flags.hash)
+		return (str);
+	temp = ft_strdup(str);
+	free(str);
+	str = ft_strjoin(temp, ".");
+	free(temp);
+	if (!str)
+		return (NULL);
+	str_after_dot = itoa_double(num - (intmax_t)num, flags.precision_num);
+	temp = ft_strdup(str);
+	free(str);
+	str = ft_strjoin(temp, str_after_dot);
+	free(str_after_dot);
+	free(temp);
+	return (str);
 }
 
-static int	print_with_flags(long double num, t_tag *tags, int print_len)
-{
-	int	res;
-	int	width;
-
-	width = tags->width.num;
-	res = 0;
-	if (width > print_len)
-	{
-		if (tags->flags.left_align)
-		{
-			res += print_sign(num, tags);
-			res += print_digit_precision(num, tags);
-			width -= res;
-			while (width-- > 0)
-				res += printf_putchar(' ');
-		}
-		else
-		{
-			if (tags->flags.zero && !tags->precision.is_exist)
-			{
-				res += print_sign(num, tags);
-				while (width-- > print_len)
-					res += printf_putchar('0');
-				res += print_digit_precision(num, tags);
-			}
-			else
-			{
-				while (width-- > print_len)
-					res += printf_putchar(' ');
-				res += print_sign(num, tags);
-				res += print_digit_precision(num, tags);
-			}
-		}
-	}
-	else
-	{
-		res += print_sign(num, tags);
-		res += print_digit_precision(num, tags);
-	}
-	
-	return (res);
-}
-
-int			print_double(t_tag *tags, va_list list)
+int			print_double(t_flag flags, va_list list)
 {
 	int			res;
 	long double	num;
-	int			print_len;
+	char		*print_str;
 
 	res = 0;
-	if (tags->modifier.big_l)
+	if (flags.big_l)
 		num = (long double)va_arg(list, long double);
 	else
-		num = va_arg(list, double);
-	if (tags->precision.num == 0)
-		tags->precision.num = 6;
-	print_len = get_print_len(num, tags);
-	res += print_with_flags(num, tags, print_len);
+		num = (long double)va_arg(list, double);
+	if (!flags.precision_exist && flags.precision_num == 0)
+		flags.precision_num = 6;
+	print_str = get_str_with_precision(num, flags);
+	if (!print_str)
+		return (-1);
+	res = print_number_with_flags(print_str, flags, num < 0 ? 1 : 0);
+	free(print_str);
 	return (res);
 }

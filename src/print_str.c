@@ -3,123 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 23:07:18 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:52:47 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/28 16:45:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	print_str_of_len(int len, char *str, int amount_of_spaces)
+static char	*newstr_with_char(size_t zero, size_t len, int minus)
 {
-	int	res;
+	char	*str;
+	size_t	i;
+	char	filler;
 
-	res = 0;
-	while (len-- > 0 && *str)
-		res += printf_putchar(*str++);
-	if (amount_of_spaces > 0)
-		while (amount_of_spaces-- > 0)
-			res += printf_putchar(' ');
-	return (res);
-}
-
-static int	print_without_align(char *str, t_tag *tags, int len, char c)
-{
-	int	res;
-	int	width;
-	int	precision;
-
-	res = 0;
-	width = tags->width.num;
-	precision = tags->precision.num;
-	if (precision < len)
-	{
-		while (width-- > precision)
-			res += printf_putchar(c);
-		res += print_str_of_len(width + 1, str, 0);
-	}
+	if (zero && !minus)
+		filler = '0';
 	else
-	{
-		while (width-- > len)
-			res += printf_putchar(c);
-		res += printf_putstr(str);
-	}
-	return (res);
+		filler = ' ';
+	i = 0;
+	str = ft_strnew(len);
+	if (!str)
+		return (NULL);
+	while (i < len)
+		str[i++] = filler;
+	return (str);
 }
 
-static int	calculate_and_print(t_tag *tags, char *str, int len)
+int			print_with_flags(char *str, int width, t_flag flags)
 {
-	int res;
-	int	width;
-	int	precision;
+	char	*print;
+	int		len;
+	char	*temp;
+	int		minus;
 
-	res = 0;
-	width = tags->width.num;
-	precision = tags->precision.num;
-	if (tags->flags.left_align)
-		if (precision <= len)
-			res += print_str_of_len(precision, str, width - precision);
+	minus = flags.minus;
+	len = ft_strlen(str);
+	if (width > len)
+	{
+		temp = newstr_with_char(flags.zero, width - len, minus);
+		if (minus)
+			print = ft_strjoin(str, temp);
 		else
-			res += print_str_of_len(precision, str, width - len);
-	// else if (tags->flags.zero)
-	// 	res += print_without_align(str, tags, len, '0');
+			print = ft_strjoin(temp, str);
+		if (!print)
+			return (-1);
+		len = ft_strlen(print);
+		write(flags.fd, print, len);
+		free(temp);
+		free(print);
+	}
 	else
-		res += print_without_align(str, tags, len, ' ');
-	return (res);
+		write(flags.fd, str, len);
+	return (len);
 }
 
-static int	print_without_precision(t_tag *tags, char *str)
+static char	*get_str_with_precision(char *str, t_flag flags)
 {
-	int	res;
-	int	width;
+	int		len;
+	char	*res;
 
-	res = 0;
-	width = tags->width.num;
-	if (tags->flags.left_align)
-	{
-		res += printf_putstr(str);
-		while (width-- > ft_strlen(str))
-			res += printf_putchar(' ');
-	}
-	// else if (tags->flags.zero)
-	// {
-	// 	while (width-- > ft_strlen(str))
-	// 		res += printf_putchar('0');
-	// 	res += printf_putstr(str);
-	// }
+	if (flags.precision_exist)
+		len = flags.precision_num;
 	else
-	{
-		while (width-- > ft_strlen(str))
-			res += printf_putchar(' ');
-		res += printf_putstr(str);
-	}
+		len = ft_strlen(str);
+	res = ft_strnew(len);
+	if (!res)
+		return (NULL);
+	res = ft_strncpy(res, str, len);
 	return (res);
 }
 
-int			print_str(t_tag *tags, va_list list)
+int			print_str(t_flag flags, char *str)
 {
 	int		res;
-	char	*str;
-	int		width;
-	int		precision;
-	int		len;
 
-	str = va_arg(list, char*);
 	if (!str)
 		str = "(null)";
-	res = 0;
-	len = ft_strlen(str);
-	width = tags->width.num;
-	precision = tags->precision.num;
-	if (width == 0 && precision == 0)
-		res += printf_putstr(str);
-	else if (width == 0 || width < len)
-		res += print_str_of_len(precision, str, 0);
-	else if (precision == 0)
-		res += print_without_precision(tags, str);
-	else
-		res += calculate_and_print(tags, str, len);
+	str = get_str_with_precision(str, flags);
+	if (!str)
+		return (-1);
+	res = print_with_flags(str, flags.width_num, flags);
+	free(str);
 	return (res);
 }

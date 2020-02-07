@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 14:38:22 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/07 18:12:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,68 +16,78 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdint.h>
+# include "./libft.h"
+# include <stdio.h>//udalit'
 
-
-#include <stdio.h>
+/*
+**<D> - Black foreground color
+**<R> - Red foreground color
+**<G> - Green foreground color
+**<Y> - Yellow foreground color
+**<B> - Blue foreground color
+**<M> - Magenta foreground color
+**<C> - Cyan foreground color
+**<W> - White foreground color
+**<d> - Black background color
+**<r> - Red background color
+**<g> - Green background color
+**<y> - Yellow background color
+**<b> - Blue background color
+**<m> - Magenta background color
+**<c> - Cyan background color
+**<w> - White background color
+**<o> - Inverse off
+**<0> - Reset / Normal
+**<f> - Bold
+**<i> - Italic
+**<_> - Underline
+**<q> - Reverse
+**<n> - Conceal
+*/
 
 typedef struct		s_flag
 {
-	int	left_align;
-	int	sign;
-	int	space;
-	int	zero;
-	int	hash;
+	int		minus;
+	int		plus;
+	int		space;
+	int		zero;
+	int		hash;
+	int		width_asterisk;
+	int		width_num;
+	int		precision_exist;
+	int		precision_asterisk;
+	int		precision_num;
+	int		h;
+	int		hh;
+	int		l;
+	int		ll;
+	int		big_l;
+	int		j;
+	int		z;
+	int		fd;
+	char	ident;
 }					t_flag;
 
-typedef struct		s_amount_char
-{
-	int	is_exist;
-	int	num;
-	int	asterisk;
-}					t_amount_char;
-
-typedef struct		s_modifier
-{
-	int	h;
-	int	hh;
-	int	l;
-	int	ll;
-	int	big_l;
-}					t_modifier;
-
-typedef struct		s_tag
-{
-	t_flag			flags;
-	t_amount_char	width;
-	t_amount_char	precision;
-	t_modifier		modifier;
-}					t_tag;
-
 int					ft_printf(const char *format, ...);
-char				*ft_strchr(const char *str, int ch);
-int					ft_strlen(const char *str);
-int					parse_specifiers(va_list list, const char *format, int *i);
-int					print_arg(char modifier, t_tag *tags, va_list list);
-int					print_char(t_tag *tags, char c);
-int					print_double_with_big_e(t_tag *tags, va_list list);
-int					print_double_with_e(t_tag *tags, va_list list);
-int					print_double(t_tag *tags, va_list list);
-int					print_hex(uintmax_t num, int big);
-int					print_int3(t_tag *tags, va_list list);
-int					print_int2(t_tag *tags, va_list list);
-int					print_int(t_tag *tags, va_list list);
-int					print_memory(t_tag *tags, va_list list);
-int					print_percent(void);
-int					print_str(t_tag *tags, va_list list);
-int					print_str2(t_tag *tags, va_list list);
-int					print_unsigned_int(t_tag *tags, va_list list);
-int					print_unsigned_low_hex(t_tag *tags, va_list list);
-int					print_octal(t_tag *tags, va_list list);
-int					print_unsigned_upper_hex(t_tag *tags, va_list list);
-int					printf_putchar(char c);
-int					printf_putnbr(uintmax_t n, int base);
-int					printf_putstr(char const *str);
-int					refill_tags(t_tag *tags, char symbol, va_list list);
+int					fd_printf(int fd, const char *format, ...);
+int					parse_flags(va_list list, const char *format,\
+					int *i, int fd);
+int					print_arg(const char *format, int *i, t_flag flags,\
+					va_list list);
+int					print_char(t_flag flags, char c);
+int					print_double(t_flag flags, va_list list);
+int					print_effect(const char *str, int *i, int fd);
+int					print_int(t_flag flags, va_list list);
+int					print_memory(t_flag flags, void *p);
+int					print_str(t_flag flags, char *str);
+int					print_number_with_flags(char *str, t_flag flags,\
+					int negative);
+int					print_oux(t_flag flags, uintmax_t num, int base);
+int					print_unsigned_num(char *str, t_flag flags,\
+					int base, uintmax_t num);
+int					printf_putchar(char c, int fd);
+int					print_with_flags(char *str, int width, t_flag flags);
+char				*str_with_precision(uintmax_t num, t_flag flags, int base);
+int					get_len_num(intmax_t num);
 
 #endif

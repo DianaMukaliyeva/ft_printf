@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_double_with_e.c                              :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:14:08 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 13:40:59 by diana            ###   ########.fr       */
+/*   Created: 2020/01/27 15:00:23 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:23:39 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_double_with_e(t_tag *tags, va_list list)
+char	*ft_strrev(char *str)
 {
-	int		res;
-	double	num;
+	char	tmp;
+	int		i;
+	int		j;
 
-	res = 0;
-	num = va_arg(list, double);
-	if (tags->precision.is_exist)
-		res += printf_putnbr((int)num, 10);
-	return (res);
+	i = 0;
+	j = ft_strlen(str) - 1;
+	while (i < j)
+	{
+		tmp = str[i];
+		str[i] = str[j];
+		str[j] = tmp;
+		j--;
+		i++;
+	}
+	return (str);
 }

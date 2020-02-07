@@ -3,290 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 19:43:24 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 13:41:50 by diana            ###   ########.fr       */
+/*   Created: 2020/01/16 17:46:33 by diana             #+#    #+#             */
+/*   Updated: 2020/01/27 12:01:34 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-static int	get_len(intmax_t num, t_tag *tags, int check_plus)
+int			get_len_num(intmax_t num)
 {
 	int	len;
 
 	len = 1;
-	if (check_plus && num > 0 && (tags->flags.sign || tags->flags.space))
-		len++;
+	if (num + 1 == -9223372036854775807)
+		return (19);
 	if (num < 0)
-	{
-		len++;
 		num *= -1;
-	}
-	if (num / 10 > 0)
-		len += get_len(num / 10, tags, 0);
+	while ((num /= 10) > 0)
+		len++;
 	return (len);
 }
 
-static int	print_digit_precision(intmax_t num, int res, t_tag *tags, int len)
+static char	*itoa_positive(intmax_t num)
 {
-	if (num < 0)
-	{
-		res += printf_putchar('-');
-		num *= -1;
-		tags->precision.num++;
-	}
-	else if (num == 0 && tags->flags.left_align == 0 && (tags->flags.sign || tags->flags.space))
-		tags->precision.num--;
-	if (len < tags->precision.num)
-		while (len++ < tags->precision.num)
-			res += printf_putchar('0');
-	if (tags->precision.num > 0 || num != 0)
-		res += printf_putnbr(num, 10);
-	return (res);
-}
+	char	*str;
 
-static int	print_sign_or_space(intmax_t *num, char c, int should_print_number)
-{
-	int			res;
-	long long	n;
-
-	n = *num;
-	res = 0;
-	if (should_print_number)
-	{
-		if (n >= 0)
-			res += printf_putchar(c);
-		res += printf_putnbr(n, 10);
-	}
+	if (num + 1 == -9223372036854775807)
+		str = ft_strdup("9223372036854775808");
 	else
 	{
-		if (n >= 0)
-			res += printf_putchar(c);
-		else
-		{
-			res += printf_putchar('-');
-			*num = n * -1;
-		}
+		num < 0 ? num *= -1 : 0;
+		str = ft_itoa(num);
 	}
-	return (res);
+	return (str);
 }
 
-
-static int	print_calculate(t_tag *tags, intmax_t num)
+static char	*get_str_with_precision(intmax_t num, t_flag flags)
 {
-	int	res;
-	int	len;
-	int	width;
+	char	*str;
+	char	*temp;
+	char	*str_temp;
+	int		len;
 
-	res = 0;
-	len = get_len(num, tags, 1);
-	width = tags->width.num;
-	if (tags->precision.is_exist)
+	len = get_len_num(num);
+	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
+		str = ft_strnew(1);
+	else
+		str = itoa_positive(num);
+	if (!str)
+		return (NULL);
+	if (flags.precision_num > len)
 	{
-		if (tags->flags.left_align)//est minus i precision
-		{
-			if (tags->flags.sign)//-+*.*
-			{
-				res += print_sign_or_space(&num, '+', 0);
-				len = get_len(num, tags, 0);
-				res = print_digit_precision(num, res, tags, len);
-				width -= res;
-				while (width-- > 0)
-					res += printf_putchar(' ');
-			}
-			else if (tags->flags.space)//- *.*
-			{
-				res += print_sign_or_space(&num, ' ', 0);
-				len = get_len(num, tags, 0);
-				res = print_digit_precision(num, res, tags, len);
-				width -= res;
-				while (width-- > 0)
-					res += printf_putchar(' ');
-			}
-			else//-*.*
-			{
-				res = print_digit_precision(num, res, tags, len);
-				if (len < tags->precision.num)
-					while (width-- > tags->precision.num)
-						res += printf_putchar(' ');
-				else
-					while (width-- > len)
-						res += printf_putchar(' ');
-				if (tags->width.num != 0 && tags->precision.num == 0 && num == 0)
-					res += printf_putchar(' ');
-			}
-		}
-		else//net minusa, est precision
-		{
-			if (tags->flags.sign)//+*.*
-			{
-				// len = get_len(num, tags, 0);
-				width--;
-				if (len < tags->precision.num)
-					while (width-- > tags->precision.num)
-						res += printf_putchar(' ');
-				else
-					while (width-- >= len)
-						res += printf_putchar(' ');
-				res += print_sign_or_space(&num, '+', 0);
-				res = print_digit_precision(num, res, tags, len - 1);
-				if (tags->precision.num == 0 && num == 0)
-					res += printf_putchar(' ');
-			}
-			else if (tags->flags.space)// *.*
-			{
-				width--;
-				if (len < tags->precision.num)
-					while (width-- > tags->precision.num)
-						res += printf_putchar(' ');
-				else
-					while (width-- >= len)
-						res += printf_putchar(' ');
-				res += print_sign_or_space(&num, ' ', 0);
-				res = print_digit_precision(num, res, tags, len - 1);
-				if (tags->precision.num == 0 && num == 0)
-					res += printf_putchar(' ');
-			}
-			else//*.*
-			{
-				if (num >= 0)
-				{
-					if (len > tags->precision.num)
-						while (width-- > len)
-							res += printf_putchar(' ');
-					else
-						while (width-- > tags->precision.num)
-							res += printf_putchar(' ');
-					res = print_digit_precision(num, res, tags, len);
-					if (tags->width.num && tags->precision.num == 0 && num == 0)
-						res += printf_putchar(' ');
-				}
-				else
-				{
-					width--;
-					if (len > tags->precision.num)
-						while (width-- >= len)
-							res += printf_putchar(' ');
-					else
-						while (width-- > tags->precision.num)
-							res += printf_putchar(' ');
-					res += printf_putchar('-');
-					num *= -1;
-					res = print_digit_precision(num, res, tags, len - 1);
-				}
-			}
-		}
+		if (!(temp = ft_strnew(flags.precision_num - len)))
+			return (NULL);
+		temp = ft_memset(temp, '0', flags.precision_num - len);
+		if (!(str_temp = ft_strjoin(temp, str)))
+			return (NULL);
+		free(str);
+		free(temp);
+		return (str_temp);
 	}
-	else//точности нету
-	{
-		if (tags->flags.left_align)//-
-		{
-			if (tags->flags.sign)
-				res += print_sign_or_space(&num, '+', 1);
-			else if (tags->flags.space)
-				res += print_sign_or_space(&num, ' ', 1);
-			else
-				res += printf_putnbr(num, 10);
-			width -= res;
-			while (width-- > 0)
-				res += printf_putchar(' ');
-		}
-		else//точности нету, просто ширина
-		{
-			if (tags->flags.zero)//0*
-			{
-				if (tags->flags.sign)//0+*
-				{
-					width--;
-					res += print_sign_or_space(&num, '+', 0);
-					len = get_len(num, tags, 0);
-					while (width-- > len)
-						res += printf_putchar('0');
-					res += printf_putnbr(num, 10);
-				}
-				else if (tags->flags.space)//0 *
-				{
-					width--;
-					res += print_sign_or_space(&num, ' ', 0);
-					len = get_len(num, tags, 0);
-					while (width-- > len)
-						res += printf_putchar('0');
-					res += printf_putnbr(num, 10);
-				}
-				else//0*
-				{
-					if (num >= 0)
-					{
-						while (width-- > len)
-							res += printf_putchar('0');
-						res += printf_putnbr(num, 10);
-					}
-					else
-					{
-						res += printf_putchar('-');
-						while (width-- > len)
-							res += printf_putchar('0');
-						num *= -1;
-						res += printf_putnbr(num, 10);
-					}
-				}
-			}
-			else// 1| +*||||2| *||||3|*
-			{
-				if (tags->flags.sign)
-				{
-					while (width-- > len)
-						res += printf_putchar(' ');
-					if (num >= 0)
-						res += printf_putchar('+');
-					res += printf_putnbr(num, 10);
-				}
-				else if (tags->flags.space)
-				{
-					while (width-- > len)
-						res += printf_putchar(' ');
-					if (num >= 0)
-						res += printf_putchar(' ');
-					res += printf_putnbr(num, 10);
-				}
-				else
-				{
-					while (width-- > len)
-						res += printf_putchar(' ');
-					res += printf_putnbr(num, 10);
-				}
-			}
-		}
-	}
-	return (res);
+	return (str);
 }
 
-int			print_int(t_tag *tags, va_list list)
+int			print_int(t_flag flags, va_list list)
 {
 	int			res;
 	intmax_t	num;
+	char		*print_str;
 
 	res = 0;
-	if (tags->modifier.h)
-		num = (short int)va_arg(list, int);
-	else if (tags->modifier.hh)
-		num = (char)va_arg(list, int);
-	else if (tags->modifier.l)
-		num = va_arg(list, long);
-	else if (tags->modifier.ll)
+	if (flags.z)
+		num = (size_t)va_arg(list, intmax_t);
+	else if (flags.j)
 		num = va_arg(list, intmax_t);
+	else if (flags.l)
+		num = (long int)va_arg(list, intmax_t);
+	else if (flags.ll)
+		num = (long long int)va_arg(list, intmax_t);
+	else if (flags.h)
+		num = (short int)va_arg(list, intmax_t);
+	else if (flags.hh)
+		num = (char)va_arg(list, intmax_t);
 	else
 		num = va_arg(list, int);
-	if (tags->width.is_exist || tags->precision.is_exist)
-		res += print_calculate(tags, num);
-	else if (tags->flags.sign)
-		res += print_sign_or_space(&num, '+', 1);
-	else if (tags->flags.space)
-		res += print_sign_or_space(&num, ' ', 1);
-	else
-		res += printf_putnbr(num, 10);
+	print_str = get_str_with_precision(num, flags);
+	if (!print_str)
+		return (-1);
+	res = print_number_with_flags(print_str, flags, num < 0 ? 1 : 0);
+	free(print_str);
 	return (res);
 }

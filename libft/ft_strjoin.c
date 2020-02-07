@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 15:33:35 by dmukaliy         ###   ########.fr       */
+/*   Created: 2019/10/17 18:50:06 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:59:19 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int			print_memory(t_flag flags, void *p)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int			res;
-	uintmax_t	address;
-	char		*print_str;
+	int		strlen;
+	char	*str;
 
-	res = 0;
-	address = (uintmax_t)p;
-	flags.hash = 1;
-	print_str = str_with_precision(address, flags, 16);
-	if (!print_str)
-		return (-1);
-	res = print_unsigned_num(print_str, flags, 16, address);
-	free(print_str);
-	return (res);
+	if (!s1 || !s2)
+		return (NULL);
+	strlen = ft_strlen(s1) + ft_strlen(s2);
+	str = ft_strnew(strlen);
+	if (str == NULL)
+		return (NULL);
+	ft_strcpy(str, s1);
+	ft_strcat(str, s2);
+	return (str);
 }

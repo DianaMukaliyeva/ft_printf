@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 09:29:28 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 01:30:06 by diana            ###   ########.fr       */
+/*   Created: 2019/10/17 18:44:25 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/24 18:38:18 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_strlen(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	char	*temp;
 
-	i = 0;
-	if (!str)
-		return (i);
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	temp = (char*)s;
+	while (*temp)
+	{
+		if (*temp == c)
+			return (temp);
+		temp++;
+	}
+	return (NULL);
 }

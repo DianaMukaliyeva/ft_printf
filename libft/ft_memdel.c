@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_percent.c                                    :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 12:53:09 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/16 19:38:16 by diana            ###   ########.fr       */
+/*   Created: 2019/10/23 19:33:24 by dmukaliy          #+#    #+#             */
+/*   Updated: 2019/10/23 19:42:27 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_percent(void)
+void	ft_memdel(void **ap)
 {
-	return (printf_putchar('%'));
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
 }

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/10 18:57:01 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/12 21:49:52 by dmukaliy         ###   ########.fr       */
+/*   Created: 2019/10/17 18:43:43 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:59:00 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char	*ft_strchr(const char *str, int ch)
+char	*ft_strcat(char *restrict s1, const char *restrict s2)
 {
-	while (*str)
+	char	*result;
+	char	*temp;
+
+	temp = (char*)s2;
+	result = s1;
+	while (*result)
+		result++;
+	while (*temp)
 	{
-		if (*str == ch)
-			return ((char *)str);
-		str++;
+		*result = *temp;
+		temp++;
+		result++;
 	}
-	if (ch == 0 && *str == '\0')
-		return ((char *)str);
-	return (NULL);
+	*result = '\0';
+	return (s1);
 }

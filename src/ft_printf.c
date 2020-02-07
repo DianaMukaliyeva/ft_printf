@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:15:16 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/19 17:21:31 by diana            ###   ########.fr       */
+/*   Updated: 2020/01/29 18:55:15 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_printf(const char *format, ...)
 	int		i;
 	int		len;
 	int		res;
+	int		temp_res;
 
 	i = 0;
 	res = 0;
@@ -26,9 +27,43 @@ int	ft_printf(const char *format, ...)
 	while (i < len)
 	{
 		if (format[i] == '%')
-			res += parse_specifiers(list, format, &i);
+		{
+			temp_res = parse_flags(list, format, &i, 1);
+			if (temp_res == -1)
+				return (-1);
+			res += temp_res;
+		}
 		else
-			res += printf_putchar(format[i]);
+			res += printf_putchar(format[i], 1);
+		i++;
+	}
+	va_end(list);
+	return (res);
+}
+
+int	fd_printf(int fd, const char *format, ...)
+{
+	va_list	list;
+	int		i;
+	int		len;
+	int		res;
+	int		temp_res;
+
+	i = 0;
+	res = 0;
+	len = ft_strlen(format);
+	va_start(list, format);
+	while (i < len)
+	{
+		if (format[i] == '%')
+		{
+			temp_res = parse_flags(list, format, &i, fd);
+			if (temp_res == -1)
+				return (-1);
+			res += temp_res;
+		}
+		else
+			res += printf_putchar(format[i], fd);
 		i++;
 	}
 	va_end(list);

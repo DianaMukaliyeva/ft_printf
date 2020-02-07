@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 15:33:35 by dmukaliy         ###   ########.fr       */
+/*   Created: 2019/10/17 18:43:31 by dmukaliy          #+#    #+#             */
+/*   Updated: 2019/10/24 19:05:58 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int			print_memory(t_flag flags, void *p)
+char	*ft_strncpy(char *dest, const char *src, size_t len)
 {
-	int			res;
-	uintmax_t	address;
-	char		*print_str;
+	char	*temp;
+	char	*result;
 
-	res = 0;
-	address = (uintmax_t)p;
-	flags.hash = 1;
-	print_str = str_with_precision(address, flags, 16);
-	if (!print_str)
-		return (-1);
-	res = print_unsigned_num(print_str, flags, 16, address);
-	free(print_str);
-	return (res);
+	result = dest;
+	temp = (char*)src;
+	while (*temp && len > 0)
+	{
+		*result++ = *temp++;
+		len--;
+	}
+	while (len > 0)
+	{
+		*result = '\0';
+		result++;
+		len--;
+	}
+	return (dest);
 }

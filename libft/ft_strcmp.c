@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_putnbr.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/12 23:04:27 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/18 19:05:20 by diana            ###   ########.fr       */
+/*   Created: 2019/10/17 18:45:28 by dmukaliy          #+#    #+#             */
+/*   Updated: 2019/10/17 18:45:29 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	printf_putnbr(uintmax_t n, int base)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		res;
-
-	res = 0;
-	if (n / base > 0)
-		res += printf_putnbr(n / base, base);
-	res += printf_putchar((n % base) + '0');
-	return (res);
+	while (*s1 == *s2)
+	{
+		s1++;
+		s2++;
+		if (*s1 == '\0')
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

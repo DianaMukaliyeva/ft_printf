@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   print_oux.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:11:35 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/27 15:33:35 by dmukaliy         ###   ########.fr       */
+/*   Created: 2020/01/27 12:40:59 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/27 15:33:30 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			print_memory(t_flag flags, void *p)
+int		print_oux(t_flag flags, uintmax_t num, int base)
 {
-	int			res;
-	uintmax_t	address;
-	char		*print_str;
+	int		res;
+	char	*print_str;
 
 	res = 0;
-	address = (uintmax_t)p;
-	flags.hash = 1;
-	print_str = str_with_precision(address, flags, 16);
+	if (flags.z)
+		num = (size_t)num;
+	else if (flags.j)
+		num = (uintmax_t)num;
+	else if (flags.l)
+		num = (unsigned long)num;
+	else if (flags.ll)
+		num = (unsigned long long)num;
+	else if (flags.h)
+		num = (unsigned short int)num;
+	else if (flags.hh)
+		num = (unsigned char)num;
+	else
+		num = (unsigned int)num;
+	print_str = str_with_precision(num, flags, base);
 	if (!print_str)
 		return (-1);
-	res = print_unsigned_num(print_str, flags, 16, address);
+	res = print_unsigned_num(print_str, flags, base, num);
 	free(print_str);
 	return (res);
 }

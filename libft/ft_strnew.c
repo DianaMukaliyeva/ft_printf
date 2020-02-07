@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_double_with_big_e.c                          :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:14:51 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/01/17 13:40:49 by diana            ###   ########.fr       */
+/*   Created: 2019/10/17 18:48:08 by dmukaliy          #+#    #+#             */
+/*   Updated: 2020/01/24 19:54:15 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_double_with_big_e(t_tag *tags, va_list list)
+char	*ft_strnew(size_t size)
 {
-	int		res;
-	double	num;
+	char	*str;
 
-	res = 0;
-	num = va_arg(list, double);
-	if (tags->precision.is_exist)
-		res += printf_putnbr((int)num, 10);
-	return (res);
+	str = (char*)malloc(sizeof(char) * size + 1);
+	if (!str)
+		return (NULL);
+	ft_memset(str, '\0', size + 1);
+	return (str);
 }
