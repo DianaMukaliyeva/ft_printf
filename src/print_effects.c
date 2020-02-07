@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_effects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 15:38:36 by diana             #+#    #+#             */
-/*   Updated: 2020/02/02 17:00:24 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/07 15:01:27 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			print_effect(const char *str, int *i, int fd)
 
 	effect = get_abbr(str, i);
 	if (ft_strchr("RGYBMCWD", str[*i + 1]))
-		res = turn_on_color(effect, fd);//skolko simvolov zapisyvaetsya v fail i est li tuda bold i italic
+		res = turn_on_color(effect, fd);
 	else if (ft_strchr("_ifnq0", str[*i + 1]))
 		res = turn_on_effect(effect, fd);
 	else if (ft_strchr("rgybmcwdo", str[*i + 1]))
@@ -114,4 +114,3 @@ int			print_effect(const char *str, int *i, int fd)
 	*i = *i + 2;
 	return (res);
 }
-

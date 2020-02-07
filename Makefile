@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: diana <diana@student.42.fr>                +#+  +:+       +#+         #
+#    By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/08 17:15:47 by dmukaliy          #+#    #+#              #
-#    Updated: 2020/02/02 22:43:44 by diana            ###   ########.fr        #
+#    Updated: 2020/02/07 14:58:29 by dmukaliy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(NAME):
 
 clean:
 	@rm -f $(OBJ)
-	@echo "   $(GREEN)<<$(RESET)$(YELLOW)all o.files are deleted$(GREEN)>>$(RESET)"
+	@echo "   $(GREEN)<<$(RESET)$(YELLOW)all .o files are deleted$(GREEN)>>$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)

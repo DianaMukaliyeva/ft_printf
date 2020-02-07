@@ -3,138 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   print_double.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 10:02:40 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/02/02 15:08:20 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/07 15:41:44 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*put_num_to_str(char *res, long double drob, int precision, int len)
+static char	*itoa_double(long double num, int precision)
 {
-	char		*temp;
-	char		*temp2;
-	int			prec_copy;
-	// int			count;
+	char	*res;
+	char	*temp;
+	char	*str_num;
 
-	// if (precision > 18)
-	// {
-	// 	prec_copy = 18;
-	// 	count = 0;
-	// }
-	// else
-		prec_copy = precision;
-	if (len < prec_copy)
+	res = ft_strnew(1);
+	while (precision > 0)
 	{
-		if (!(temp = ft_strnew(prec_copy - len)))
+		if (!res)
 			return (NULL);
-		temp = ft_memset(temp, '0', prec_copy - len);
-		temp2 = ft_strdup(res);
-		free(res);
-		res = ft_strjoin(temp2, temp);
-		ft_strdel(&temp);
-		ft_strdel(&temp2);
-	}
-	if (drob > 0)
-	{
-		temp = ft_itoa((uintmax_t)drob);
-		temp2 = ft_strdup(res);
-		free(res);
-		res = ft_strjoin(temp2, temp);
-		ft_strdel(&temp);
-		ft_strdel(&temp2);
-	}
-	// if (precision > 18)
-	// {
-	// 	drob = drob - (uintmax_t)drob;
-	// 	while (precision != prec_copy)
-	// 	{
-	// 		drob *= 10;
-	// 		precision--;
-	// 		count++;
-	// 	}
-	// 	if (drob > 0)
-	// 		res = put_num_to_str(res, drob, count, get_len_num((uintmax_t)drob));
-	// 	else
-	// 		res = put_num_to_str(res, drob, count, 0);
-
-	// }
-	return (res);
-}
-
-static char	*get_drob_part(char *res, long double drob, int precision, int hash)
-{
-	char		*temp;
-	int			len_after_comma;
-
-	if (((uintmax_t)drob > 0) || precision > 0)
-	{
 		temp = ft_strdup(res);
 		free(res);
-		res = ft_strjoin(temp, ".");
-		ft_strdel(&temp);
-		if (drob > 0)
-			len_after_comma = get_len_num((uintmax_t)drob);
-		else
-			len_after_comma = 0;
-		res = put_num_to_str(res, drob, precision, len_after_comma);
-	}
-	if (precision == 0 && hash)
-	{
-		temp = ft_strdup(res);
-		free(res);
-		res = ft_strjoin(temp, ".");
-		ft_strdel(&temp);
+		num *= 10;
+		str_num = ft_itoa((int)num);
+		res = ft_strjoin(temp, str_num);
+		free(temp);
+		free(str_num);
+		precision--;
+		num = num - (int)num;
 	}
 	return (res);
 }
 
-static char	*itoa_double_with_prec(long double num, int precision, int hash)
+static void	ft_rounding(long double *num, int precision)
 {
-	char		*res;
-	long double	drob;
-	long double	copy_drob;
-	intmax_t	num_before;
-	int			prec_copy;
+	double		round;
 
-	// if (precision > 18)
-	// 	prec_copy = 18;
-	// else
-		prec_copy = precision;
-	num_before = (intmax_t)num;
-	drob = (num - (uintmax_t)num);
-	while (drob > 0 && prec_copy-- > 0)
-		drob *= 10;
-	copy_drob = drob + 0.5;
-	if (((int)copy_drob > (int)drob && get_len_num((int)copy_drob) > precision)\
-		|| ((int)copy_drob > 0 && (int)(copy_drob - (int)copy_drob) >= 0.9))
-	{
-		num_before++;
-		copy_drob = 0;
-	}
-	res = ft_itoa(num_before);
-	if (!res)
-		return (NULL);
-		// printf(" double = %Lf\n", drob);
-	if (drob > 0)
-		res = get_drob_part(res, copy_drob, precision, hash);
-	else
-		res = get_drob_part(res, drob, precision, hash);
-	return (res);
+	round = 0.5;
+	while (precision-- > 0)
+		round /= 10;
+	*num = *num + round;
 }
 
 static char	*get_str_with_precision(long double num, t_flag flags)
 {
-	char	*str;
+	char		*str;
+	char		*temp;
+	char		*str_after_dot;
 
 	if (num < 0)
 		num *= -1;
-	if (num == 0 && flags.precision_exist && flags.precision_num == 0)
-		str = ft_strnew(1);
-	else
-		str = itoa_double_with_prec(num, flags.precision_num, flags.hash);
+	ft_rounding(&num, flags.precision_num);
+	if (!(str = ft_itoa((intmax_t)num)))
+		return (NULL);
+	if (flags.precision_num == 0 && !flags.hash)
+		return (str);
+	temp = ft_strdup(str);
+	free(str);
+	str = ft_strjoin(temp, ".");
+	free(temp);
+	if (!str)
+		return (NULL);
+	str_after_dot = itoa_double(num - (intmax_t)num, flags.precision_num);
+	temp = ft_strdup(str);
+	free(str);
+	str = ft_strjoin(temp, str_after_dot);
+	free(str_after_dot);
+	free(temp);
 	return (str);
 }
 

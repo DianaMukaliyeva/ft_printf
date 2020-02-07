@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diana <diana@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dmukaliy <dmukaliy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 17:39:26 by dmukaliy          #+#    #+#             */
-/*   Updated: 2020/02/02 19:57:21 by diana            ###   ########.fr       */
+/*   Updated: 2020/02/07 18:12:35 by dmukaliy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int					ft_printf(const char *format, ...);
 int					fd_printf(int fd, const char *format, ...);
 int					parse_flags(va_list list, const char *format,\
 					int *i, int fd);
-int					print_arg(const char *format, int *i, t_flag flags, va_list list);
+int					print_arg(const char *format, int *i, t_flag flags,\
+					va_list list);
 int					print_char(t_flag flags, char c);
 int					print_double(t_flag flags, va_list list);
 int					print_effect(const char *str, int *i, int fd);
